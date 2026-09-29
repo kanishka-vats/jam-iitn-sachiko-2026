@@ -22,6 +22,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection = Vector2.zero;
     private Vector2 lastDirection = Vector2.right;
     
+    [Header("Weapon")]
+    [SerializeField] private WeaponBase currentWeapon;
+    
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    private bool isMoving = false;
+    private bool isShooting = false;
+    
     [Header("Modifiers (Powerups)")]
     [SerializeField] private bool invertControlsX = false;
     [SerializeField] private bool invertControlsY = false;
@@ -34,11 +42,18 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        
+        if (currentWeapon == null)
+        {
+            currentWeapon = GetComponentInChildren<WeaponBase>();
+        }
     }
 
     private void Update()
     {
         HandleInput();
+        HandleFire();
+        UpdateAnimation();
         
         if (dashCooldownTimer > 0)
         {
@@ -84,6 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             FacingDirection = moveDirection;
             lastDirection = moveDirection;
+            isMoving = true;
             
             if (horizontalInput < 0)
             {
@@ -96,6 +112,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            isMoving = false;
             FacingDirection = lastDirection;
         }
         
@@ -106,11 +123,63 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleFire()
+    {
+        if (playerInput.actions["Fire"].IsPressed() && currentWeapon != null)
+        {
+            currentWeapon.Fire();
+            isShooting = true;
+        }
+        else
+        {
+            isShooting = false;
+        }
+    }
+    
+    private void UpdateAnimation()
+    {
+        if (animator == null) return;
+        
+        // Set animation parameters
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsShooting", isShooting);
+    }
+
     private void StartDash()
     {
         isDashing = true;
         dashTimer = dashDuration;
         dashCooldownTimer = dashCooldown * dashCooldownMultiplier;
+    }
+
+    public void SwapWeapon(WeaponBase newWeapon)
+    {
+        if (newWeapon == null) return;
+        
+        // Disable old weapon if exists
+        if (currentWeapon != null)
+        {
+            currentWeapon.gameObject.SetActive(false);
+        }
+        
+        // Enable new weapon
+        currentWeapon = newWeapon;
+        currentWeapon.gameObject.SetActive(true);
+    }
+
+    public void SwapWeapon(GameObject weaponPrefab)
+    {
+        if (weaponPrefab == null) return;
+        
+        // Destroy old weapon
+        if (currentWeapon != null)
+        {
+            Destroy(currentWeapon.gameObject);
+        }
+        
+        // Instantiate new weapon as child
+        GameObject weaponObj = Instantiate(weaponPrefab, transform);
+        currentWeapon = weaponObj.GetComponent<WeaponBase>();
     }
 
     #region Powerup Modification Methods
@@ -205,6 +274,11 @@ public class PlayerController : MonoBehaviour
     public float GetCurrentMoveSpeed()
     {
         return moveSpeed * moveSpeedMultiplier;
+    }
+    
+    public WeaponBase GetCurrentWeapon()
+    {
+        return currentWeapon;
     }
     
     #endregion
