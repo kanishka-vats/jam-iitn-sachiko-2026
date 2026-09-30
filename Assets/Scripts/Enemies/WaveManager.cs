@@ -3,15 +3,18 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [Header("Wave Configuration")]
-    public WaveData[] waves;
+    [SerializeField] private WaveData[] waves;
 
-    public int currentWave = 1;
+    [Header("Current Wave")]
+    [SerializeField] private int currentWave = 1;
 
     private float waveTimer;
     private bool waveActive = false;
 
     public float WaveTimer => waveTimer;
     public bool WaveActive => waveActive;
+
+    public int CurrentWave => currentWave;
 
     public WaveData CurrentWaveData
     {
@@ -48,13 +51,16 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void StartWave()
+    public void StartWave()
     {
         WaveData wave = CurrentWaveData;
 
         if (wave == null)
         {
-            Debug.LogWarning("No WaveData found for wave " + currentWave);
+            Debug.LogWarning(
+                "No WaveData found for wave " + currentWave
+            );
+
             return;
         }
 
@@ -83,7 +89,20 @@ public class WaveManager : MonoBehaviour
             );
         }
 
-        // Power-up selection will be triggered here later.
+        // Power-up selection will be triggered here.
+    }
+
+    public void StartNextWave()
+    {
+        currentWave++;
+
+        if (currentWave > waves.Length)
+        {
+            Debug.Log("===== ALL WAVES COMPLETE =====");
+            return;
+        }
+
+        StartWave();
     }
 
     public float GetDifficultyMultiplier()
@@ -104,18 +123,5 @@ public class WaveManager : MonoBehaviour
             return false;
 
         return wave.isBossWave;
-    }
-
-    public void StartNextWave()
-    {
-        currentWave++;
-
-        if (currentWave > waves.Length)
-        {
-            Debug.Log("===== ALL WAVES COMPLETE =====");
-            return;
-        }
-
-        StartWave();
     }
 }
