@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4224059032235012873}
   - component: {fileID: 5046913990291407544}
-  - component: {fileID: 2300243439137103479}
+  - component: {fileID: 4143455015933210437}
   - component: {fileID: 7584354605994431686}
   - component: {fileID: 9177204309947100287}
   m_Layer: 6
-  m_Name: Walker
+  m_Name: Archer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8018868, g: 0.38467845, b: 0.27612138, a: 1}
+  m_Color: {r: 0.735849, g: 0.30891773, b: 0.6828688, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2300243439137103479
+--- !u!114 &4143455015933210437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,12 +103,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4532530207034033373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d256bcecafaae76428a02de01e2b3c50, type: 3}
+  m_Script: {fileID: 11500000, guid: e3f0506335e274d4f94f891d372574ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalkerEnemy
-  maxHealth: 5
-  moveSpeed: 2
+  m_EditorClassIdentifier: Assembly-CSharp::ArcherEnemy
+  maxHealth: 10
+  moveSpeed: 1.5
   damage: 10
+  preferredDistance: 6
+  minimumDistance: 4
+  attackRange: 8
+  fireRate: 2
 --- !u!58 &7584354605994431686
 CircleCollider2D:
   m_ObjectHideFlags: 0
