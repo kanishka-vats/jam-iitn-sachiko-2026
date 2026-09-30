@@ -2,18 +2,32 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Wave Settings")]
-    public int currentWave = 1;
-    public float waveDuration = 60f;
+    [Header("Wave Configuration")]
+    public WaveData[] waves;
 
-    [Header("Difficulty")]
-    public float difficultyIncreasePerWave = 0.25f;
+    public int currentWave = 1;
 
     private float waveTimer;
-    private bool waveActive = true;
+    private bool waveActive = false;
 
     public float WaveTimer => waveTimer;
     public bool WaveActive => waveActive;
+
+    public WaveData CurrentWaveData
+    {
+        get
+        {
+            if (waves == null || waves.Length == 0)
+                return null;
+
+            int index = currentWave - 1;
+
+            if (index < 0 || index >= waves.Length)
+                return null;
+
+            return waves[index];
+        }
+    }
 
     private void Start()
     {
@@ -36,29 +50,71 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
-        waveTimer = waveDuration;
+        WaveData wave = CurrentWaveData;
+
+        if (wave == null)
+        {
+            Debug.LogWarning("No WaveData found for wave " + currentWave);
+            return;
+        }
+
+        waveTimer = wave.duration;
         waveActive = true;
 
-        Debug.Log("===== WAVE " + currentWave + " STARTED =====");
+        Debug.Log(
+            "===== " +
+            wave.waveName +
+            " STARTED ====="
+        );
     }
 
     private void EndWave()
     {
         waveActive = false;
 
-        Debug.Log("===== WAVE " + currentWave + " COMPLETE =====");
+        WaveData wave = CurrentWaveData;
+
+        if (wave != null)
+        {
+            Debug.Log(
+                "===== " +
+                wave.waveName +
+                " COMPLETE ====="
+            );
+        }
 
         // Power-up selection will be triggered here later.
     }
 
     public float GetDifficultyMultiplier()
     {
-        return 1f + ((currentWave - 1) * difficultyIncreasePerWave);
+        WaveData wave = CurrentWaveData;
+
+        if (wave == null)
+            return 1f;
+
+        return wave.difficultyMultiplier;
+    }
+
+    public bool IsBossWave()
+    {
+        WaveData wave = CurrentWaveData;
+
+        if (wave == null)
+            return false;
+
+        return wave.isBossWave;
     }
 
     public void StartNextWave()
     {
         currentWave++;
+
+        if (currentWave > waves.Length)
+        {
+            Debug.Log("===== ALL WAVES COMPLETE =====");
+            return;
+        }
 
         StartWave();
     }

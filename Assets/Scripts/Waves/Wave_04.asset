@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013384c1a41285347b1f492548906223, type: 3}
+  m_Name: Wave_04
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveName: Wave 1
+  duration: 30
+  difficultyMultiplier: 1.75
+  enemies:
+  - enemyPrefab: {fileID: 4532530207034033373, guid: 0371db0e3ce72d14a8fffdeae31737b2, type: 3}
+    spawnChance: 50
+  - enemyPrefab: {fileID: 4532530207034033373, guid: 59ae6d4123976b3459d33a0c9cac599e, type: 3}
+    spawnChance: 30
+  - enemyPrefab: {fileID: 4532530207034033373, guid: e578f7a9f4fc93147acafa2634a60c5d, type: 3}
+    spawnChance: 20
+  isBossWave: 0
