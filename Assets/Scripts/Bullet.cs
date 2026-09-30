@@ -31,15 +31,28 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        // Move bullet
         transform.position +=
             (Vector3)(direction * bulletSpeed * Time.deltaTime);
 
-        // Lifetime
         lifetimeTimer += Time.deltaTime;
 
         if (lifetimeTimer >= lifetime)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            EnemyBase enemy = collision.GetComponent<EnemyBase>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+
             Destroy(gameObject);
         }
     }
