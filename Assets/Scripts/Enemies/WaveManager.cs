@@ -5,6 +5,9 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Configuration")]
     [SerializeField] private WaveData[] waves;
 
+    [Header("References")]
+    [SerializeField] private PowerUpManager powerUpManager; 
+
     [Header("Current Wave")]
     [SerializeField] private int currentWave = 1;
 
@@ -89,7 +92,10 @@ public class WaveManager : MonoBehaviour
             );
         }
 
-        // Power-up selection will be triggered here.
+        if (powerUpManager != null)
+        {
+            powerUpManager.ShowPowerUpSelection();
+        }
     }
 
     public void StartNextWave()
