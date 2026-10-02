@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f0506335e274d4f94f891d372574ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherEnemy
-  maxHealth: 10
+  maxHealth: 2
   moveSpeed: 1.5
   damage: 10
   preferredDistance: 6

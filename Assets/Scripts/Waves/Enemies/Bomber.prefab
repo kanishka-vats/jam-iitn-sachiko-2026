@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb4f4c3b13561e4288d193b43d8d08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BomberEnemy
-  maxHealth: 5
-  moveSpeed: 6
-  damage: 30
+  maxHealth: 1
+  moveSpeed: 5
+  damage: 20
   explosionRadius: 2
   explosionDamage: 30
