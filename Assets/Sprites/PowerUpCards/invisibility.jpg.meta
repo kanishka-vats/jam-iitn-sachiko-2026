@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fa33d1097983d704ca92678399c4a9d5
+guid: fd979c4c691c18448b9ad06cd2290200
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7143903003274762654
-    second: WhatsApp Image 2026-09-30 at 23.48.07_0
+      213: 6432302697416492528
+    second: invisibility_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WhatsApp Image 2026-09-30 at 23.48.07_0
+      name: invisibility_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26626fb8112cbdc90800000000000000
-      internalID: -7143903003274762654
+      spriteID: 0f50c473931244950800000000000000
+      internalID: 6432302697416492528
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WhatsApp Image 2026-09-30 at 23.48.07_0: -7143903003274762654
+      invisibility_0: 6432302697416492528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

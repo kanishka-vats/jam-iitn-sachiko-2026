@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ProjectileSize
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Projectile Size Up
-  description: Increase projectile size
+  description: Increase projectile size.
   cardImage: {fileID: 0}
   powerUpType: 2
   isTwisted: 0
   effectValue: 1
-  diamondCost: 2
+  diamondCost: 30

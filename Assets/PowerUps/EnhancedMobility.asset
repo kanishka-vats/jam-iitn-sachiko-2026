@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: EnhancedMobility
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Enhanced Mobility
-  description: Inverted controls for current wave
-  cardImage: {fileID: 0}
+  description: Increase your movement mobility.
+  cardImage: {fileID: -7053028572353336102, guid: 9118444911645924eafddf3d29f32498, type: 3}
   powerUpType: 4
   isTwisted: 1
   effectValue: 1
-  diamondCost: 2
+  diamondCost: 30

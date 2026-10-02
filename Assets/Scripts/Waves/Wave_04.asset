@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_04
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveName: Wave 4
-  duration: 15
+  duration: 60
   difficultyMultiplier: 1.5
   enemies:
   - enemyPrefab: {fileID: 4532530207034033373, guid: 0371db0e3ce72d14a8fffdeae31737b2, type: 3}

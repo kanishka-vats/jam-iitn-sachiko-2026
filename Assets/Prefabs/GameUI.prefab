@@ -971,6 +971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpCard
   powerUpInfo: {fileID: 8805404654412821374}
   infoText: {fileID: 1609103734482321142}
+  costText: {fileID: 1548034558912579905}
   hoverScale: 1.08
   animationSpeed: 10
 --- !u!1 &1549013867511734772
@@ -2686,6 +2687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpCard
   powerUpInfo: {fileID: 2881403120137476992}
   infoText: {fileID: 8368354784692308836}
+  costText: {fileID: 3414169836637538174}
   hoverScale: 1.08
   animationSpeed: 10
 --- !u!1 &3747349919103730003
@@ -2801,6 +2803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpCard
   powerUpInfo: {fileID: 850836897349455516}
   infoText: {fileID: 7392619731003164343}
+  costText: {fileID: 2064252795841996370}
   hoverScale: 1.1
   animationSpeed: 10
 --- !u!1 &3816451381719023721

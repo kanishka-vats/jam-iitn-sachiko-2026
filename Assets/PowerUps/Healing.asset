@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Healing
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Healing
-  description: Regen for current wave + +25 sec wave timer
-  cardImage: {fileID: 0}
+  description: Regenerate health over time.
+  cardImage: {fileID: -3009549584514927659, guid: 6936bf6ab132ced42bac28b170180231, type: 3}
   powerUpType: 3
   isTwisted: 1
   effectValue: 1
-  diamondCost: 2
+  diamondCost: 30

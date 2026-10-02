@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 public class PowerUpCard : MonoBehaviour,
     IPointerEnterHandler,
@@ -22,9 +23,14 @@ public class PowerUpCard : MonoBehaviour,
     private Vector3 originalScale;
     private bool isHovered;
 
+    private Image cardImage;
+
     private void Awake()
     {
         originalScale = transform.localScale;
+
+        // Get the Image component from the PowerUpCard itself
+        cardImage = GetComponent<Image>();
 
         if (powerUpInfo != null)
         {
@@ -52,6 +58,12 @@ public class PowerUpCard : MonoBehaviour,
     {
         powerUpData = data;
         powerUpManager = manager;
+
+        // Apply the artwork from the selected PowerUpData
+        if (cardImage != null && data.cardImage != null)
+        {
+            cardImage.sprite = data.cardImage;
+        }
 
         if (infoText != null)
         {

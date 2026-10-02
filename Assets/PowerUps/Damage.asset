@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Damage
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Damage Up
-  description: Increase weapon damage
+  description: Increase weapon damage.
   cardImage: {fileID: 0}
   powerUpType: 0
   isTwisted: 0
   effectValue: 1
-  diamondCost: 2
+  diamondCost: 15
