@@ -14,7 +14,8 @@ public class EnemyBase : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject =
+            GameObject.FindGameObjectWithTag("Player");
 
         if (playerObject != null)
         {
@@ -34,6 +35,11 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.AddDiamonds(1);
+        }
+
         Destroy(gameObject);
     }
 }

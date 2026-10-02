@@ -18,3 +18,4 @@ MonoBehaviour:
   powerUpType: 3
   isTwisted: 1
   effectValue: 1
+  diamondCost: 2

@@ -10,6 +10,7 @@ public class PowerUpCard : MonoBehaviour,
     [Header("UI")]
     [SerializeField] private GameObject powerUpInfo;
     [SerializeField] private TMP_Text infoText;
+    [SerializeField] private TMP_Text costText;
 
     [Header("Hover Settings")]
     [SerializeField] private float hoverScale = 1.08f;
@@ -57,6 +58,11 @@ public class PowerUpCard : MonoBehaviour,
             infoText.text = data.description;
         }
 
+        if (costText != null)
+        {
+            costText.text = "💎 " + data.diamondCost;
+        }
+
         if (powerUpInfo != null)
         {
             powerUpInfo.SetActive(false);
@@ -97,7 +103,9 @@ public class PowerUpCard : MonoBehaviour,
             return;
         }
 
-        powerUpManager.SelectPowerUp(powerUpData);
+        powerUpManager.TryPurchasePowerUp(
+            powerUpData
+        );
     }
 
     public PowerUpData GetPowerUpData()

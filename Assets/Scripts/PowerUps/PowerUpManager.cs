@@ -126,8 +126,6 @@ public class PowerUpManager : MonoBehaviour
         List<PowerUpData> availableForSelection =
             new List<PowerUpData>(powerUps);
 
-        // Prevent the selected twisted power-up
-        // from appearing twice in the same selection.
         availableForSelection.Remove(
             selectedPowerUps[0]
         );
@@ -207,6 +205,64 @@ public class PowerUpManager : MonoBehaviour
         Debug.Log(
             "===== CHOOSE YOUR POWER-UP ====="
         );
+    }
+
+
+    // --------------------------------------------------
+    // PURCHASE POWER-UP
+    // --------------------------------------------------
+
+    public void TryPurchasePowerUp(PowerUpData powerUp)
+    {
+        if (powerUp == null)
+            return;
+
+        // Make sure CurrencyManager exists.
+        if (CurrencyManager.Instance == null)
+        {
+            Debug.LogWarning(
+                "CurrencyManager is missing."
+            );
+
+            return;
+        }
+
+        // Check if player has enough diamonds.
+        if (!CurrencyManager.Instance.CanAfford(
+            powerUp.diamondCost))
+        {
+            Debug.Log(
+                "NOT ENOUGH DIAMONDS! " +
+                powerUp.powerUpName +
+                " costs " +
+                powerUp.diamondCost +
+                " diamonds."
+            );
+
+            return;
+        }
+
+        // Spend diamonds.
+        bool purchaseSuccessful =
+            CurrencyManager.Instance.SpendDiamonds(
+                powerUp.diamondCost
+            );
+
+        if (!purchaseSuccessful)
+        {
+            return;
+        }
+
+        Debug.Log(
+            "POWER-UP PURCHASED: " +
+            powerUp.powerUpName +
+            " for " +
+            powerUp.diamondCost +
+            " diamonds."
+        );
+
+        // Continue with the existing selection flow.
+        SelectPowerUp(powerUp);
     }
 
 

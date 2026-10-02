@@ -28,4 +28,7 @@ public class PowerUpData : ScriptableObject
 
     [Header("Effect Value")]
     public float effectValue = 1f;
+
+    [Header("Cost")]
+    public int diamondCost = 5;
 }
