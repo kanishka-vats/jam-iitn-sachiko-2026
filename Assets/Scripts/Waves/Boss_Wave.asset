@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013384c1a41285347b1f492548906223, type: 3}
   m_Name: Boss_Wave
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  waveName: Wave 1
+  waveName: Boss Wave
   duration: 30
   difficultyMultiplier: 2
   enemies:

@@ -11,11 +11,6 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private List<PowerUpData> powerUps =
         new List<PowerUpData>();
 
-    // Runtime pool.
-    // Selected power-ups are removed from this list.
-    private List<PowerUpData> remainingPowerUps =
-        new List<PowerUpData>();
-
     [Header("UI")]
     [SerializeField] private GameObject powerUpPanel;
     [SerializeField] private PowerUpCard[] powerUpCards;
@@ -53,9 +48,6 @@ public class PowerUpManager : MonoBehaviour
 
     private void Start()
     {
-        remainingPowerUps =
-            new List<PowerUpData>(powerUps);
-
         if (powerUpPanel != null)
         {
             powerUpPanel.SetActive(false);
@@ -82,13 +74,24 @@ public class PowerUpManager : MonoBehaviour
         List<PowerUpData> selectedPowerUps =
             new List<PowerUpData>();
 
+        if (powerUps == null || powerUps.Count < amount)
+        {
+            Debug.LogWarning(
+                "Not enough power-ups available to generate " +
+                amount +
+                " cards."
+            );
+
+            return selectedPowerUps;
+        }
+
         List<PowerUpData> realPowerUps =
-            remainingPowerUps.FindAll(
+            powerUps.FindAll(
                 powerUp => !powerUp.isTwisted
             );
 
         List<PowerUpData> twistedPowerUps =
-            remainingPowerUps.FindAll(
+            powerUps.FindAll(
                 powerUp => powerUp.isTwisted
             );
 
@@ -96,13 +99,18 @@ public class PowerUpManager : MonoBehaviour
             twistedPowerUps.Count == 0)
         {
             Debug.LogWarning(
-                "Not enough real or twisted power-ups remaining."
+                "Power-up pool must contain at least " +
+                "one real and one twisted power-up."
             );
 
             return selectedPowerUps;
         }
 
-        // Guarantee one twisted power-up.
+
+        // ------------------------------------------
+        // GUARANTEE ONE TWISTED POWER-UP
+        // ------------------------------------------
+
         int twistedIndex =
             Random.Range(0, twistedPowerUps.Count);
 
@@ -110,9 +118,16 @@ public class PowerUpManager : MonoBehaviour
             twistedPowerUps[twistedIndex]
         );
 
-        List<PowerUpData> availableForSelection =
-            new List<PowerUpData>(remainingPowerUps);
 
+        // ------------------------------------------
+        // FILL REMAINING CARDS
+        // ------------------------------------------
+
+        List<PowerUpData> availableForSelection =
+            new List<PowerUpData>(powerUps);
+
+        // Prevent the selected twisted power-up
+        // from appearing twice in the same selection.
         availableForSelection.Remove(
             selectedPowerUps[0]
         );
@@ -126,9 +141,10 @@ public class PowerUpManager : MonoBehaviour
                     availableForSelection.Count
                 );
 
-            selectedPowerUps.Add(
-                availableForSelection[randomIndex]
-            );
+            PowerUpData selected =
+                availableForSelection[randomIndex];
+
+            selectedPowerUps.Add(selected);
 
             availableForSelection.RemoveAt(randomIndex);
         }
@@ -204,9 +220,6 @@ public class PowerUpManager : MonoBehaviour
             return;
 
         selectedPowerUp = powerUp;
-
-        // Remove selected power-up from future selections.
-        remainingPowerUps.Remove(powerUp);
 
         Debug.Log(
             "POWER-UP SELECTED: " +
@@ -288,21 +301,25 @@ public class PowerUpManager : MonoBehaviour
         {
             resultText.gameObject.SetActive(true);
 
-             if (selectedPowerUp.isTwisted)
-                    {
-                     if (selectedPowerUp.powerUpType == PowerUpType.Invisibility)
-                        {
-                            resultText.text = "YOU REALLY THOUGHT THAT WOULD WORK?";
-                        }
-                    else
-                        {
-                            resultText.text = "PLOT TWIST!";
-                        }
-                    }
-             else
-             {
-                        resultText.text = "POWER-UP GRANTED!";
-                    }
+            if (selectedPowerUp.isTwisted)
+            {
+                if (selectedPowerUp.powerUpType ==
+                    PowerUpType.Invisibility)
+                {
+                    resultText.text =
+                        "YOU REALLY THOUGHT THAT WOULD WORK?";
+                }
+                else
+                {
+                    resultText.text =
+                        "PLOT TWIST!";
+                }
+            }
+            else
+            {
+                resultText.text =
+                    "POWER-UP GRANTED!";
+            }
         }
 
         Debug.Log(
@@ -403,7 +420,6 @@ public class PowerUpManager : MonoBehaviour
 
             case PowerUpType.Heal:
 
-                // Start slow health regeneration.
                 if (playerHealth != null)
                 {
                     healthRegenerationCoroutine =
@@ -412,8 +428,6 @@ public class PowerUpManager : MonoBehaviour
                         );
                 }
 
-                // Plot twist:
-                // Increase the current wave timer by 25 seconds.
                 if (waveManager != null)
                 {
                     waveManager.AddWaveTime(25f);

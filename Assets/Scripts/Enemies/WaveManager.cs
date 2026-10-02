@@ -5,8 +5,12 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Configuration")]
     [SerializeField] private WaveData[] waves;
 
+    [Header("Final Wave")]
+    [SerializeField] private int finalWave = 4;
+
     [Header("References")]
     [SerializeField] private PowerUpManager powerUpManager;
+    [SerializeField] private GameEndManager gameEndManager;
 
     [Header("Current Wave")]
     [SerializeField] private int currentWave = 1;
@@ -19,7 +23,6 @@ public class WaveManager : MonoBehaviour
 
     public float WaveTimer => waveTimer;
     public bool WaveActive => waveActive;
-
     public int CurrentWave => currentWave;
 
     public WaveData CurrentWaveData
@@ -64,7 +67,8 @@ public class WaveManager : MonoBehaviour
         if (wave == null)
         {
             Debug.LogWarning(
-                "No WaveData found for wave " + currentWave
+                "No WaveData found for wave " +
+                currentWave
             );
 
             return;
@@ -74,8 +78,8 @@ public class WaveManager : MonoBehaviour
         waveActive = true;
 
         Debug.Log(
-            "===== " +
-            wave.waveName +
+            "===== WAVE " +
+            currentWave +
             " STARTED ====="
         );
     }
@@ -91,11 +95,39 @@ public class WaveManager : MonoBehaviour
         if (wave != null)
         {
             Debug.Log(
-                "===== " +
-                wave.waveName +
+                "===== WAVE " +
+                currentWave +
                 " COMPLETE ====="
             );
         }
+
+        // ------------------------------------------
+        // FINAL WAVE
+        // ------------------------------------------
+
+        if (currentWave >= finalWave)
+        {
+            Debug.Log(
+                "===== ALL WAVES COMPLETE ====="
+            );
+
+            if (gameEndManager != null)
+            {
+                gameEndManager.ShowVictory();
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "GameEndManager reference is missing."
+                );
+            }
+
+            return;
+        }
+
+        // ------------------------------------------
+        // NORMAL WAVE
+        // ------------------------------------------
 
         if (powerUpManager != null)
         {
@@ -119,17 +151,39 @@ public class WaveManager : MonoBehaviour
         );
     }
 
-
     public void StartNextWave()
     {
+        Debug.Log(
+            "START NEXT WAVE CALLED. Current wave BEFORE increment: " +
+            currentWave
+        );
+
         currentWave++;
 
-        if (currentWave > waves.Length)
+        Debug.Log(
+            "Current wave AFTER increment: " +
+            currentWave
+        );
+
+        // ------------------------------------------
+        // DO NOT START WAVE 5
+        // ------------------------------------------
+
+        if (currentWave > finalWave)
         {
-            Debug.Log("===== ALL WAVES COMPLETE =====");
+            Debug.Log(
+                "===== FINAL WAVE ALREADY COMPLETE ====="
+            );
+
+            if (gameEndManager != null)
+            {
+                gameEndManager.ShowVictory();
+            }
+
             return;
         }
 
+        // Reset temporary power-ups
         if (powerUpManager != null)
         {
             powerUpManager.ResetTemporaryPowerUps();
@@ -137,7 +191,6 @@ public class WaveManager : MonoBehaviour
 
         StartWave();
     }
-
 
     // --------------------------------------------------
     // WAVE TIMER MODIFICATION
@@ -165,9 +218,10 @@ public class WaveManager : MonoBehaviour
         );
     }
 
-
     public float GetDifficultyMultiplier()
     {
-        return 1f + (currentWave - 1) * difficultyPerWave;
+        return 1f +
+            (currentWave - 1) *
+            difficultyPerWave;
     }
 }
