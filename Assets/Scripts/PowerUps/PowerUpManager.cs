@@ -21,6 +21,7 @@ public class PowerUpManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private WaveManager waveManager;
+    [SerializeField] private PlayerController playerController;
 
     private PowerUpData selectedPowerUp;
 
@@ -137,7 +138,14 @@ public class PowerUpManager : MonoBehaviour
             return;
         }
 
+        // Show power-up selection UI.
         powerUpPanel.SetActive(true);
+
+        // Disable player movement while choosing.
+        if (playerController != null)
+        {
+            playerController.SetMovementEnabled(false);
+        }
 
         for (int i = 0; i < powerUpCards.Length; i++)
         {
@@ -178,6 +186,12 @@ public class PowerUpManager : MonoBehaviour
         if (powerUpPanel != null)
         {
             powerUpPanel.SetActive(false);
+        }
+
+        // Re-enable player movement immediately.
+        if (playerController != null)
+        {
+            playerController.SetMovementEnabled(true);
         }
 
         // Start the next wave immediately.

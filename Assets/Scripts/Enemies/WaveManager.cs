@@ -81,6 +81,8 @@ public class WaveManager : MonoBehaviour
     {
         waveActive = false;
 
+        DestroyRemainingEnemies();
+
         WaveData wave = CurrentWaveData;
 
         if (wave != null)
@@ -97,6 +99,23 @@ public class WaveManager : MonoBehaviour
             powerUpManager.ShowPowerUpSelection();
         }
     }
+
+    private void DestroyRemainingEnemies()
+    {
+        GameObject[] enemies =
+            GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        Debug.Log(
+            "Remaining enemies cleared: " +
+            enemies.Length
+        );
+    }
+
 
     public void StartNextWave()
     {
