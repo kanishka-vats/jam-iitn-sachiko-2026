@@ -288,14 +288,21 @@ public class PowerUpManager : MonoBehaviour
         {
             resultText.gameObject.SetActive(true);
 
-            if (selectedPowerUp.isTwisted)
-            {
-                resultText.text = "PLOT TWIST!";
-            }
-            else
-            {
-                resultText.text = "POWER-UP GRANTED!";
-            }
+             if (selectedPowerUp.isTwisted)
+                    {
+                     if (selectedPowerUp.powerUpType == PowerUpType.Invisibility)
+                        {
+                            resultText.text = "YOU REALLY THOUGHT THAT WOULD WORK?";
+                        }
+                    else
+                        {
+                            resultText.text = "PLOT TWIST!";
+                        }
+                    }
+             else
+             {
+                        resultText.text = "POWER-UP GRANTED!";
+                    }
         }
 
         Debug.Log(
