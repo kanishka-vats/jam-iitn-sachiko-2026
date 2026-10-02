@@ -358,6 +358,8 @@ MonoBehaviour:
   resultText: {fileID: 417020679}
   waveManager: {fileID: 1790586766}
   playerController: {fileID: 1647594483}
+  playerGun: {fileID: 1396058143}
+  playerHealth: {fileID: 1564156687}
 --- !u!4 &139055931
 Transform:
   m_ObjectHideFlags: 0
@@ -1703,7 +1705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpCard
   powerUpInfo: {fileID: 391851222}
   infoText: {fileID: 14099396}
-  hoverScale: 1.08
+  hoverScale: 1.1
   animationSpeed: 10
 --- !u!1 &1394177230
 GameObject:
@@ -1750,6 +1752,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 1897788042}
+--- !u!114 &1396058143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4561353995552287912, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
+  m_PrefabInstance: {fileID: 19758927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdd2ebb1c9a49d408fb060b4298f7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gun
 --- !u!1 &1424157856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8247263689056632448, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
@@ -2252,6 +2265,8 @@ MonoBehaviour:
   resultText: {fileID: 0}
   waveManager: {fileID: 0}
   playerController: {fileID: 0}
+  playerGun: {fileID: 0}
+  playerHealth: {fileID: 0}
 --- !u!1 &2077836319
 GameObject:
   m_ObjectHideFlags: 0

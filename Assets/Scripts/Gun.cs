@@ -19,6 +19,7 @@ public class Gun : WeaponBase
     private int bulletCountMultiplier = 1;
     private float bulletSpeedMultiplier = 1f;
     private float damageMultiplier = 1f;
+    private float bulletSizeMultiplier = 1f;
 
     protected override void Update()
     {
@@ -96,6 +97,10 @@ public class Gun : WeaponBase
                 );
             }
 
+            // Apply projectile size power-up.
+            bullet.transform.localScale *=
+                bulletSizeMultiplier;
+
             bullet.transform.rotation =
                 Quaternion.AngleAxis(
                     angle,
@@ -115,13 +120,17 @@ public class Gun : WeaponBase
 
     public void SetFireRateMultiplier(float multiplier)
     {
-        fireRateMultiplier = Mathf.Max(0.01f, multiplier);
+        fireRateMultiplier =
+            Mathf.Max(0.01f, multiplier);
     }
 
     public void AddFireRateMultiplier(float amount)
     {
         fireRateMultiplier =
-            Mathf.Max(0.01f, fireRateMultiplier + amount);
+            Mathf.Max(
+                0.01f,
+                fireRateMultiplier + amount
+            );
     }
 
     public void SetBulletCount(int count)
@@ -171,7 +180,8 @@ public class Gun : WeaponBase
 
     public void SetDamagePerBullet(int damage)
     {
-        damagePerBullet = Mathf.Max(1, damage);
+        damagePerBullet =
+            Mathf.Max(1, damage);
     }
 
     public void SetDamageMultiplier(float multiplier)
@@ -189,9 +199,25 @@ public class Gun : WeaponBase
             );
     }
 
+    public void SetBulletSizeMultiplier(float multiplier)
+    {
+        bulletSizeMultiplier =
+            Mathf.Max(0.01f, multiplier);
+    }
+
+    public void AddBulletSizeMultiplier(float amount)
+    {
+        bulletSizeMultiplier =
+            Mathf.Max(
+                0.01f,
+                bulletSizeMultiplier + amount
+            );
+    }
+
     public void SetShootCooldown(float cooldown)
     {
-        shootCooldown = Mathf.Max(0.01f, cooldown);
+        shootCooldown =
+            Mathf.Max(0.01f, cooldown);
     }
 
     public void ResetAllMultipliers()
@@ -200,6 +226,7 @@ public class Gun : WeaponBase
         bulletCountMultiplier = 1;
         bulletSpeedMultiplier = 1f;
         damageMultiplier = 1f;
+        bulletSizeMultiplier = 1f;
     }
 
     #endregion
@@ -226,6 +253,11 @@ public class Gun : WeaponBase
         return Mathf.RoundToInt(
             damagePerBullet * damageMultiplier
         );
+    }
+
+    public float GetBulletSizeMultiplier()
+    {
+        return bulletSizeMultiplier;
     }
 
     public float GetFireRateMultiplier()

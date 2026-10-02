@@ -11,6 +11,9 @@ public class WaveManager : MonoBehaviour
     [Header("Current Wave")]
     [SerializeField] private int currentWave = 1;
 
+    [Header("Difficulty")]
+    [SerializeField] private float difficultyPerWave = 0.15f;
+
     private float waveTimer;
     private bool waveActive = false;
 
@@ -127,26 +130,18 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+        if (powerUpManager != null)
+        {
+            powerUpManager.ResetTemporaryPowerUps();
+        }
+
         StartWave();
     }
 
     public float GetDifficultyMultiplier()
     {
-        WaveData wave = CurrentWaveData;
-
-        if (wave == null)
-            return 1f;
-
-        return wave.difficultyMultiplier;
+        return 1f + (currentWave - 1) * difficultyPerWave;
     }
 
-    public bool IsBossWave()
-    {
-        WaveData wave = CurrentWaveData;
 
-        if (wave == null)
-            return false;
-
-        return wave.isBossWave;
-    }
 }

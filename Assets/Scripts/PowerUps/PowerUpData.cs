@@ -25,4 +25,7 @@ public class PowerUpData : ScriptableObject
     public PowerUpType powerUpType;
 
     public bool isTwisted;
+
+    [Header("Effect Value")]
+    public float effectValue = 1f;
 }

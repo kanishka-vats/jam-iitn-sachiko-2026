@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: EnhancedMobility
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Enhanced Mobility
-  description: 'Increase movement speed
-
-    [Twisted Controls]'
-  icon: {fileID: 0}
+  description: Inverted controls for current wave
+  cardImage: {fileID: 0}
   powerUpType: 0
   isTwisted: 0
+  effectValue: 1

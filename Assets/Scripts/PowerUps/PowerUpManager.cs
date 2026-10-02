@@ -11,6 +11,11 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private List<PowerUpData> powerUps =
         new List<PowerUpData>();
 
+    // Runtime pool.
+    // Selected power-ups are removed from this list.
+    private List<PowerUpData> remainingPowerUps =
+        new List<PowerUpData>();
+
     [Header("UI")]
     [SerializeField] private GameObject powerUpPanel;
     [SerializeField] private PowerUpCard[] powerUpCards;
@@ -22,6 +27,8 @@ public class PowerUpManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private Gun playerGun;
+    [SerializeField] private PlayerHealth playerHealth;
 
     private PowerUpData selectedPowerUp;
 
@@ -39,6 +46,9 @@ public class PowerUpManager : MonoBehaviour
 
     private void Start()
     {
+        remainingPowerUps =
+            new List<PowerUpData>(powerUps);
+
         if (powerUpPanel != null)
         {
             powerUpPanel.SetActive(false);
@@ -65,16 +75,20 @@ public class PowerUpManager : MonoBehaviour
             new List<PowerUpData>();
 
         List<PowerUpData> realPowerUps =
-            powerUps.FindAll(powerUp => !powerUp.isTwisted);
+            remainingPowerUps.FindAll(
+                powerUp => !powerUp.isTwisted
+            );
 
         List<PowerUpData> twistedPowerUps =
-            powerUps.FindAll(powerUp => powerUp.isTwisted);
+            remainingPowerUps.FindAll(
+                powerUp => powerUp.isTwisted
+            );
 
         if (realPowerUps.Count == 0 ||
             twistedPowerUps.Count == 0)
         {
             Debug.LogWarning(
-                "Not enough real or twisted power-ups available."
+                "Not enough real or twisted power-ups remaining."
             );
 
             return selectedPowerUps;
@@ -88,24 +102,27 @@ public class PowerUpManager : MonoBehaviour
             twistedPowerUps[twistedIndex]
         );
 
-        List<PowerUpData> remainingPowerUps =
-            new List<PowerUpData>(powerUps);
+        List<PowerUpData> availableForSelection =
+            new List<PowerUpData>(remainingPowerUps);
 
-        remainingPowerUps.Remove(
+        availableForSelection.Remove(
             selectedPowerUps[0]
         );
 
         while (selectedPowerUps.Count < amount &&
-               remainingPowerUps.Count > 0)
+               availableForSelection.Count > 0)
         {
             int randomIndex =
-                Random.Range(0, remainingPowerUps.Count);
+                Random.Range(
+                    0,
+                    availableForSelection.Count
+                );
 
             selectedPowerUps.Add(
-                remainingPowerUps[randomIndex]
+                availableForSelection[randomIndex]
             );
 
-            remainingPowerUps.RemoveAt(randomIndex);
+            availableForSelection.RemoveAt(randomIndex);
         }
 
         return selectedPowerUps;
@@ -138,10 +155,8 @@ public class PowerUpManager : MonoBehaviour
             return;
         }
 
-        // Show power-up selection UI.
         powerUpPanel.SetActive(true);
 
-        // Disable player movement while choosing.
         if (playerController != null)
         {
             playerController.SetMovementEnabled(false);
@@ -164,7 +179,9 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
-        Debug.Log("===== CHOOSE YOUR POWER-UP =====");
+        Debug.Log(
+            "===== CHOOSE YOUR POWER-UP ====="
+        );
     }
 
     // --------------------------------------------------
@@ -178,6 +195,9 @@ public class PowerUpManager : MonoBehaviour
 
         selectedPowerUp = powerUp;
 
+        // Remove selected power-up from future selections.
+        remainingPowerUps.Remove(powerUp);
+
         Debug.Log(
             "POWER-UP SELECTED: " +
             selectedPowerUp.powerUpName
@@ -188,7 +208,6 @@ public class PowerUpManager : MonoBehaviour
             powerUpPanel.SetActive(false);
         }
 
-        // Re-enable player movement immediately.
         if (playerController != null)
         {
             playerController.SetMovementEnabled(true);
@@ -200,7 +219,7 @@ public class PowerUpManager : MonoBehaviour
             waveManager.StartNextWave();
         }
 
-        // Start the 10-second reveal at the same time.
+        // Start the reveal at the same time.
         StartCoroutine(RevealPowerUp());
     }
 
@@ -281,6 +300,152 @@ public class PowerUpManager : MonoBehaviour
             Debug.Log("POWER-UP GRANTED!");
         }
 
-        // Actual power-up effects will be added here later.
+        ApplyPowerUp();
+    }
+
+    // --------------------------------------------------
+    // APPLY POWER-UP
+    // --------------------------------------------------
+
+    private void ApplyPowerUp()
+    {
+        if (selectedPowerUp == null)
+            return;
+
+        switch (selectedPowerUp.powerUpType)
+        {
+            // ------------------------------------------
+            // LEGIT: DAMAGE
+            // ------------------------------------------
+
+            case PowerUpType.Damage:
+
+                if (playerGun != null)
+                {
+                    playerGun.AddDamageMultiplier(
+                        selectedPowerUp.effectValue
+                    );
+                }
+
+                Debug.Log(
+                    "Damage increased by " +
+                    selectedPowerUp.effectValue
+                );
+
+                break;
+
+
+            // ------------------------------------------
+            // LEGIT: PROJECTILE SPEED
+            // ------------------------------------------
+
+            case PowerUpType.ProjectileSpeed:
+
+                if (playerGun != null)
+                {
+                    playerGun.AddBulletSpeedMultiplier(
+                        selectedPowerUp.effectValue
+                    );
+                }
+
+                Debug.Log(
+                    "Projectile speed increased by " +
+                    selectedPowerUp.effectValue
+                );
+
+                break;
+
+
+            // ------------------------------------------
+            // LEGIT: PROJECTILE SIZE
+            // ------------------------------------------
+
+            case PowerUpType.ProjectileSize:
+
+                if (playerGun != null)
+                {
+                    playerGun.AddBulletSizeMultiplier(
+                        selectedPowerUp.effectValue
+                    );
+                }
+
+                Debug.Log(
+                    "Projectile size increased by " +
+                    selectedPowerUp.effectValue
+                );
+
+                break;
+
+
+            // ------------------------------------------
+            // LEGIT: HEAL
+            // ------------------------------------------
+
+            case PowerUpType.Heal:
+
+                if (playerHealth != null)
+                {
+                    playerHealth.Heal(
+                        Mathf.RoundToInt(
+                            selectedPowerUp.effectValue
+                        )
+                    );
+                }
+
+                Debug.Log(
+                    "Player healed by " +
+                    selectedPowerUp.effectValue
+                );
+
+                break;
+
+
+            // ------------------------------------------
+            // TWISTED: INVISIBILITY
+            // ------------------------------------------
+
+            case PowerUpType.Invisibility:
+
+                Debug.Log(
+                    "PLOT TWIST: Invisibility was fake!"
+                );
+
+                break;
+
+
+            // ------------------------------------------
+            // TWISTED: INVERTED CONTROLS
+            // ------------------------------------------
+
+            case PowerUpType.InvertedControls:
+
+                Debug.Log(
+                    "PLOT TWIST: Controls will be inverted " +
+                    "for this wave."
+                );
+
+                // Implemented next.
+                break;
+        }
+    }
+
+    // --------------------------------------------------
+    // RESET TEMPORARY POWER-UPS
+    // --------------------------------------------------
+
+    public void ResetTemporaryPowerUps()
+    {
+        Debug.Log(
+            "===== RESETTING TEMPORARY POWER-UPS ====="
+        );
+
+        // Twisted power-up effects will be reset here.
+        //
+        // Example:
+        //
+        // playerController.SetInvertedControls(false);
+        //
+        // We will add this once inverted controls
+        // are implemented.
     }
 }

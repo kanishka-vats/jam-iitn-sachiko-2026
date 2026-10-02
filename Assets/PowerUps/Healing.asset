@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Healing
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Healing
-  description: Restore a portion of health
-  icon: {fileID: 0}
+  description: Regen for current wave + +25 sec wave timer
+  cardImage: {fileID: 0}
   powerUpType: 0
   isTwisted: 0
+  effectValue: 1
