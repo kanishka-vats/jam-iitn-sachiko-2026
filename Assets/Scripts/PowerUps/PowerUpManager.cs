@@ -30,7 +30,13 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private Gun playerGun;
     [SerializeField] private PlayerHealth playerHealth;
 
+    [Header("Regenerative Health")]
+    [SerializeField] private float regenerationInterval = 1f;
+
     private PowerUpData selectedPowerUp;
+
+    private Coroutine healthRegenerationCoroutine;
+
 
     private void Awake()
     {
@@ -43,6 +49,7 @@ public class PowerUpManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     private void Start()
     {
@@ -64,6 +71,7 @@ public class PowerUpManager : MonoBehaviour
             resultText.gameObject.SetActive(false);
         }
     }
+
 
     // --------------------------------------------------
     // POWER-UP GENERATION
@@ -128,6 +136,7 @@ public class PowerUpManager : MonoBehaviour
         return selectedPowerUps;
     }
 
+
     // --------------------------------------------------
     // SHOW POWER-UP SELECTION
     // --------------------------------------------------
@@ -184,6 +193,7 @@ public class PowerUpManager : MonoBehaviour
         );
     }
 
+
     // --------------------------------------------------
     // PLAYER SELECTS POWER-UP
     // --------------------------------------------------
@@ -222,6 +232,7 @@ public class PowerUpManager : MonoBehaviour
         // Start the reveal at the same time.
         StartCoroutine(RevealPowerUp());
     }
+
 
     // --------------------------------------------------
     // POWER-UP REVEAL
@@ -263,6 +274,7 @@ public class PowerUpManager : MonoBehaviour
         RevealSelectedPowerUp();
     }
 
+
     // --------------------------------------------------
     // REVEAL RESULT
     // --------------------------------------------------
@@ -302,6 +314,7 @@ public class PowerUpManager : MonoBehaviour
 
         ApplyPowerUp();
     }
+
 
     // --------------------------------------------------
     // APPLY POWER-UP
@@ -378,23 +391,33 @@ public class PowerUpManager : MonoBehaviour
 
 
             // ------------------------------------------
-            // LEGIT: HEAL
+            // TWISTED: REGENERATIVE HEALTH
             // ------------------------------------------
 
             case PowerUpType.Heal:
 
+                // Start slow health regeneration.
                 if (playerHealth != null)
                 {
-                    playerHealth.Heal(
-                        Mathf.RoundToInt(
-                            selectedPowerUp.effectValue
-                        )
-                    );
+                    healthRegenerationCoroutine =
+                        StartCoroutine(
+                            RegenerateHealth()
+                        );
+                }
+
+                // Plot twist:
+                // Increase the current wave timer by 25 seconds.
+                if (waveManager != null)
+                {
+                    waveManager.AddWaveTime(25f);
                 }
 
                 Debug.Log(
-                    "Player healed by " +
-                    selectedPowerUp.effectValue
+                    "PLOT TWIST: Regenerative health activated."
+                );
+
+                Debug.Log(
+                    "PLOT TWIST: Wave timer increased by 25 seconds."
                 );
 
                 break;
@@ -419,15 +442,47 @@ public class PowerUpManager : MonoBehaviour
 
             case PowerUpType.InvertedControls:
 
+                if (playerController != null)
+                {
+                    playerController.SetInvertedControls(true);
+                }
+
                 Debug.Log(
                     "PLOT TWIST: Controls will be inverted " +
                     "for this wave."
                 );
 
-                // Implemented next.
                 break;
         }
     }
+
+
+    // --------------------------------------------------
+    // REGENERATIVE HEALTH
+    // --------------------------------------------------
+
+    private IEnumerator RegenerateHealth()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(
+                regenerationInterval
+            );
+
+            if (playerHealth == null)
+                yield break;
+
+            if (playerHealth.IsDead())
+                yield break;
+
+            playerHealth.Heal(1);
+
+            Debug.Log(
+                "Regenerative Health: +1 HP"
+            );
+        }
+    }
+
 
     // --------------------------------------------------
     // RESET TEMPORARY POWER-UPS
@@ -439,13 +494,26 @@ public class PowerUpManager : MonoBehaviour
             "===== RESETTING TEMPORARY POWER-UPS ====="
         );
 
-        // Twisted power-up effects will be reset here.
-        //
-        // Example:
-        //
-        // playerController.SetInvertedControls(false);
-        //
-        // We will add this once inverted controls
-        // are implemented.
+        // Reset inverted controls.
+        if (playerController != null)
+        {
+            playerController.SetInvertedControls(false);
+        }
+
+        // Stop regenerative health.
+        StopHealthRegeneration();
+    }
+
+
+    private void StopHealthRegeneration()
+    {
+        if (healthRegenerationCoroutine != null)
+        {
+            StopCoroutine(
+                healthRegenerationCoroutine
+            );
+
+            healthRegenerationCoroutine = null;
+        }
     }
 }

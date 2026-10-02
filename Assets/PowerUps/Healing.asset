@@ -15,6 +15,6 @@ MonoBehaviour:
   powerUpName: Healing
   description: Regen for current wave + +25 sec wave timer
   cardImage: {fileID: 0}
-  powerUpType: 0
-  isTwisted: 0
+  powerUpType: 3
+  isTwisted: 1
   effectValue: 1

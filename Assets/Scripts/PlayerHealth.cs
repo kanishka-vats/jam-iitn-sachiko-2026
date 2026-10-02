@@ -15,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+
+        // Sync UI immediately
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int damage)
@@ -26,9 +29,17 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = Mathf.Max(currentHealth, 0);
 
-        Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
+        Debug.Log(
+            "Player Health: " +
+            currentHealth +
+            "/" +
+            maxHealth
+        );
 
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        OnHealthChanged?.Invoke(
+            currentHealth,
+            maxHealth
+        );
 
         if (currentHealth <= 0)
         {
@@ -43,11 +54,22 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth += amount;
 
-        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        currentHealth = Mathf.Min(
+            currentHealth,
+            maxHealth
+        );
 
-        Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
+        Debug.Log(
+            "Player Health: " +
+            currentHealth +
+            "/" +
+            maxHealth
+        );
 
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        OnHealthChanged?.Invoke(
+            currentHealth,
+            maxHealth
+        );
     }
 
     private void Die()

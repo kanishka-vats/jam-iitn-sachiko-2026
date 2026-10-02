@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float dashCooldownTimer = 0f;
     private float dashTimer = 0f;
     private bool isDashing = false;
+    private bool invertedControls = false;
 
     [Header("Direction")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = input.x;
         float verticalInput = input.y;
 
-        // Apply inverted controls if powerup active
+        // Apply inverted controls if power-up is active
         if (invertControlsX)
             horizontalInput *= -1f;
 
@@ -307,6 +308,19 @@ public class PlayerController : MonoBehaviour
     public void SetInvertControlsY(bool invert)
     {
         invertControlsY = invert;
+    }
+
+    public void SetInvertedControls(bool inverted)
+    {
+        invertedControls = inverted;
+
+        invertControlsX = inverted;
+        invertControlsY = inverted;
+
+        Debug.Log(
+            "Inverted Controls: " +
+            inverted
+        );
     }
 
     public void SetMoveSpeed(float speed)

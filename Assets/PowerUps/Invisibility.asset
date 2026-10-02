@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'Become invisible to enemies
 
     [Bluffs]'
-  icon: {fileID: 0}
-  powerUpType: 0
+  cardImage: {fileID: 0}
+  powerUpType: 5
   isTwisted: 1
+  effectValue: 1

@@ -6,7 +6,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveData[] waves;
 
     [Header("References")]
-    [SerializeField] private PowerUpManager powerUpManager; 
+    [SerializeField] private PowerUpManager powerUpManager;
 
     [Header("Current Wave")]
     [SerializeField] private int currentWave = 1;
@@ -138,10 +138,36 @@ public class WaveManager : MonoBehaviour
         StartWave();
     }
 
+
+    // --------------------------------------------------
+    // WAVE TIMER MODIFICATION
+    // --------------------------------------------------
+
+    public void AddWaveTime(float amount)
+    {
+        if (!waveActive)
+        {
+            Debug.LogWarning(
+                "Cannot add wave time because the wave is not active."
+            );
+
+            return;
+        }
+
+        waveTimer += amount;
+
+        Debug.Log(
+            "Wave timer increased by " +
+            amount +
+            " seconds. " +
+            "New time: " +
+            waveTimer
+        );
+    }
+
+
     public float GetDifficultyMultiplier()
     {
         return 1f + (currentWave - 1) * difficultyPerWave;
     }
-
-
 }
