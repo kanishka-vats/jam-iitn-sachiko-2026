@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Wave_01
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveName: Wave 1
-  duration: 30
+  duration: 45
   difficultyMultiplier: 1
   enemies:
   - enemyPrefab: {fileID: 4532530207034033373, guid: 0371db0e3ce72d14a8fffdeae31737b2, type: 3}
-    spawnChance: 70
+    spawnChance: 80
   - enemyPrefab: {fileID: 4532530207034033373, guid: 59ae6d4123976b3459d33a0c9cac599e, type: 3}
-    spawnChance: 30
+    spawnChance: 5
   isBossWave: 0

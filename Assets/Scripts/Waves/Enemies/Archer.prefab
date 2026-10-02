@@ -113,6 +113,7 @@ MonoBehaviour:
   minimumDistance: 4
   attackRange: 8
   fireRate: 2
+  projectilePrefab: {fileID: 8675175613093462767, guid: 5ccd9d2987332ce4bac319aa17233db9, type: 3}
 --- !u!58 &7584354605994431686
 CircleCollider2D:
   m_ObjectHideFlags: 0
