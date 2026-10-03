@@ -42,6 +42,8 @@ public class Gun : WeaponBase
             return;
         }
 
+        AudioManager.Instance.PlaySFX(SFXType.PlayerShoot);
+
         Vector2 baseDirection = aimDirection;
 
         int totalBullets =
