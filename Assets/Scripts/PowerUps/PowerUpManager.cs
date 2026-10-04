@@ -77,14 +77,21 @@ public class PowerUpManager : MonoBehaviour
         if (powerUps == null || powerUps.Count < amount)
         {
             Debug.LogWarning(
-                "Not enough power-ups available to generate " +
-                amount +
-                " cards."
+                "Not enough power-ups available."
             );
 
             return selectedPowerUps;
         }
 
+        int currentDiamonds = 0;
+
+        if (CurrencyManager.Instance != null)
+        {
+            currentDiamonds =
+                CurrencyManager.Instance.Diamonds;
+        }
+
+        // Separate twisted and normal power-ups
         List<PowerUpData> realPowerUps =
             powerUps.FindAll(
                 powerUp => !powerUp.isTwisted
@@ -95,116 +102,126 @@ public class PowerUpManager : MonoBehaviour
                 powerUp => powerUp.isTwisted
             );
 
-        if (realPowerUps.Count == 0 ||
-            twistedPowerUps.Count == 0)
-        {
-            Debug.LogWarning(
-                "Power-up pool must contain at least " +
-                "one real and one twisted power-up."
+        // Find power-ups the player can currently afford
+        List<PowerUpData> affordablePowerUps =
+            powerUps.FindAll(
+                powerUp =>
+                    powerUp.diamondCost <= currentDiamonds
             );
 
-            return selectedPowerUps;
+        // ------------------------------------------------
+        // 1. GUARANTEE AT LEAST ONE AFFORDABLE CARD
+        // ------------------------------------------------
+
+        if (affordablePowerUps.Count > 0)
+        {
+            PowerUpData affordableCard =
+                affordablePowerUps[
+                    Random.Range(
+                        0,
+                        affordablePowerUps.Count
+                    )
+                ];
+
+            selectedPowerUps.Add(
+                affordableCard
+            );
+        }
+        else
+        {
+            Debug.LogWarning(
+                "Player cannot afford any power-up!"
+            );
+
+            // Fallback: give the player the cheapest card
+            PowerUpData cheapestPowerUp =
+                powerUps[0];
+
+            foreach (PowerUpData powerUp in powerUps)
+            {
+                if (powerUp.diamondCost <
+                    cheapestPowerUp.diamondCost)
+                {
+                    cheapestPowerUp = powerUp;
+                }
+            }
+
+            selectedPowerUps.Add(
+                cheapestPowerUp
+            );
         }
 
+        // ------------------------------------------------
+        // 2. GUARANTEE AT LEAST ONE TWISTED CARD
+        // ------------------------------------------------
 
-        // ------------------------------------------
-        // GUARANTEE ONE TWISTED POWER-UP
-        // ------------------------------------------
+        if (twistedPowerUps.Count > 0)
+        {
+            bool alreadyHasTwisted =
+                selectedPowerUps.Exists(
+                    powerUp => powerUp.isTwisted
+                );
 
-        int twistedIndex =
-            Random.Range(0, twistedPowerUps.Count);
+            if (!alreadyHasTwisted)
+            {
+                List<PowerUpData> availableTwisted =
+                    new List<PowerUpData>(
+                        twistedPowerUps
+                    );
 
-        selectedPowerUps.Add(
-            twistedPowerUps[twistedIndex]
-        );
+                availableTwisted.RemoveAll(
+                    powerUp =>
+                        selectedPowerUps.Contains(powerUp)
+                );
 
+                if (availableTwisted.Count > 0)
+                {
+                    PowerUpData twistedCard =
+                        availableTwisted[
+                            Random.Range(
+                                0,
+                                availableTwisted.Count
+                            )
+                        ];
 
-        // ------------------------------------------
-        // FILL REMAINING CARDS
-        // ------------------------------------------
+                    selectedPowerUps.Add(
+                        twistedCard
+                    );
+                }
+            }
+        }
 
-        List<PowerUpData> availableForSelection =
+        // ------------------------------------------------
+        // 3. FILL REMAINING CARDS RANDOMLY
+        // ------------------------------------------------
+
+        List<PowerUpData> remainingPowerUps =
             new List<PowerUpData>(powerUps);
 
-        availableForSelection.Remove(
-            selectedPowerUps[0]
+        remainingPowerUps.RemoveAll(
+            powerUp =>
+                selectedPowerUps.Contains(powerUp)
         );
 
-        while (selectedPowerUps.Count < amount &&
-               availableForSelection.Count > 0)
+        while (
+            selectedPowerUps.Count < amount &&
+            remainingPowerUps.Count > 0
+        )
         {
             int randomIndex =
                 Random.Range(
                     0,
-                    availableForSelection.Count
+                    remainingPowerUps.Count
                 );
 
-            PowerUpData selected =
-                availableForSelection[randomIndex];
+            selectedPowerUps.Add(
+                remainingPowerUps[randomIndex]
+            );
 
-            selectedPowerUps.Add(selected);
-
-            availableForSelection.RemoveAt(randomIndex);
+            remainingPowerUps.RemoveAt(randomIndex);
         }
 
         return selectedPowerUps;
-    }
-
-
-    // --------------------------------------------------
-    // SHOW POWER-UP SELECTION
-    // --------------------------------------------------
-
-    public void ShowPowerUpSelection()
-    {
-        if (powerUpPanel == null)
-        {
-            Debug.LogWarning(
-                "Power Up Panel is not assigned."
-            );
-
-            return;
-        }
-
-        List<PowerUpData> selectedPowerUps =
-            GetRandomPowerUps(3);
-
-        if (selectedPowerUps.Count < 3)
-        {
-            Debug.LogWarning(
-                "Could not generate 3 power-ups."
-            );
-
-            return;
-        }
-
-        powerUpPanel.SetActive(true);
-
-        if (playerController != null)
-        {
-            playerController.SetMovementEnabled(false);
-        }
-
-        for (int i = 0; i < powerUpCards.Length; i++)
-        {
-            if (i < selectedPowerUps.Count)
-            {
-                powerUpCards[i].gameObject.SetActive(true);
-
-                powerUpCards[i].Setup(
-                    selectedPowerUps[i],
-                    this
-                );
-            }
-            else
-            {
-                powerUpCards[i].gameObject.SetActive(false);
-            }
-        }
-
-        Debug.Log(
-            "===== CHOOSE YOUR POWER-UP ====="
-        );
     }
 
 
@@ -593,4 +610,58 @@ public class PowerUpManager : MonoBehaviour
             healthRegenerationCoroutine = null;
         }
     }
+
+    public void ShowPowerUpSelection()
+{
+    if (powerUpPanel == null)
+    {
+        Debug.LogWarning(
+            "Power Up Panel is not assigned."
+        );
+
+        return;
+    }
+
+    List<PowerUpData> selectedPowerUps =
+        GetRandomPowerUps(3);
+
+    if (selectedPowerUps.Count < 3)
+    {
+        Debug.LogWarning(
+            "Could not generate 3 power-ups."
+        );
+
+        return;
+    }
+
+    powerUpPanel.SetActive(true);
+
+    if (playerController != null)
+    {
+        playerController.SetMovementEnabled(false);
+    }
+
+    for (int i = 0; i < powerUpCards.Length; i++)
+    {
+        if (i < selectedPowerUps.Count)
+        {
+            powerUpCards[i].gameObject.SetActive(true);
+
+            powerUpCards[i].Setup(
+                selectedPowerUps[i],
+                this
+            );
+        }
+        else
+        {
+            powerUpCards[i].gameObject.SetActive(false);
+        }
+    }
+
+    Debug.Log(
+        "===== CHOOSE YOUR POWER-UP ====="
+    );
+}
+
+
 }

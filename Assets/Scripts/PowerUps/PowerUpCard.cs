@@ -17,6 +17,9 @@ public class PowerUpCard : MonoBehaviour,
     [SerializeField] private float hoverScale = 1.08f;
     [SerializeField] private float animationSpeed = 10f;
 
+    [Header("Purchase Visual")]
+    [SerializeField] private float unavailableAlpha = 0.75f;
+
     private PowerUpData powerUpData;
     private PowerUpManager powerUpManager;
 
@@ -79,6 +82,29 @@ public class PowerUpCard : MonoBehaviour,
         {
             powerUpInfo.SetActive(false);
         }
+
+        UpdatePurchaseState();
+    }
+
+    private void UpdatePurchaseState()
+    {
+        if (powerUpData == null ||
+            CurrencyManager.Instance == null)
+        {
+            return;
+        }
+
+        bool canAfford =
+            CurrencyManager.Instance.CanAfford(
+                powerUpData.diamondCost
+            );
+
+        if (cardImage != null)
+        {
+            Color color = cardImage.color;
+            color.a = canAfford ? 1f : unavailableAlpha;
+            cardImage.color = color;
+        }
     }
 
     public void OnPointerEnter(
@@ -111,6 +137,15 @@ public class PowerUpCard : MonoBehaviour,
     {
         if (powerUpData == null ||
             powerUpManager == null)
+        {
+            return;
+        }
+
+        // Don't allow unaffordable purchases
+        if (CurrencyManager.Instance == null ||
+            !CurrencyManager.Instance.CanAfford(
+                powerUpData.diamondCost
+            ))
         {
             return;
         }

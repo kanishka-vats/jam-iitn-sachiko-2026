@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
 
     private void Start()
-    {
+    {   
         playerInput = GetComponent<PlayerInput>();
 
         if (currentWeapon == null)
@@ -191,6 +191,8 @@ public class PlayerController : MonoBehaviour
         if (!movementEnabled)
             return;
 
+        AudioManager.Instance.PlaySFX(SFXType.PlayerDash);
+
         isDashing = true;
         dashTimer = dashDuration;
         dashCooldownTimer =
@@ -274,6 +276,7 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeedMultiplier += amount;
     }
+    
 
     public void SetDashSpeedMultiplier(float multiplier)
     {

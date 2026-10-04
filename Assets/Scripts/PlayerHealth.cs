@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = Mathf.Max(currentHealth, 0);
 
+        AudioManager.Instance.PlaySFX(SFXType.PlayerHit);
+
         Debug.Log(
             "Player Health: " +
             currentHealth +
@@ -75,6 +77,8 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("PLAYER DIED");
+
+        AudioManager.Instance.PlaySFX(SFXType.PlayerDeath);
 
         OnDeath?.Invoke();
     }
