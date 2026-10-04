@@ -42,5 +42,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MainMenuAnimation
+    uniqueID: 4132025455
+    locked: 0
+  - name: MainMenu
+    uniqueID: 2458681477
+    locked: 0
   m_RenderingLayers:
   - Default
