@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Projectile Size Up
   description: Increase projectile size.
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 8482749812223898124, guid: bed4149733a6bec4b89d6c91f02da12f, type: 3}
   powerUpType: 2
   isTwisted: 0
   effectValue: 1

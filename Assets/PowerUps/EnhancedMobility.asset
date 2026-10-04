@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Enhanced Mobility
   description: Increase your movement mobility.
-  cardImage: {fileID: -7053028572353336102, guid: 9118444911645924eafddf3d29f32498, type: 3}
+  cardImage: {fileID: 8230287850583017267, guid: f2e0b9f2c3cd1ca48bb0ce8ed26d3d7a, type: 3}
   powerUpType: 4
   isTwisted: 1
   effectValue: 1

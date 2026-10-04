@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Invisibility
   description: Become invisible to enemies.
-  cardImage: {fileID: 6432302697416492528, guid: fd979c4c691c18448b9ad06cd2290200, type: 3}
+  cardImage: {fileID: -4639669150883504187, guid: bb32a86ebae056c48b14a352de6c857b, type: 3}
   powerUpType: 5
   isTwisted: 1
   effectValue: 1

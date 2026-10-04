@@ -1,0 +1,858 @@
+fileFormatVersion: 2
+guid: 6c72a336a8fde6f4485c3555d8e7cea8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -463065856461275725
+    second: sachiko in new fronts_0
+  - first:
+      213: -3395420903723159014
+    second: sachiko in new fronts_1
+  - first:
+      213: 5797165402026019408
+    second: sachiko in new fronts_2
+  - first:
+      213: -8037476885643202659
+    second: sachiko in new fronts_3
+  - first:
+      213: -1971239053140010637
+    second: sachiko in new fronts_4
+  - first:
+      213: 1799848909045362846
+    second: sachiko in new fronts_5
+  - first:
+      213: 1818499364194801417
+    second: sachiko in new fronts_6
+  - first:
+      213: 4188069991963440376
+    second: sachiko in new fronts_7
+  - first:
+      213: -8900267063452157816
+    second: sachiko in new fronts_8
+  - first:
+      213: -1140797057343868267
+    second: sachiko in new fronts_9
+  - first:
+      213: -2778556954572883761
+    second: sachiko in new fronts_10
+  - first:
+      213: 2177866284123090114
+    second: sachiko in new fronts_11
+  - first:
+      213: 4831937446161741526
+    second: sachiko in new fronts_12
+  - first:
+      213: 4318920471025659549
+    second: sachiko in new fronts_13
+  - first:
+      213: 7556159667467522028
+    second: sachiko in new fronts_14
+  - first:
+      213: 7321750210285826579
+    second: sachiko in new fronts_15
+  - first:
+      213: 4178290469149122183
+    second: sachiko in new fronts_16
+  - first:
+      213: 2074951871970410926
+    second: sachiko in new fronts_17
+  - first:
+      213: 7123618014940214059
+    second: sachiko in new fronts_18
+  - first:
+      213: 7855678346764763096
+    second: sachiko in new fronts_19
+  - first:
+      213: 8345470303841062212
+    second: sachiko in new fronts_20
+  - first:
+      213: 7149147847938241770
+    second: sachiko in new fronts_21
+  - first:
+      213: 4511674270497075312
+    second: sachiko in new fronts_22
+  - first:
+      213: 4362472798167958898
+    second: sachiko in new fronts_23
+  - first:
+      213: 8656044557964467855
+    second: sachiko in new fronts_24
+  - first:
+      213: -7012093703777351859
+    second: sachiko in new fronts_25
+  - first:
+      213: -4334455779952068841
+    second: sachiko in new fronts_26
+  - first:
+      213: 7590282382668516141
+    second: sachiko in new fronts_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sachiko in new fronts_0
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1769
+        width: 89
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bd73069e0cd299f0800000000000000
+      internalID: -463065856461275725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_1
+      rect:
+        serializedVersion: 2
+        x: 2971
+        y: 1769
+        width: 88
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1235a28daa01e0d0800000000000000
+      internalID: -3395420903723159014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_2
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1380
+        width: 479
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05a02fbe73ba37050800000000000000
+      internalID: 5797165402026019408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_3
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 1377
+        width: 237
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9fe2dc5b55257090800000000000000
+      internalID: -8037476885643202659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_4
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 1385
+        width: 243
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37956367680c4a4e0800000000000000
+      internalID: -1971239053140010637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_5
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 1384
+        width: 54
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e90f509fb095af810800000000000000
+      internalID: 1799848909045362846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_6
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 1381
+        width: 233
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 907da13798b9c3910800000000000000
+      internalID: 1818499364194801417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_7
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1382
+        width: 238
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f43475e7730f1a30800000000000000
+      internalID: 4188069991963440376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_8
+      rect:
+        serializedVersion: 2
+        x: 2018
+        y: 1380
+        width: 480
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88833dce246eb7480800000000000000
+      internalID: -8900267063452157816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_9
+      rect:
+        serializedVersion: 2
+        x: 2490
+        y: 1377
+        width: 237
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592353cde131b20f0800000000000000
+      internalID: -1140797057343868267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_10
+      rect:
+        serializedVersion: 2
+        x: 2723
+        y: 1385
+        width: 243
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc8fd76db259079d0800000000000000
+      internalID: -2778556954572883761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_11
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 1384
+        width: 54
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cce479b8d5593e10800000000000000
+      internalID: 2177866284123090114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_12
+      rect:
+        serializedVersion: 2
+        x: 3069
+        y: 1381
+        width: 233
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d6f06fa18d7e0340800000000000000
+      internalID: 4831937446161741526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_13
+      rect:
+        serializedVersion: 2
+        x: 3295
+        y: 1382
+        width: 238
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ea5a82943efeb30800000000000000
+      internalID: 4318920471025659549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_14
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 869
+        width: 89
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cef098dee2fdcd860800000000000000
+      internalID: 7556159667467522028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_15
+      rect:
+        serializedVersion: 2
+        x: 2971
+        y: 869
+        width: 88
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3127a3226051c9560800000000000000
+      internalID: 7321750210285826579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_16
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 479
+        width: 479
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78e980e4b054cf930800000000000000
+      internalID: 4178290469149122183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_17
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 476
+        width: 237
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea104d6ebb5bbcc10800000000000000
+      internalID: 2074951871970410926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_18
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 484
+        width: 243
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23b51097dc2cd260800000000000000
+      internalID: 7123618014940214059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_19
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 483
+        width: 54
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df34a0d5d9f40d60800000000000000
+      internalID: 7855678346764763096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_20
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 481
+        width: 233
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d8400760111d370800000000000000
+      internalID: 8345470303841062212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_21
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 482
+        width: 238
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae47b130710e63360800000000000000
+      internalID: 7149147847938241770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_22
+      rect:
+        serializedVersion: 2
+        x: 2018
+        y: 480
+        width: 480
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0707f3b58dfac9e30800000000000000
+      internalID: 4511674270497075312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_23
+      rect:
+        serializedVersion: 2
+        x: 2490
+        y: 477
+        width: 237
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2750b1585ed9a8c30800000000000000
+      internalID: 4362472798167958898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_24
+      rect:
+        serializedVersion: 2
+        x: 2723
+        y: 485
+        width: 243
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8edc6de9a2702870800000000000000
+      internalID: 8656044557964467855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_25
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 484
+        width: 54
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4709969de900be90800000000000000
+      internalID: -7012093703777351859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_26
+      rect:
+        serializedVersion: 2
+        x: 3068
+        y: 481
+        width: 234
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 717715dde6be8d3c0800000000000000
+      internalID: -4334455779952068841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sachiko in new fronts_27
+      rect:
+        serializedVersion: 2
+        x: 3295
+        y: 482
+        width: 238
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2bccdbac99165960800000000000000
+      internalID: 7590282382668516141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sachiko in new fronts_0: -463065856461275725
+      sachiko in new fronts_1: -3395420903723159014
+      sachiko in new fronts_10: -2778556954572883761
+      sachiko in new fronts_11: 2177866284123090114
+      sachiko in new fronts_12: 4831937446161741526
+      sachiko in new fronts_13: 4318920471025659549
+      sachiko in new fronts_14: 7556159667467522028
+      sachiko in new fronts_15: 7321750210285826579
+      sachiko in new fronts_16: 4178290469149122183
+      sachiko in new fronts_17: 2074951871970410926
+      sachiko in new fronts_18: 7123618014940214059
+      sachiko in new fronts_19: 7855678346764763096
+      sachiko in new fronts_2: 5797165402026019408
+      sachiko in new fronts_20: 8345470303841062212
+      sachiko in new fronts_21: 7149147847938241770
+      sachiko in new fronts_22: 4511674270497075312
+      sachiko in new fronts_23: 4362472798167958898
+      sachiko in new fronts_24: 8656044557964467855
+      sachiko in new fronts_25: -7012093703777351859
+      sachiko in new fronts_26: -4334455779952068841
+      sachiko in new fronts_27: 7590282382668516141
+      sachiko in new fronts_3: -8037476885643202659
+      sachiko in new fronts_4: -1971239053140010637
+      sachiko in new fronts_5: 1799848909045362846
+      sachiko in new fronts_6: 1818499364194801417
+      sachiko in new fronts_7: 4188069991963440376
+      sachiko in new fronts_8: -8900267063452157816
+      sachiko in new fronts_9: -1140797057343868267
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

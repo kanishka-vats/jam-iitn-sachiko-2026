@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Damage Up
   description: Increase weapon damage.
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 6084795338600430819, guid: 1fe9984f92fa9124ebd16241e35ad26f, type: 3}
   powerUpType: 0
   isTwisted: 0
   effectValue: 1

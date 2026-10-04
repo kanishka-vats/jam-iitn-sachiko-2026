@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   powerUpName: Projectile Speed Up
   description: Increase projectile speed.
-  cardImage: {fileID: 0}
+  cardImage: {fileID: -7899024313410965313, guid: 976ff8781de351d4f8e3024ae935d33b, type: 3}
   powerUpType: 1
   isTwisted: 0
   effectValue: 1
