@@ -42,6 +42,12 @@ public class StartTransitionController : MonoBehaviour
 
     private IEnumerator StartTransition()
     {
+        // Stop main menu music immediately
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
+
         // Hide menu
         if (menuPanel != null)
             menuPanel.SetActive(false);
