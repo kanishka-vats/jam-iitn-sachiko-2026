@@ -401,6 +401,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 6718078175490903866, guid: b7eee8a4cee66144e97b77ce9ed64318, type: 3}
+      propertyPath: gameplayMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 470b34107d29a5c4d8be0e001dfd1eaa, type: 3}
+    - target: {fileID: 6718078175490903866, guid: b7eee8a4cee66144e97b77ce9ed64318, type: 3}
       propertyPath: sfxMasterVolume
       value: 0.35
       objectReference: {fileID: 0}
