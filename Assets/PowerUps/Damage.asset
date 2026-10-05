@@ -15,6 +15,7 @@ MonoBehaviour:
   powerUpName: Damage Up
   description: Increase weapon damage.
   cardImage: {fileID: 6084795338600430819, guid: 1fe9984f92fa9124ebd16241e35ad26f, type: 3}
+  infoImage: {fileID: 21300000, guid: c5845cb818b9be34094f4d61fa971288, type: 3}
   powerUpType: 0
   isTwisted: 0
   effectValue: 1

@@ -15,6 +15,7 @@ MonoBehaviour:
   powerUpName: Healing
   description: Regenerate health over time.
   cardImage: {fileID: 5554566931361496520, guid: ce78b141a0036774c98af7f5d6df9a04, type: 3}
+  infoImage: {fileID: 21300000, guid: f5480e03a737b55419471fd953f5a4cd, type: 3}
   powerUpType: 3
   isTwisted: 1
   effectValue: 1

@@ -15,6 +15,7 @@ MonoBehaviour:
   powerUpName: Invisibility
   description: Become invisible to enemies.
   cardImage: {fileID: -4639669150883504187, guid: bb32a86ebae056c48b14a352de6c857b, type: 3}
+  infoImage: {fileID: 21300000, guid: 8add1c2cced462e41b6798e2e9ea0835, type: 3}
   powerUpType: 5
   isTwisted: 1
   effectValue: 1

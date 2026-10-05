@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 13c8663c932af9646907308bdc90415f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1119651283936433730
+    second: increase-player-mobility_0
+  - first:
+      213: -735449772898148900
+    second: increase-player-mobility_1
+  - first:
+      213: -6630000891207856666
+    second: increase-player-mobility_2
+  - first:
+      213: -5959161733887542030
+    second: increase-player-mobility_3
+  - first:
+      213: 361889656789204475
+    second: increase-player-mobility_4
+  - first:
+      213: -2444685583663806588
+    second: increase-player-mobility_5
+  - first:
+      213: -5083659036205561210
+    second: increase-player-mobility_6
+  - first:
+      213: 941718326329717896
+    second: increase-player-mobility_7
+  - first:
+      213: -4800932513821754278
+    second: increase-player-mobility_8
+  - first:
+      213: -6427937224768686874
+    second: increase-player-mobility_9
+  - first:
+      213: 7667018536895518087
+    second: increase-player-mobility_10
+  - first:
+      213: -4778570537334450258
+    second: increase-player-mobility_11
+  - first:
+      213: -7488674923979370341
+    second: increase-player-mobility_12
+  - first:
+      213: 8940919776613014868
+    second: increase-player-mobility_13
+  - first:
+      213: 9096582216092900848
+    second: increase-player-mobility_14
+  - first:
+      213: -5001414877578527437
+    second: increase-player-mobility_15
+  - first:
+      213: 6625033606424651187
+    second: increase-player-mobility_16
+  - first:
+      213: -8485058513031121145
+    second: increase-player-mobility_17
+  - first:
+      213: 2246519785300223526
+    second: increase-player-mobility_18
+  - first:
+      213: 5729903222095400303
+    second: increase-player-mobility_19
+  - first:
+      213: 4935831355263078102
+    second: increase-player-mobility_20
+  - first:
+      213: -7275313051453391233
+    second: increase-player-mobility_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: increase-player-mobility_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 285
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 246575b19ecc98f00800000000000000
+      internalID: 1119651283936433730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 283
+        width: 82
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd934004582bc5f0800000000000000
+      internalID: -735449772898148900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 283
+        width: 70
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed480311518df3a0800000000000000
+      internalID: -6630000891207856666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_3
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 283
+        width: 90
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc388cd9fdcc4da0800000000000000
+      internalID: -5959161733887542030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 285
+        width: 58
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfdfec8b9b0b50500800000000000000
+      internalID: 361889656789204475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_5
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 285
+        width: 77
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48743360a6bb21ed0800000000000000
+      internalID: -2444685583663806588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_6
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 283
+        width: 52
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a43cb7a073379b0800000000000000
+      internalID: -5083659036205561210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_7
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 285
+        width: 57
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 884bb5f04d7a11d00800000000000000
+      internalID: 941718326329717896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_8
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 143
+        width: 75
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5cf70ba059af5db0800000000000000
+      internalID: -4800932513821754278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_9
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 143
+        width: 58
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e4f62796216bc6a0800000000000000
+      internalID: -6427937224768686874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_10
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 143
+        width: 77
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7851ef9dcb8b66a60800000000000000
+      internalID: 7667018536895518087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_11
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 143
+        width: 79
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7580c0a6b1fadb0800000000000000
+      internalID: -4778570537334450258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_12
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 143
+        width: 57
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9095d555d1e21890800000000000000
+      internalID: -7488674923979370341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_13
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 141
+        width: 90
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d98427a27841c70800000000000000
+      internalID: 8940919776613014868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 99
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fd5a5c645d8d3e70800000000000000
+      internalID: 9096582216092900848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_15
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 0
+        width: 75
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33df39fdaa7679ab0800000000000000
+      internalID: -5001414877578527437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_16
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 1
+        width: 59
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b567ffc6f8d0fb50800000000000000
+      internalID: 6625033606424651187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_17
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 1
+        width: 46
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7073068fc340f3a80800000000000000
+      internalID: -8485058513031121145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_18
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 1
+        width: 58
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626e4b797dd3d2f10800000000000000
+      internalID: 2246519785300223526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_19
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 1
+        width: 46
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6dcc564f94b48f40800000000000000
+      internalID: 5729903222095400303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_20
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 1
+        width: 86
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dec0b967789f7440800000000000000
+      internalID: 4935831355263078102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: increase-player-mobility_21
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 1
+        width: 79
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7e7b527355e80b90800000000000000
+      internalID: -7275313051453391233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      increase-player-mobility_0: 1119651283936433730
+      increase-player-mobility_1: -735449772898148900
+      increase-player-mobility_10: 7667018536895518087
+      increase-player-mobility_11: -4778570537334450258
+      increase-player-mobility_12: -7488674923979370341
+      increase-player-mobility_13: 8940919776613014868
+      increase-player-mobility_14: 9096582216092900848
+      increase-player-mobility_15: -5001414877578527437
+      increase-player-mobility_16: 6625033606424651187
+      increase-player-mobility_17: -8485058513031121145
+      increase-player-mobility_18: 2246519785300223526
+      increase-player-mobility_19: 5729903222095400303
+      increase-player-mobility_2: -6630000891207856666
+      increase-player-mobility_20: 4935831355263078102
+      increase-player-mobility_21: -7275313051453391233
+      increase-player-mobility_3: -5959161733887542030
+      increase-player-mobility_4: 361889656789204475
+      increase-player-mobility_5: -2444685583663806588
+      increase-player-mobility_6: -5083659036205561210
+      increase-player-mobility_7: 941718326329717896
+      increase-player-mobility_8: -4800932513821754278
+      increase-player-mobility_9: -6427937224768686874
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

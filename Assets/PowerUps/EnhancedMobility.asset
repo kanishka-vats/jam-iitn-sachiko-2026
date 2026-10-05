@@ -15,6 +15,7 @@ MonoBehaviour:
   powerUpName: Enhanced Mobility
   description: Increase your movement mobility.
   cardImage: {fileID: 8230287850583017267, guid: f2e0b9f2c3cd1ca48bb0ce8ed26d3d7a, type: 3}
+  infoImage: {fileID: 21300000, guid: 13c8663c932af9646907308bdc90415f, type: 3}
   powerUpType: 4
   isTwisted: 1
   effectValue: 1

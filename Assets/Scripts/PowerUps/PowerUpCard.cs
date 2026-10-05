@@ -10,30 +10,40 @@ public class PowerUpCard : MonoBehaviour,
 {
     [Header("UI")]
     [SerializeField] private GameObject powerUpInfo;
-    [SerializeField] private TMP_Text infoText;
+
+    [Header("Cost UI")]
+    [SerializeField] private Image currencyIcon;
     [SerializeField] private TMP_Text costText;
 
     [Header("Hover Settings")]
-    [SerializeField] private float hoverScale = 1.08f;
+    [SerializeField] private float hoverScale = 1.1f;
+    [SerializeField] private float hoverLift = 10f;
+    [SerializeField] private float hoverRotation = 2f;
     [SerializeField] private float animationSpeed = 10f;
 
+    [Header("Hover Visual")]
+    [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color hoverColor = Color.white;
+
     [Header("Purchase Visual")]
-    [SerializeField] private float unavailableAlpha = 0.75f;
+    [SerializeField] private float unavailableAlpha = 0.55f;
 
     private PowerUpData powerUpData;
     private PowerUpManager powerUpManager;
 
-    private Vector3 originalScale;
-    private bool isHovered;
-
     private Image cardImage;
+
+    private Vector3 originalScale;
+    private Quaternion originalRotation;
+
+    private bool isHovered;
 
     private void Awake()
     {
-        originalScale = transform.localScale;
-
-        // Get the Image component from the PowerUpCard itself
         cardImage = GetComponent<Image>();
+
+        originalScale = transform.localScale;
+        originalRotation = transform.localRotation;
 
         if (powerUpInfo != null)
         {
@@ -43,16 +53,12 @@ public class PowerUpCard : MonoBehaviour,
 
     private void Update()
     {
-        Vector3 targetScale = isHovered
-            ? originalScale * hoverScale
-            : originalScale;
-
-        transform.localScale = Vector3.Lerp(
-            transform.localScale,
-            targetScale,
-            animationSpeed * Time.deltaTime
-        );
+        UpdateHoverAnimation();
     }
+
+    // =========================================================
+    // SETUP
+    // =========================================================
 
     public void Setup(
         PowerUpData data,
@@ -62,29 +68,127 @@ public class PowerUpCard : MonoBehaviour,
         powerUpData = data;
         powerUpManager = manager;
 
-        // Apply the artwork from the selected PowerUpData
-        if (cardImage != null && data.cardImage != null)
+        if (data == null)
+            return;
+
+        // -----------------------------------------------------
+        // Card Artwork
+        // -----------------------------------------------------
+
+        if (cardImage != null &&
+            data.cardImage != null)
         {
             cardImage.sprite = data.cardImage;
         }
 
-        if (infoText != null)
-        {
-            infoText.text = data.description;
-        }
-
-        if (costText != null)
-        {
-            costText.text = "💎 " + data.diamondCost;
-        }
+        // -----------------------------------------------------
+        // Power-Up Info PNG
+        // -----------------------------------------------------
 
         if (powerUpInfo != null)
         {
+            Image infoImage =
+                powerUpInfo.GetComponent<Image>();
+
+            if (infoImage != null &&
+                data.infoImage != null)
+            {
+                infoImage.sprite = data.infoImage;
+
+                infoImage.preserveAspect = true;
+            }
+
             powerUpInfo.SetActive(false);
+        }
+
+        // -----------------------------------------------------
+        // Cost
+        // -----------------------------------------------------
+
+        if (costText != null)
+        {
+            costText.text =
+                data.diamondCost.ToString();
+        }
+
+        // -----------------------------------------------------
+        // Reset Hover
+        // -----------------------------------------------------
+
+        isHovered = false;
+
+        transform.localScale = originalScale;
+        transform.localRotation = originalRotation;
+
+        if (cardImage != null)
+        {
+            cardImage.color = normalColor;
         }
 
         UpdatePurchaseState();
     }
+
+    // =========================================================
+    // HOVER ANIMATION
+    // =========================================================
+
+    private void UpdateHoverAnimation()
+    {
+        Vector3 targetScale =
+            isHovered
+                ? originalScale * hoverScale
+                : originalScale;
+
+        Quaternion targetRotation =
+            isHovered
+                ? originalRotation *
+                  Quaternion.Euler(
+                      0f,
+                      0f,
+                      hoverRotation
+                  )
+                : originalRotation;
+
+        transform.localScale =
+            Vector3.Lerp(
+                transform.localScale,
+                targetScale,
+                animationSpeed *
+                Time.deltaTime
+            );
+
+        transform.localRotation =
+            Quaternion.Lerp(
+                transform.localRotation,
+                targetRotation,
+                animationSpeed *
+                Time.deltaTime
+            );
+
+        // -----------------------------------------------------
+        // Card Brightness
+        // -----------------------------------------------------
+
+        if (cardImage != null)
+        {
+            Color targetColor =
+                isHovered
+                    ? hoverColor
+                    : normalColor;
+
+            cardImage.color =
+                Color.Lerp(
+                    cardImage.color,
+                    targetColor,
+                    animationSpeed *
+                    Time.deltaTime
+                );
+        }
+    }
+
+    // =========================================================
+    // PURCHASE STATE
+    // =========================================================
 
     private void UpdatePurchaseState()
     {
@@ -99,13 +203,48 @@ public class PowerUpCard : MonoBehaviour,
                 powerUpData.diamondCost
             );
 
+        // Card transparency
         if (cardImage != null)
         {
-            Color color = cardImage.color;
-            color.a = canAfford ? 1f : unavailableAlpha;
+            Color color =
+                cardImage.color;
+
+            color.a =
+                canAfford
+                    ? 1f
+                    : unavailableAlpha;
+
             cardImage.color = color;
         }
+
+        // Cost text transparency
+        if (costText != null)
+        {
+            costText.alpha =
+                canAfford
+                    ? 1f
+                    : 0.6f;
+        }
+
+        // Currency icon transparency
+        if (currencyIcon != null)
+        {
+            Color iconColor =
+                currencyIcon.color;
+
+            iconColor.a =
+                canAfford
+                    ? 1f
+                    : 0.6f;
+
+            currencyIcon.color =
+                iconColor;
+        }
     }
+
+    // =========================================================
+    // POINTER ENTER
+    // =========================================================
 
     public void OnPointerEnter(
         PointerEventData eventData
@@ -119,6 +258,10 @@ public class PowerUpCard : MonoBehaviour,
         }
     }
 
+    // =========================================================
+    // POINTER EXIT
+    // =========================================================
+
     public void OnPointerExit(
         PointerEventData eventData
     )
@@ -131,6 +274,10 @@ public class PowerUpCard : MonoBehaviour,
         }
     }
 
+    // =========================================================
+    // POINTER CLICK
+    // =========================================================
+
     public void OnPointerClick(
         PointerEventData eventData
     )
@@ -141,11 +288,13 @@ public class PowerUpCard : MonoBehaviour,
             return;
         }
 
-        // Don't allow unaffordable purchases
-        if (CurrencyManager.Instance == null ||
-            !CurrencyManager.Instance.CanAfford(
-                powerUpData.diamondCost
-            ))
+        if (CurrencyManager.Instance == null)
+        {
+            return;
+        }
+
+        if (!CurrencyManager.Instance.CanAfford(
+                powerUpData.diamondCost))
         {
             return;
         }
@@ -154,6 +303,10 @@ public class PowerUpCard : MonoBehaviour,
             powerUpData
         );
     }
+
+    // =========================================================
+    // PUBLIC ACCESS
+    // =========================================================
 
     public PowerUpData GetPowerUpData()
     {

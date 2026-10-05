@@ -15,6 +15,7 @@ MonoBehaviour:
   powerUpName: Projectile Speed Up
   description: Increase projectile speed.
   cardImage: {fileID: -7899024313410965313, guid: 976ff8781de351d4f8e3024ae935d33b, type: 3}
+  infoImage: {fileID: 21300000, guid: 0d3d6281856b85f45bba1f349283168d, type: 3}
   powerUpType: 1
   isTwisted: 0
   effectValue: 1

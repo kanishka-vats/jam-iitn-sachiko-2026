@@ -1,0 +1,598 @@
+fileFormatVersion: 2
+guid: 0d3d6281856b85f45bba1f349283168d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8975976645586637452
+    second: amplify-attack-speed_0
+  - first:
+      213: 398998151375051378
+    second: amplify-attack-speed_1
+  - first:
+      213: 4991740684996713469
+    second: amplify-attack-speed_2
+  - first:
+      213: 8848628625309011362
+    second: amplify-attack-speed_3
+  - first:
+      213: 6512452245385154848
+    second: amplify-attack-speed_4
+  - first:
+      213: -1865630413208035307
+    second: amplify-attack-speed_5
+  - first:
+      213: 2551463950606410406
+    second: amplify-attack-speed_6
+  - first:
+      213: -5920291828060140652
+    second: amplify-attack-speed_7
+  - first:
+      213: -7272712545411353309
+    second: amplify-attack-speed_8
+  - first:
+      213: 8781222609667973538
+    second: amplify-attack-speed_9
+  - first:
+      213: -4809808515262853563
+    second: amplify-attack-speed_10
+  - first:
+      213: -3719785947880629332
+    second: amplify-attack-speed_11
+  - first:
+      213: 5567441441006782029
+    second: amplify-attack-speed_12
+  - first:
+      213: 8746259486957186006
+    second: amplify-attack-speed_13
+  - first:
+      213: -6685604059121822236
+    second: amplify-attack-speed_14
+  - first:
+      213: -3134807469342728688
+    second: amplify-attack-speed_15
+  - first:
+      213: 5003180829993147385
+    second: amplify-attack-speed_16
+  - first:
+      213: 2657944104948725086
+    second: amplify-attack-speed_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: amplify-attack-speed_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 285
+        width: 76
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47d2b9f2cccee6380800000000000000
+      internalID: -8975976645586637452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 283
+        width: 100
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a5fb664b6898500800000000000000
+      internalID: 398998151375051378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_2
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 285
+        width: 74
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfb1814a4b9364540800000000000000
+      internalID: 4991740684996713469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 285
+        width: 58
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad85e84ad4acca70800000000000000
+      internalID: 8848628625309011362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 285
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02190ee00d0e06a50800000000000000
+      internalID: 6512452245385154848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_5
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 285
+        width: 54
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510e1921603fb16e0800000000000000
+      internalID: -1865630413208035307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_6
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 285
+        width: 79
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a22c11e1fe986320800000000000000
+      internalID: 2551463950606410406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 143
+        width: 77
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49bc3dd03f5e6dda0800000000000000
+      internalID: -5920291828060140652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_8
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 143
+        width: 86
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 325ba31f872221b90800000000000000
+      internalID: -7272712545411353309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_9
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 143
+        width: 87
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a163e6407b2dd970800000000000000
+      internalID: 8781222609667973538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_10
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 143
+        width: 77
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ecb1a83a0204db0800000000000000
+      internalID: -4809808515262853563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_11
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 141
+        width: 70
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cabd510836aa06cc0800000000000000
+      internalID: -3719785947880629332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_12
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 143
+        width: 92
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d468ff63e76834d40800000000000000
+      internalID: 5567441441006782029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_13
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 0
+        width: 51
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6db2979e9a4f06970800000000000000
+      internalID: 8746259486957186006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_14
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 1
+        width: 74
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e55223b786f733a0800000000000000
+      internalID: -6685604059121822236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_15
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 1
+        width: 57
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ed59e273dee74d0800000000000000
+      internalID: -3134807469342728688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_16
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1
+        width: 58
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fb19c6f47ede6540800000000000000
+      internalID: 5003180829993147385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: amplify-attack-speed_17
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 1
+        width: 88
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55ff40c41ae2e420800000000000000
+      internalID: 2657944104948725086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      amplify-attack-speed_0: -8975976645586637452
+      amplify-attack-speed_1: 398998151375051378
+      amplify-attack-speed_10: -4809808515262853563
+      amplify-attack-speed_11: -3719785947880629332
+      amplify-attack-speed_12: 5567441441006782029
+      amplify-attack-speed_13: 8746259486957186006
+      amplify-attack-speed_14: -6685604059121822236
+      amplify-attack-speed_15: -3134807469342728688
+      amplify-attack-speed_16: 5003180829993147385
+      amplify-attack-speed_17: 2657944104948725086
+      amplify-attack-speed_2: 4991740684996713469
+      amplify-attack-speed_3: 8848628625309011362
+      amplify-attack-speed_4: 6512452245385154848
+      amplify-attack-speed_5: -1865630413208035307
+      amplify-attack-speed_6: 2551463950606410406
+      amplify-attack-speed_7: -5920291828060140652
+      amplify-attack-speed_8: -7272712545411353309
+      amplify-attack-speed_9: 8781222609667973538
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
