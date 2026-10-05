@@ -1,0 +1,1170 @@
+fileFormatVersion: 2
+guid: 2fe96eabc8596ae4b8c96c08ff5d8985
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7517722426766490142
+    second: congratulations-you-died_0
+  - first:
+      213: -1445672826751340144
+    second: congratulations-you-died_1
+  - first:
+      213: -6613401499268495002
+    second: congratulations-you-died_2
+  - first:
+      213: -8377167089136811416
+    second: congratulations-you-died_3
+  - first:
+      213: 3156438381597295369
+    second: congratulations-you-died_4
+  - first:
+      213: -2863725196071280455
+    second: congratulations-you-died_5
+  - first:
+      213: 1185577668303192232
+    second: congratulations-you-died_6
+  - first:
+      213: 7245724108080419122
+    second: congratulations-you-died_7
+  - first:
+      213: -1742235833072641305
+    second: congratulations-you-died_8
+  - first:
+      213: 4476206021600575246
+    second: congratulations-you-died_9
+  - first:
+      213: -214494528746385604
+    second: congratulations-you-died_10
+  - first:
+      213: 1527078086510980994
+    second: congratulations-you-died_11
+  - first:
+      213: 3931899939753588137
+    second: congratulations-you-died_12
+  - first:
+      213: 5669738702111562923
+    second: congratulations-you-died_13
+  - first:
+      213: 7035396956072330983
+    second: congratulations-you-died_14
+  - first:
+      213: -3624992886986069189
+    second: congratulations-you-died_15
+  - first:
+      213: 6763622703425611576
+    second: congratulations-you-died_16
+  - first:
+      213: -4225485122248758369
+    second: congratulations-you-died_17
+  - first:
+      213: 7453609547345847380
+    second: congratulations-you-died_18
+  - first:
+      213: 262047846405799485
+    second: congratulations-you-died_19
+  - first:
+      213: 7983536076620498162
+    second: congratulations-you-died_20
+  - first:
+      213: 6706146584763104604
+    second: congratulations-you-died_21
+  - first:
+      213: -6298572916634131830
+    second: congratulations-you-died_22
+  - first:
+      213: 5285399085107334849
+    second: congratulations-you-died_23
+  - first:
+      213: 7865381660611211587
+    second: congratulations-you-died_24
+  - first:
+      213: 4274011065816924702
+    second: congratulations-you-died_25
+  - first:
+      213: 6127694138408485678
+    second: congratulations-you-died_26
+  - first:
+      213: 180625113684592113
+    second: congratulations-you-died_27
+  - first:
+      213: 1117298553008585292
+    second: congratulations-you-died_28
+  - first:
+      213: 3092203225695265157
+    second: congratulations-you-died_29
+  - first:
+      213: 1025222415387685032
+    second: congratulations-you-died_30
+  - first:
+      213: 1481111052894274889
+    second: congratulations-you-died_31
+  - first:
+      213: 736702756789427889
+    second: congratulations-you-died_32
+  - first:
+      213: -1303967552325451780
+    second: congratulations-you-died_33
+  - first:
+      213: 4639547483000649981
+    second: congratulations-you-died_34
+  - first:
+      213: -4819630140455307008
+    second: congratulations-you-died_35
+  - first:
+      213: 1392534888949784486
+    second: congratulations-you-died_36
+  - first:
+      213: 6024793527109981063
+    second: congratulations-you-died_37
+  - first:
+      213: 3328765311246972454
+    second: congratulations-you-died_38
+  - first:
+      213: -6208773323704565663
+    second: congratulations-you-died_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: congratulations-you-died_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 335
+        width: 57
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a776f67b0545860800000000000000
+      internalID: 7517722426766490142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 335
+        width: 63
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0913d0c3930ffebe0800000000000000
+      internalID: -1445672826751340144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 335
+        width: 68
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669c01f206a7834a0800000000000000
+      internalID: -6613401499268495002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_3
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 315
+        width: 66
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86248e3aae25ebb80800000000000000
+      internalID: -8377167089136811416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_4
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 335
+        width: 75
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903048a0cfbedcb20800000000000000
+      internalID: 3156438381597295369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_5
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 337
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b0e5d95b110248d0800000000000000
+      internalID: -2863725196071280455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_6
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 337
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a009dc9b94047010800000000000000
+      internalID: 1185577668303192232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_7
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 335
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2311e92dfabfd8460800000000000000
+      internalID: 7245724108080419122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_8
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 337
+        width: 46
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ea9fb69db552d7e0800000000000000
+      internalID: -1742235833072641305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_9
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 337
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0f77f229adae1e30800000000000000
+      internalID: 4476206021600575246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_10
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 337
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f8ecfcc56f50df0800000000000000
+      internalID: -214494528746385604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_11
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 337
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f25cacd65413510800000000000000
+      internalID: 1527078086510980994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_12
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 335
+        width: 63
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a57461c92ae09630800000000000000
+      internalID: 3931899939753588137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_13
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 335
+        width: 69
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bacd4ac5f45feae40800000000000000
+      internalID: 5669738702111562923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_14
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 335
+        width: 40
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e64e84a140c2a160800000000000000
+      internalID: 7035396956072330983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_15
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 228
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3ba0e1ec2071bdc0800000000000000
+      internalID: -3624992886986069189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_16
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 226
+        width: 51
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 837637873073ddd50800000000000000
+      internalID: 6763622703425611576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_17
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 289
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9b2aac3baf0c55c0800000000000000
+      internalID: -4225485122248758369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_18
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 226
+        width: 51
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4546204746a807760800000000000000
+      internalID: 7453609547345847380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_19
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 226
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e7c2fb02bf2a300800000000000000
+      internalID: 262047846405799485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_20
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 226
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f40b7a53c73bce60800000000000000
+      internalID: 7983536076620498162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_21
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 228
+        width: 24
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5df084c9c4011d50800000000000000
+      internalID: 6706146584763104604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_22
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 226
+        width: 38
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a826028bd49f698a0800000000000000
+      internalID: -6298572916634131830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_23
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 36
+        width: 73
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce4ff3f672895940800000000000000
+      internalID: 5285399085107334849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_24
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 36
+        width: 52
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3417a9f92f2772d60800000000000000
+      internalID: 7865381660611211587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_25
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 97
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e124b107b66505b30800000000000000
+      internalID: 4274011065816924702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_26
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 97
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e23c41c5a51f90550800000000000000
+      internalID: 6127694138408485678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_27
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 36
+        width: 38
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f54faa7595b18200800000000000000
+      internalID: 180625113684592113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_28
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 36
+        width: 24
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a72204d11718f00800000000000000
+      internalID: 1117298553008585292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 34
+        width: 30
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58122e85376b9ea20800000000000000
+      internalID: 3092203225695265157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_30
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 36
+        width: 23
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a073fcda525a3e00800000000000000
+      internalID: 1025222415387685032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_31
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 34
+        width: 30
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9450ba4c7a6fd8410800000000000000
+      internalID: 1481111052894274889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_32
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 36
+        width: 52
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1be1c7b014b493a00800000000000000
+      internalID: 736702756789427889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_33
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 34
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cff710d7b6067ede0800000000000000
+      internalID: -1303967552325451780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_34
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 34
+        width: 29
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df8bfcabadbf26040800000000000000
+      internalID: 4639547483000649981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_35
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 34
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00935693ceb3d1db0800000000000000
+      internalID: -4819630140455307008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_36
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 36
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af90318a17435310800000000000000
+      internalID: 1392534888949784486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_37
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 0
+        width: 60
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 783967ccacd5c9350800000000000000
+      internalID: 6024793527109981063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_38
+      rect:
+        serializedVersion: 2
+        x: 996
+        y: 34
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626b48df966223e20800000000000000
+      internalID: 3328765311246972454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: congratulations-you-died_39
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 34
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1600badbe8106d9a0800000000000000
+      internalID: -6208773323704565663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      congratulations-you-died_0: 7517722426766490142
+      congratulations-you-died_1: -1445672826751340144
+      congratulations-you-died_10: -214494528746385604
+      congratulations-you-died_11: 1527078086510980994
+      congratulations-you-died_12: 3931899939753588137
+      congratulations-you-died_13: 5669738702111562923
+      congratulations-you-died_14: 7035396956072330983
+      congratulations-you-died_15: -3624992886986069189
+      congratulations-you-died_16: 6763622703425611576
+      congratulations-you-died_17: -4225485122248758369
+      congratulations-you-died_18: 7453609547345847380
+      congratulations-you-died_19: 262047846405799485
+      congratulations-you-died_2: -6613401499268495002
+      congratulations-you-died_20: 7983536076620498162
+      congratulations-you-died_21: 6706146584763104604
+      congratulations-you-died_22: -6298572916634131830
+      congratulations-you-died_23: 5285399085107334849
+      congratulations-you-died_24: 7865381660611211587
+      congratulations-you-died_25: 4274011065816924702
+      congratulations-you-died_26: 6127694138408485678
+      congratulations-you-died_27: 180625113684592113
+      congratulations-you-died_28: 1117298553008585292
+      congratulations-you-died_29: 3092203225695265157
+      congratulations-you-died_3: -8377167089136811416
+      congratulations-you-died_30: 1025222415387685032
+      congratulations-you-died_31: 1481111052894274889
+      congratulations-you-died_32: 736702756789427889
+      congratulations-you-died_33: -1303967552325451780
+      congratulations-you-died_34: 4639547483000649981
+      congratulations-you-died_35: -4819630140455307008
+      congratulations-you-died_36: 1392534888949784486
+      congratulations-you-died_37: 6024793527109981063
+      congratulations-you-died_38: 3328765311246972454
+      congratulations-you-died_39: -6208773323704565663
+      congratulations-you-died_4: 3156438381597295369
+      congratulations-you-died_5: -2863725196071280455
+      congratulations-you-died_6: 1185577668303192232
+      congratulations-you-died_7: 7245724108080419122
+      congratulations-you-died_8: -1742235833072641305
+      congratulations-you-died_9: 4476206021600575246
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
