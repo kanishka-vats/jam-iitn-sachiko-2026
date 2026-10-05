@@ -9,6 +9,9 @@ public class GameEndManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject victoryScreen;
 
+    [Header("Gameplay UI")]
+    [SerializeField] private GameObject[] gameplayUI;
+
     private void Start()
     {
         // Hide both screens at the start.
@@ -26,6 +29,9 @@ public class GameEndManager : MonoBehaviour
         {
             playerHealth.OnDeath += ShowGameOver;
         }
+
+        // Make sure the game starts unpaused.
+        Time.timeScale = 1f;
     }
 
     private void OnDestroy()
@@ -38,15 +44,36 @@ public class GameEndManager : MonoBehaviour
 
     public void ShowGameOver()
     {
+        // Hide all gameplay UI.
+        HideGameplayUI();
+
+        // Show Game Over screen.
         gameOverScreen.SetActive(true);
 
+        // Pause game.
         Time.timeScale = 0f;
     }
 
     public void ShowVictory()
     {
+        // Hide all gameplay UI.
+        HideGameplayUI();
+
+        // Show Victory screen.
         victoryScreen.SetActive(true);
 
+        // Pause game.
         Time.timeScale = 0f;
+    }
+
+    private void HideGameplayUI()
+    {
+        foreach (GameObject ui in gameplayUI)
+        {
+            if (ui != null)
+            {
+                ui.SetActive(false);
+            }
+        }
     }
 }

@@ -612,6 +612,11 @@ MonoBehaviour:
   playerHealth: {fileID: 1564156687}
   gameOverScreen: {fileID: 1424157856}
   victoryScreen: {fileID: 1158397505}
+  gameplayUI:
+  - {fileID: 1340202719}
+  - {fileID: 1262711141}
+  - {fileID: 1114366272}
+  - {fileID: 554164562}
 --- !u!1001 &1059437392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,34 +673,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1825021813677190830, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825021813677190830, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825021813677190830, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825021813677190830, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -138.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967446266548805388, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967446266548805388, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967446266548805388, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3412982228261679674, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -724,10 +701,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5918126243724838997, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6204953572892305346, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -739,10 +712,6 @@ PrefabInstance:
     - target: {fileID: 6327508943439960717, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431009113155238228, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6606503220345368193, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_Name
@@ -809,6 +778,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1790586766}
     - target: {fileID: 8011922744985574224, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1543928381}
+    - target: {fileID: 9108280548539655113, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1543928381}
@@ -1598,8 +1571,8 @@ MonoBehaviour:
   powerUpPanel: {fileID: 1705651104}
   powerUpCards:
   - {fileID: 1378441898}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 578501370}
+  - {fileID: 1905654939}
   countdownText: {fileID: 1431274723}
   resultText: {fileID: 417020679}
   waveManager: {fileID: 1790586766}
