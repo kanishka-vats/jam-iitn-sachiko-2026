@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
+
     private bool isMoving = false;
     private bool isShooting = false;
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
 
     private void Start()
-    {   
+    {
         playerInput = GetComponent<PlayerInput>();
 
         if (currentWeapon == null)
@@ -138,13 +139,16 @@ public class PlayerController : MonoBehaviour
             lastDirection = moveDirection;
             isMoving = true;
 
+            // Flip sprite based on horizontal movement.
+            // The base Player_Left sprite faces LEFT,
+            // so flip it only when moving RIGHT.
             if (horizontalInput < 0)
             {
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else if (horizontalInput > 0)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
         }
         else
@@ -181,8 +185,37 @@ public class PlayerController : MonoBehaviour
         if (animator == null)
             return;
 
+        // Keep existing animation parameters
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsShooting", isShooting);
+
+        // Freeze animation when not moving
+        if (!isMoving)
+        {
+            animator.speed = 0f;
+            return;
+        }
+
+        animator.speed = 1f;
+
+        float x = moveDirection.x;
+        float y = moveDirection.y;
+
+        // UP
+        if (y > 0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
+        {
+            animator.Play("Player_Up");
+        }
+        // DOWN
+        else if (y < -0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
+        {
+            animator.Play("Player_Down");
+        }
+        // LEFT / RIGHT
+        else
+        {
+            animator.Play("Player_Left");
+        }
     }
 
     private void StartDash()
@@ -276,7 +309,6 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeedMultiplier += amount;
     }
-    
 
     public void SetDashSpeedMultiplier(float multiplier)
     {

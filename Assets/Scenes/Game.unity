@@ -171,9 +171,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5967805741105799940, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.016
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6236590491356862794, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3936624992445982557, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1979859223}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
 --- !u!1 &139055929
@@ -1092,6 +1100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdd2ebb1c9a49d408fb060b4298f7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
+--- !u!4 &1396058144 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3936624992445982557, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
+  m_PrefabInstance: {fileID: 19758927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1423049280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979859222}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1336,7 +1349,7 @@ Transform:
   - {fileID: 139055931}
   - {fileID: 1790586767}
   - {fileID: 1423049281}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1396058144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004341373
 GameObject:
@@ -68382,7 +68395,6 @@ SceneRoots:
   - {fileID: 749333541}
   - {fileID: 1162615755}
   - {fileID: 19758927}
-  - {fileID: 1979859223}
   - {fileID: 1059437392}
   - {fileID: 2077450794}
   - {fileID: 2038851877}
