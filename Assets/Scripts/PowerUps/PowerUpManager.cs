@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PowerUpManager : MonoBehaviour
 {
     public static PowerUpManager Instance;
 
-    [Header("Available Power Ups")]
-    [SerializeField] private List<PowerUpData> powerUps =
-        new List<PowerUpData>();
+    [Header("Power Ups")]
+    [SerializeField] private List<PowerUpData> powerUps;
 
-    [Header("UI")]
+    [Header("Power Up Selection UI")]
     [SerializeField] private GameObject powerUpPanel;
     [SerializeField] private PowerUpCard[] powerUpCards;
 
@@ -19,19 +19,37 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private TMP_Text countdownText;
     [SerializeField] private TMP_Text resultText;
 
+    [Header("Twisted Reveal")]
+    [SerializeField] private GameObject twistedRevealObject;
+    [SerializeField] private UIFrameAnimation twistedCharacterAnimation;
+    [SerializeField] private TMP_Text twistedSubtitle;
+
+    [Header("Twisted Reveal Volume")]
+    [SerializeField] private Volume twistedRevealVolume;
+
+    [Header("Twisted Dialogue")]
+    [SerializeField] private AudioSource twistedDialogueSource;
+    [SerializeField] private AudioClip twistedDialogueClip;
+
+    [Header("Twisted Reveal Settings")]
+    [Range(0.05f, 1f)]
+    [SerializeField] private float twistedTimeScale = 0.2f;
+
     [Header("References")]
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Gun playerGun;
     [SerializeField] private PlayerHealth playerHealth;
 
-    [Header("Regenerative Health")]
+    [Header("Health Regeneration")]
     [SerializeField] private float regenerationInterval = 1f;
 
     private PowerUpData selectedPowerUp;
 
     private Coroutine healthRegenerationCoroutine;
 
+    private float originalTimeScale;
+    private float originalFixedDeltaTime;
 
     private void Awake()
     {
@@ -44,7 +62,6 @@ public class PowerUpManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     private void Start()
     {
@@ -62,248 +79,131 @@ public class PowerUpManager : MonoBehaviour
         {
             resultText.gameObject.SetActive(false);
         }
+
+        if (twistedRevealObject != null)
+        {
+            twistedRevealObject.SetActive(false);
+        }
+
+        if (twistedSubtitle != null)
+        {
+            twistedSubtitle.gameObject.SetActive(false);
+        }
+
+        // Red tint starts disabled.
+        if (twistedRevealVolume != null)
+        {
+            twistedRevealVolume.weight = 0f;
+        }
+
+        if (twistedDialogueSource != null)
+        {
+            twistedDialogueSource.playOnAwake = false;
+            twistedDialogueSource.loop = false;
+        }
     }
 
+    // =========================================================
+    // POWER UP GENERATION
+    // =========================================================
 
-    // --------------------------------------------------
-    // POWER-UP GENERATION
-    // --------------------------------------------------
-
-    public List<PowerUpData> GetRandomPowerUps(int amount)
+    public void GetRandomPowerUps()
     {
+        if (powerUps == null || powerUps.Count < 3)
+        {
+            Debug.LogWarning(
+                "PowerUpManager: Not enough power-ups configured."
+            );
+
+            return;
+        }
+
+        List<PowerUpData> availablePowerUps =
+            new List<PowerUpData>(powerUps);
+
         List<PowerUpData> selectedPowerUps =
             new List<PowerUpData>();
 
-        if (powerUps == null || powerUps.Count < amount)
-        {
-            Debug.LogWarning(
-                "Not enough power-ups available."
-            );
-
-            return selectedPowerUps;
-        }
-
-        int currentDiamonds = 0;
-
-        if (CurrencyManager.Instance != null)
-        {
-            currentDiamonds =
-                CurrencyManager.Instance.Diamonds;
-        }
-
-        // Separate twisted and normal power-ups
-        List<PowerUpData> realPowerUps =
-            powerUps.FindAll(
-                powerUp => !powerUp.isTwisted
-            );
-
+        // Guarantee at least one twisted power-up.
         List<PowerUpData> twistedPowerUps =
-            powerUps.FindAll(
+            availablePowerUps.FindAll(
                 powerUp => powerUp.isTwisted
             );
 
-        // Find power-ups the player can currently afford
-        List<PowerUpData> affordablePowerUps =
-            powerUps.FindAll(
-                powerUp =>
-                    powerUp.diamondCost <= currentDiamonds
-            );
-
-        // ------------------------------------------------
-        // 1. GUARANTEE AT LEAST ONE AFFORDABLE CARD
-        // ------------------------------------------------
-
-        if (affordablePowerUps.Count > 0)
-        {
-            PowerUpData affordableCard =
-                affordablePowerUps[
-                    Random.Range(
-                        0,
-                        affordablePowerUps.Count
-                    )
-                ];
-
-            selectedPowerUps.Add(
-                affordableCard
-            );
-        }
-        else
-        {
-            Debug.LogWarning(
-                "Player cannot afford any power-up!"
-            );
-
-            // Fallback: give the player the cheapest card
-            PowerUpData cheapestPowerUp =
-                powerUps[0];
-
-            foreach (PowerUpData powerUp in powerUps)
-            {
-                if (powerUp.diamondCost <
-                    cheapestPowerUp.diamondCost)
-                {
-                    cheapestPowerUp = powerUp;
-                }
-            }
-
-            selectedPowerUps.Add(
-                cheapestPowerUp
-            );
-        }
-
-        // ------------------------------------------------
-        // 2. GUARANTEE AT LEAST ONE TWISTED CARD
-        // ------------------------------------------------
-
         if (twistedPowerUps.Count > 0)
         {
-            bool alreadyHasTwisted =
-                selectedPowerUps.Exists(
-                    powerUp => powerUp.isTwisted
-                );
+            PowerUpData twistedPowerUp =
+                twistedPowerUps[
+                    Random.Range(0, twistedPowerUps.Count)
+                ];
 
-            if (!alreadyHasTwisted)
-            {
-                List<PowerUpData> availableTwisted =
-                    new List<PowerUpData>(
-                        twistedPowerUps
-                    );
-
-                availableTwisted.RemoveAll(
-                    powerUp =>
-                        selectedPowerUps.Contains(powerUp)
-                );
-
-                if (availableTwisted.Count > 0)
-                {
-                    PowerUpData twistedCard =
-                        availableTwisted[
-                            Random.Range(
-                                0,
-                                availableTwisted.Count
-                            )
-                        ];
-
-                    selectedPowerUps.Add(
-                        twistedCard
-                    );
-                }
-            }
+            selectedPowerUps.Add(twistedPowerUp);
+            availablePowerUps.Remove(twistedPowerUp);
         }
 
-        // ------------------------------------------------
-        // 3. FILL REMAINING CARDS RANDOMLY
-        // ------------------------------------------------
-
-        List<PowerUpData> remainingPowerUps =
-            new List<PowerUpData>(powerUps);
-
-        remainingPowerUps.RemoveAll(
-            powerUp =>
-                selectedPowerUps.Contains(powerUp)
-        );
-
+        // Fill remaining cards.
         while (
-            selectedPowerUps.Count < amount &&
-            remainingPowerUps.Count > 0
+            selectedPowerUps.Count < 3 &&
+            availablePowerUps.Count > 0
         )
         {
             int randomIndex =
                 Random.Range(
                     0,
-                    remainingPowerUps.Count
+                    availablePowerUps.Count
                 );
 
-            selectedPowerUps.Add(
-                remainingPowerUps[randomIndex]
-            );
+            PowerUpData randomPowerUp =
+                availablePowerUps[randomIndex];
 
-            remainingPowerUps.RemoveAt(randomIndex);
+            selectedPowerUps.Add(randomPowerUp);
+            availablePowerUps.RemoveAt(randomIndex);
         }
 
-        return selectedPowerUps;
+        // Assign cards.
+        for (int i = 0; i < powerUpCards.Length; i++)
+        {
+            if (i < selectedPowerUps.Count)
+            {
+                powerUpCards[i].Setup(
+                    selectedPowerUps[i],
+                    this
+                );
+            }
+        }
     }
 
-
-    // --------------------------------------------------
-    // PURCHASE POWER-UP
-    // --------------------------------------------------
+    // =========================================================
+    // POWER UP SELECTION
+    // =========================================================
 
     public void TryPurchasePowerUp(PowerUpData powerUp)
     {
         if (powerUp == null)
-            return;
-
-        // Make sure CurrencyManager exists.
-        if (CurrencyManager.Instance == null)
-        {
-            Debug.LogWarning(
-                "CurrencyManager is missing."
-            );
-
-            return;
-        }
-
-        // Check if player has enough diamonds.
-        if (!CurrencyManager.Instance.CanAfford(
-            powerUp.diamondCost))
-        {
-            Debug.Log(
-                "NOT ENOUGH DIAMONDS! " +
-                powerUp.powerUpName +
-                " costs " +
-                powerUp.diamondCost +
-                " diamonds."
-            );
-
-            return;
-        }
-
-        // Spend diamonds.
-        bool purchaseSuccessful =
-            CurrencyManager.Instance.SpendDiamonds(
-                powerUp.diamondCost
-            );
-
-        if (!purchaseSuccessful)
         {
             return;
         }
 
-        Debug.Log(
-            "POWER-UP PURCHASED: " +
-            powerUp.powerUpName +
-            " for " +
-            powerUp.diamondCost +
-            " diamonds."
-        );
-
-        // Continue with the existing selection flow.
+        // Keep the existing project selection flow.
         SelectPowerUp(powerUp);
     }
-
-
-    // --------------------------------------------------
-    // PLAYER SELECTS POWER-UP
-    // --------------------------------------------------
 
     public void SelectPowerUp(PowerUpData powerUp)
     {
         if (powerUp == null)
+        {
             return;
+        }
 
         selectedPowerUp = powerUp;
 
-        Debug.Log(
-            "POWER-UP SELECTED: " +
-            selectedPowerUp.powerUpName
-        );
-
+        // Hide selection UI.
         if (powerUpPanel != null)
         {
             powerUpPanel.SetActive(false);
         }
 
+        // Allow player movement again.
         if (playerController != null)
         {
             playerController.SetMovementEnabled(true);
@@ -315,14 +215,13 @@ public class PowerUpManager : MonoBehaviour
             waveManager.StartNextWave();
         }
 
-        // Start the reveal at the same time.
+        // Start the reveal countdown.
         StartCoroutine(RevealPowerUp());
     }
 
-
-    // --------------------------------------------------
-    // POWER-UP REVEAL
-    // --------------------------------------------------
+    // =========================================================
+    // 10 SECOND REVEAL
+    // =========================================================
 
     private IEnumerator RevealPowerUp()
     {
@@ -331,23 +230,17 @@ public class PowerUpManager : MonoBehaviour
             countdownText.gameObject.SetActive(true);
         }
 
-        if (resultText != null)
-        {
-            resultText.gameObject.SetActive(false);
-        }
+        float countdown = 10f;
 
-        float timer = 10f;
-
-        while (timer > 0f)
+        while (countdown > 0f)
         {
             if (countdownText != null)
             {
                 countdownText.text =
-                    "POWER-UP REVEAL\n" +
-                    Mathf.CeilToInt(timer);
+                    Mathf.CeilToInt(countdown).ToString();
             }
 
-            timer -= Time.deltaTime;
+            countdown -= Time.deltaTime;
 
             yield return null;
         }
@@ -360,74 +253,330 @@ public class PowerUpManager : MonoBehaviour
         RevealSelectedPowerUp();
     }
 
-
-    // --------------------------------------------------
-    // REVEAL RESULT
-    // --------------------------------------------------
+    // =========================================================
+    // REVEAL SELECTED POWER UP
+    // =========================================================
 
     private void RevealSelectedPowerUp()
     {
         if (selectedPowerUp == null)
+        {
             return;
+        }
+
+        if (selectedPowerUp.isTwisted)
+        {
+            StartCoroutine(
+                PlayTwistedReveal()
+            );
+        }
+        else
+        {
+            ShowNormalReveal();
+            ApplyPowerUp();
+        }
+    }
+
+    // =========================================================
+    // NORMAL REVEAL
+    // =========================================================
+
+    private void ShowNormalReveal()
+    {
+        if (resultText == null)
+        {
+            return;
+        }
+
+        resultText.gameObject.SetActive(true);
+
+        resultText.text =
+            "POWER-UP GRANTED!";
+    }
+
+    // =========================================================
+    // TWISTED REVEAL
+    // =========================================================
+
+    private IEnumerator PlayTwistedReveal()
+    {
+        // -----------------------------------------------------
+        // Save current time settings
+        // -----------------------------------------------------
+
+        originalTimeScale = Time.timeScale;
+        originalFixedDeltaTime = Time.fixedDeltaTime;
+
+        // -----------------------------------------------------
+        // Show PLOT TWIST text
+        // -----------------------------------------------------
 
         if (resultText != null)
         {
             resultText.gameObject.SetActive(true);
+            resultText.text = "PLOT TWIST!";
 
-            if (selectedPowerUp.isTwisted)
-            {
-                if (selectedPowerUp.powerUpType ==
-                    PowerUpType.Invisibility)
-                {
-                    resultText.text =
-                        "YOU REALLY THOUGHT THAT WOULD WORK?";
-                }
-                else
-                {
-                    resultText.text =
-                        "PLOT TWIST!";
-                }
-            }
-            else
-            {
-                resultText.text =
-                    "POWER-UP GRANTED!";
-            }
+            StartCoroutine(
+                AnimatePlotTwistText()
+            );
         }
 
-        Debug.Log(
-            "POWER-UP REVEALED: " +
-            selectedPowerUp.powerUpName
-        );
+        // -----------------------------------------------------
+        // Show twisted reveal UI
+        // -----------------------------------------------------
 
-        if (selectedPowerUp.isTwisted)
+        if (twistedRevealObject != null)
         {
-            Debug.Log("PLOT TWIST!");
+            twistedRevealObject.SetActive(true);
+        }
+
+        // -----------------------------------------------------
+        // Setup subtitle
+        // -----------------------------------------------------
+
+        if (twistedSubtitle != null)
+        {
+            twistedSubtitle.text =
+                GetTwistedSubtitle();
+
+            twistedSubtitle.gameObject.SetActive(true);
+        }
+
+        // -----------------------------------------------------
+        // ENABLE RED TINT
+        // -----------------------------------------------------
+
+        if (twistedRevealVolume != null)
+        {
+            twistedRevealVolume.weight = 1f;
+
+            Debug.Log(
+                "PowerUpManager: RED TINT ENABLED."
+            );
         }
         else
         {
-            Debug.Log("POWER-UP GRANTED!");
+            Debug.LogWarning(
+                "PowerUpManager: Twisted Reveal Volume is not assigned."
+            );
         }
+
+        // -----------------------------------------------------
+        // ENABLE SLOW MOTION
+        // -----------------------------------------------------
+
+        Time.timeScale = twistedTimeScale;
+
+        Time.fixedDeltaTime =
+            originalFixedDeltaTime *
+            twistedTimeScale;
+
+        // -----------------------------------------------------
+        // Start character frame animation
+        // -----------------------------------------------------
+
+        if (twistedCharacterAnimation != null)
+        {
+            twistedCharacterAnimation.Play();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "PowerUpManager: Twisted Character Animation is not assigned."
+            );
+        }
+
+        // -----------------------------------------------------
+        // Play character dialogue
+        // -----------------------------------------------------
+
+        if (
+            twistedDialogueSource != null &&
+            twistedDialogueClip != null
+        )
+        {
+            twistedDialogueSource.clip =
+                twistedDialogueClip;
+
+            twistedDialogueSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "PowerUpManager: Twisted dialogue source or clip is missing."
+            );
+        }
+
+        // -----------------------------------------------------
+        // Wait for dialogue
+        // -----------------------------------------------------
+
+        if (
+            twistedDialogueSource != null &&
+            twistedDialogueSource.clip != null
+        )
+        {
+            yield return new WaitWhile(
+                () => twistedDialogueSource.isPlaying
+            );
+        }
+        else
+        {
+            // Fallback if there is no dialogue.
+            yield return new WaitForSecondsRealtime(2f);
+        }
+
+        // -----------------------------------------------------
+        // Stop character animation
+        // -----------------------------------------------------
+
+        if (twistedCharacterAnimation != null)
+        {
+            twistedCharacterAnimation.Stop();
+        }
+
+        // -----------------------------------------------------
+        // Hide twisted reveal UI
+        // -----------------------------------------------------
+
+        if (twistedRevealObject != null)
+        {
+            twistedRevealObject.SetActive(false);
+        }
+
+        if (twistedSubtitle != null)
+        {
+            twistedSubtitle.gameObject.SetActive(false);
+        }
+
+        // -----------------------------------------------------
+        // DISABLE RED TINT
+        // -----------------------------------------------------
+
+        if (twistedRevealVolume != null)
+        {
+            twistedRevealVolume.weight = 0f;
+
+            Debug.Log(
+                "PowerUpManager: RED TINT DISABLED."
+            );
+        }
+
+        // -----------------------------------------------------
+        // Restore normal game speed
+        // -----------------------------------------------------
+
+        Time.timeScale = originalTimeScale;
+
+        Time.fixedDeltaTime =
+            originalFixedDeltaTime;
+
+        // -----------------------------------------------------
+        // Hide result text
+        // -----------------------------------------------------
+
+        if (resultText != null)
+        {
+            resultText.gameObject.SetActive(false);
+        }
+
+        // -----------------------------------------------------
+        // Apply actual power-up
+        // -----------------------------------------------------
 
         ApplyPowerUp();
     }
 
+    // =========================================================
+    // PLOT TWIST TEXT ANIMATION
+    // =========================================================
 
-    // --------------------------------------------------
-    // APPLY POWER-UP
-    // --------------------------------------------------
+    private IEnumerator AnimatePlotTwistText()
+    {
+        if (resultText == null)
+        {
+            yield break;
+        }
+
+        Vector3 originalScale =
+            resultText.transform.localScale;
+
+        resultText.transform.localScale =
+            originalScale * 0.5f;
+
+        float duration = 0.35f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float progress =
+                Mathf.Clamp01(
+                    elapsed / duration
+                );
+
+            float eased =
+                1f -
+                Mathf.Pow(
+                    1f - progress,
+                    3f
+                );
+
+            resultText.transform.localScale =
+                Vector3.Lerp(
+                    originalScale * 0.5f,
+                    originalScale,
+                    eased
+                );
+
+            yield return null;
+        }
+
+        resultText.transform.localScale =
+            originalScale;
+    }
+
+    // =========================================================
+    // TWISTED SUBTITLE
+    // =========================================================
+
+    private string GetTwistedSubtitle()
+    {
+        if (selectedPowerUp == null)
+        {
+            return "";
+        }
+
+        switch (selectedPowerUp.powerUpType)
+        {
+            case PowerUpType.Invisibility:
+                return "YOU REALLY THOUGHT THAT WOULD WORK?";
+
+            case PowerUpType.InvertedControls:
+                return "OH... YOU'RE GOING TO REGRET THAT.";
+
+            case PowerUpType.Heal:
+                return "DID YOU REALLY THINK I'D HELP YOU?";
+
+            default:
+                return "YOU HAVE NO IDEA WHAT YOU JUST CHOSE.";
+        }
+    }
+
+    // =========================================================
+    // APPLY POWER UP
+    // =========================================================
 
     private void ApplyPowerUp()
     {
         if (selectedPowerUp == null)
+        {
             return;
+        }
 
         switch (selectedPowerUp.powerUpType)
         {
-            // ------------------------------------------
-            // LEGIT: DAMAGE
-            // ------------------------------------------
-
             case PowerUpType.Damage:
 
                 if (playerGun != null)
@@ -437,17 +586,7 @@ public class PowerUpManager : MonoBehaviour
                     );
                 }
 
-                Debug.Log(
-                    "Damage increased by " +
-                    selectedPowerUp.effectValue
-                );
-
                 break;
-
-
-            // ------------------------------------------
-            // LEGIT: PROJECTILE SPEED
-            // ------------------------------------------
 
             case PowerUpType.ProjectileSpeed:
 
@@ -458,17 +597,7 @@ public class PowerUpManager : MonoBehaviour
                     );
                 }
 
-                Debug.Log(
-                    "Projectile speed increased by " +
-                    selectedPowerUp.effectValue
-                );
-
                 break;
-
-
-            // ------------------------------------------
-            // LEGIT: PROJECTILE SIZE
-            // ------------------------------------------
 
             case PowerUpType.ProjectileSize:
 
@@ -479,125 +608,84 @@ public class PowerUpManager : MonoBehaviour
                     );
                 }
 
-                Debug.Log(
-                    "Projectile size increased by " +
-                    selectedPowerUp.effectValue
-                );
-
                 break;
-
-
-            // ------------------------------------------
-            // TWISTED: REGENERATIVE HEALTH
-            // ------------------------------------------
 
             case PowerUpType.Heal:
 
-                if (playerHealth != null)
-                {
-                    healthRegenerationCoroutine =
-                        StartCoroutine(
-                            RegenerateHealth()
-                        );
-                }
+                StartHealthRegeneration();
 
                 if (waveManager != null)
                 {
                     waveManager.AddWaveTime(25f);
                 }
 
-                Debug.Log(
-                    "PLOT TWIST: Regenerative health activated."
-                );
-
-                Debug.Log(
-                    "PLOT TWIST: Wave timer increased by 25 seconds."
-                );
-
                 break;
-
-
-            // ------------------------------------------
-            // TWISTED: INVISIBILITY
-            // ------------------------------------------
 
             case PowerUpType.Invisibility:
 
                 Debug.Log(
-                    "PLOT TWIST: Invisibility was fake!"
+                    "Invisibility power-up activated."
                 );
 
                 break;
-
-
-            // ------------------------------------------
-            // TWISTED: INVERTED CONTROLS
-            // ------------------------------------------
 
             case PowerUpType.InvertedControls:
 
                 if (playerController != null)
                 {
-                    playerController.SetInvertedControls(true);
+                    playerController.SetInvertedControls(
+                        true
+                    );
                 }
 
+                break;
+
+            case PowerUpType.FuturePowerUp1:
+
                 Debug.Log(
-                    "PLOT TWIST: Controls will be inverted " +
-                    "for this wave."
+                    "FuturePowerUp1 activated."
+                );
+
+                break;
+
+            case PowerUpType.FuturePowerUp2:
+
+                Debug.Log(
+                    "FuturePowerUp2 activated."
                 );
 
                 break;
         }
     }
 
+    // =========================================================
+    // HEALTH REGENERATION
+    // =========================================================
 
-    // --------------------------------------------------
-    // REGENERATIVE HEALTH
-    // --------------------------------------------------
+    private void StartHealthRegeneration()
+    {
+        StopHealthRegeneration();
+
+        healthRegenerationCoroutine =
+            StartCoroutine(
+                RegenerateHealth()
+            );
+    }
 
     private IEnumerator RegenerateHealth()
     {
-        while (true)
+        while (playerHealth != null)
         {
             yield return new WaitForSeconds(
                 regenerationInterval
             );
 
-            if (playerHealth == null)
-                yield break;
-
-            if (playerHealth.IsDead())
-                yield break;
-
-            playerHealth.Heal(1);
-
-            Debug.Log(
-                "Regenerative Health: +1 HP"
-            );
+            if (playerHealth != null)
+            {
+                playerHealth.Heal(1);
+            }
         }
     }
-
-
-    // --------------------------------------------------
-    // RESET TEMPORARY POWER-UPS
-    // --------------------------------------------------
-
-    public void ResetTemporaryPowerUps()
-    {
-        Debug.Log(
-            "===== RESETTING TEMPORARY POWER-UPS ====="
-        );
-
-        // Reset inverted controls.
-        if (playerController != null)
-        {
-            playerController.SetInvertedControls(false);
-        }
-
-        // Stop regenerative health.
-        StopHealthRegeneration();
-    }
-
 
     private void StopHealthRegeneration()
     {
@@ -611,57 +699,36 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
+    // =========================================================
+    // RESET TEMPORARY POWER UPS
+    // =========================================================
+
+    public void ResetTemporaryPowerUps()
+    {
+        StopHealthRegeneration();
+
+        if (playerController != null)
+        {
+            playerController.SetInvertedControls(false);
+        }
+    }
+
+    // =========================================================
+    // SHOW POWER UP SELECTION
+    // =========================================================
+
     public void ShowPowerUpSelection()
-{
-    if (powerUpPanel == null)
     {
-        Debug.LogWarning(
-            "Power Up Panel is not assigned."
-        );
-
-        return;
-    }
-
-    List<PowerUpData> selectedPowerUps =
-        GetRandomPowerUps(3);
-
-    if (selectedPowerUps.Count < 3)
-    {
-        Debug.LogWarning(
-            "Could not generate 3 power-ups."
-        );
-
-        return;
-    }
-
-    powerUpPanel.SetActive(true);
-
-    if (playerController != null)
-    {
-        playerController.SetMovementEnabled(false);
-    }
-
-    for (int i = 0; i < powerUpCards.Length; i++)
-    {
-        if (i < selectedPowerUps.Count)
+        if (powerUpPanel != null)
         {
-            powerUpCards[i].gameObject.SetActive(true);
-
-            powerUpCards[i].Setup(
-                selectedPowerUps[i],
-                this
-            );
+            powerUpPanel.SetActive(true);
         }
-        else
+
+        if (playerController != null)
         {
-            powerUpCards[i].gameObject.SetActive(false);
+            playerController.SetMovementEnabled(false);
         }
+
+        GetRandomPowerUps();
     }
-
-    Debug.Log(
-        "===== CHOOSE YOUR POWER-UP ====="
-    );
-}
-
-
 }
