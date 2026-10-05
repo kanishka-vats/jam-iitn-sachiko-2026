@@ -250,6 +250,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &554164562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3412982228261679674, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+  m_PrefabInstance: {fileID: 1059437392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &554857219
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +732,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1543928381}
+    - target: {fileID: 6286648943911772653, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327508943439960717, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6431009113155238228, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -804,6 +817,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+--- !u!1 &1114366272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6431009113155238228, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+  m_PrefabInstance: {fileID: 1059437392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1129409352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1085,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1979859223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1262711141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5918126243724838997, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+  m_PrefabInstance: {fileID: 1059437392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1340202719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 764183521833351388, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+  m_PrefabInstance: {fileID: 1059437392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1378441898 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4789556786334239106, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
@@ -1123,6 +1151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 1897788042}
+  gameOverPanel: {fileID: 1424157856}
+  gameplayUI:
+  - {fileID: 1114366272}
+  - {fileID: 1262711141}
+  - {fileID: 1340202719}
+  - {fileID: 554164562}
+  playerHealth: {fileID: 1564156687}
 --- !u!114 &1396058143 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4561353995552287912, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}
