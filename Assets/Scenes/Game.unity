@@ -227,6 +227,7 @@ MonoBehaviour:
   twistedRevealObject: {fileID: 2005479052}
   twistedCharacterAnimation: {fileID: 1927120284}
   twistedSubtitle: {fileID: 1613454984}
+  twistedEffectText: {fileID: 417020679}
   twistedRevealVolume: {fileID: 1143661967}
   twistedDialogueSource: {fileID: 1313255196}
   twistedDialogueClip: {fileID: 8300000, guid: 7122f70989cd2cc43b00306021415609, type: 3}
@@ -557,9 +558,81 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1256863011062256782, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256863011062256782, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549013867511734772, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765508483089061623, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4978313
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765508483089061623, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4978313
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765508483089061623, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4978313
+      objectReference: {fileID: 0}
+    - target: {fileID: 1765508483089061623, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -252
+      objectReference: {fileID: 0}
     - target: {fileID: 1767691654458051268, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497849855562145863, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3976811
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497849855562145863, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3976811
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497849855562145863, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3976811
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497849855562145863, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766302995741107536, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766302995741107536, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766302995741107536, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766302995741107536, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036459235146339435, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036459235146339435, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589526876908762026, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4788779235576719318, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_AnchorMax.y
@@ -584,6 +657,19 @@ PrefabInstance:
     - target: {fileID: 4788779235576719318, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341080592823598454, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_text
+      value: "You thought you got a power \nno no how is that possible when I am
+        here"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341080592823598454, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341080592823598454, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6204953572892305346, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -665,10 +751,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1543928381}
+    - target: {fileID: 8247263689056632448, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9108280548539655113, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1543928381}
+    - target: {fileID: 9166690203190648476, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2888366
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166690203190648476, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2888366
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166690203190648476, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2888366
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166690203190648476, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -56
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166690203190648476, guid: 9de056318d3e9da4e877ae59b552f8ba, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -51
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1673,6 +1783,7 @@ MonoBehaviour:
   twistedRevealObject: {fileID: 0}
   twistedCharacterAnimation: {fileID: 0}
   twistedSubtitle: {fileID: 0}
+  twistedEffectText: {fileID: 0}
   twistedRevealVolume: {fileID: 1143661967}
   twistedDialogueSource: {fileID: 1313255196}
   twistedDialogueClip: {fileID: 0}
