@@ -103,9 +103,8 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // POWER UP GENERATION
-    // =========================================================
+
 
     public void GetRandomPowerUps()
     {
@@ -173,9 +172,8 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // POWER UP SELECTION
-    // =========================================================
+
 
     public void TryPurchasePowerUp(PowerUpData powerUp)
     {
@@ -219,9 +217,8 @@ public class PowerUpManager : MonoBehaviour
         StartCoroutine(RevealPowerUp());
     }
 
-    // =========================================================
     // 10 SECOND REVEAL
-    // =========================================================
+
 
     private IEnumerator RevealPowerUp()
     {
@@ -253,9 +250,7 @@ public class PowerUpManager : MonoBehaviour
         RevealSelectedPowerUp();
     }
 
-    // =========================================================
     // REVEAL SELECTED POWER UP
-    // =========================================================
 
     private void RevealSelectedPowerUp()
     {
@@ -277,9 +272,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // NORMAL REVEAL
-    // =========================================================
 
     private void ShowNormalReveal()
     {
@@ -293,23 +286,16 @@ public class PowerUpManager : MonoBehaviour
         resultText.text =
             "POWER-UP GRANTED!";
     }
-
-    // =========================================================
     // TWISTED REVEAL
-    // =========================================================
 
     private IEnumerator PlayTwistedReveal()
     {
-        // -----------------------------------------------------
         // Save current time settings
-        // -----------------------------------------------------
 
         originalTimeScale = Time.timeScale;
         originalFixedDeltaTime = Time.fixedDeltaTime;
 
-        // -----------------------------------------------------
         // Show PLOT TWIST text
-        // -----------------------------------------------------
 
         if (resultText != null)
         {
@@ -321,18 +307,12 @@ public class PowerUpManager : MonoBehaviour
             );
         }
 
-        // -----------------------------------------------------
         // Show twisted reveal UI
-        // -----------------------------------------------------
-
         if (twistedRevealObject != null)
         {
             twistedRevealObject.SetActive(true);
         }
-
-        // -----------------------------------------------------
         // Setup subtitle
-        // -----------------------------------------------------
 
         if (twistedSubtitle != null)
         {
@@ -341,10 +321,7 @@ public class PowerUpManager : MonoBehaviour
 
             twistedSubtitle.gameObject.SetActive(true);
         }
-
-        // -----------------------------------------------------
         // ENABLE RED TINT
-        // -----------------------------------------------------
 
         if (twistedRevealVolume != null)
         {
@@ -360,20 +337,14 @@ public class PowerUpManager : MonoBehaviour
                 "PowerUpManager: Twisted Reveal Volume is not assigned."
             );
         }
-
-        // -----------------------------------------------------
         // ENABLE SLOW MOTION
-        // -----------------------------------------------------
 
         Time.timeScale = twistedTimeScale;
 
         Time.fixedDeltaTime =
             originalFixedDeltaTime *
             twistedTimeScale;
-
-        // -----------------------------------------------------
         // Start character frame animation
-        // -----------------------------------------------------
 
         if (twistedCharacterAnimation != null)
         {
@@ -385,10 +356,7 @@ public class PowerUpManager : MonoBehaviour
                 "PowerUpManager: Twisted Character Animation is not assigned."
             );
         }
-
-        // -----------------------------------------------------
         // Play character dialogue
-        // -----------------------------------------------------
 
         if (
             twistedDialogueSource != null &&
@@ -406,10 +374,7 @@ public class PowerUpManager : MonoBehaviour
                 "PowerUpManager: Twisted dialogue source or clip is missing."
             );
         }
-
-        // -----------------------------------------------------
         // Wait for dialogue
-        // -----------------------------------------------------
 
         if (
             twistedDialogueSource != null &&
@@ -425,19 +390,12 @@ public class PowerUpManager : MonoBehaviour
             // Fallback if there is no dialogue.
             yield return new WaitForSecondsRealtime(2f);
         }
-
-        // -----------------------------------------------------
         // Stop character animation
-        // -----------------------------------------------------
-
         if (twistedCharacterAnimation != null)
         {
             twistedCharacterAnimation.Stop();
         }
-
-        // -----------------------------------------------------
         // Hide twisted reveal UI
-        // -----------------------------------------------------
 
         if (twistedRevealObject != null)
         {
@@ -448,10 +406,7 @@ public class PowerUpManager : MonoBehaviour
         {
             twistedSubtitle.gameObject.SetActive(false);
         }
-
-        // -----------------------------------------------------
         // DISABLE RED TINT
-        // -----------------------------------------------------
 
         if (twistedRevealVolume != null)
         {
@@ -461,35 +416,22 @@ public class PowerUpManager : MonoBehaviour
                 "PowerUpManager: RED TINT DISABLED."
             );
         }
-
-        // -----------------------------------------------------
         // Restore normal game speed
-        // -----------------------------------------------------
 
         Time.timeScale = originalTimeScale;
 
         Time.fixedDeltaTime =
             originalFixedDeltaTime;
-
-        // -----------------------------------------------------
         // Hide result text
-        // -----------------------------------------------------
 
         if (resultText != null)
         {
             resultText.gameObject.SetActive(false);
         }
 
-        // -----------------------------------------------------
-        // Apply actual power-up
-        // -----------------------------------------------------
-
         ApplyPowerUp();
     }
-
-    // =========================================================
     // PLOT TWIST TEXT ANIMATION
-    // =========================================================
 
     private IEnumerator AnimatePlotTwistText()
     {
@@ -536,11 +478,7 @@ public class PowerUpManager : MonoBehaviour
         resultText.transform.localScale =
             originalScale;
     }
-
-    // =========================================================
     // TWISTED SUBTITLE
-    // =========================================================
-
     private string GetTwistedSubtitle()
     {
         if (selectedPowerUp == null)
@@ -563,10 +501,8 @@ public class PowerUpManager : MonoBehaviour
                 return "YOU HAVE NO IDEA WHAT YOU JUST CHOSE.";
         }
     }
-
-    // =========================================================
     // APPLY POWER UP
-    // =========================================================
+
 
     private void ApplyPowerUp()
     {
@@ -658,9 +594,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // HEALTH REGENERATION
-    // =========================================================
 
     private void StartHealthRegeneration()
     {
@@ -699,9 +633,8 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // RESET TEMPORARY POWER UPS
-    // =========================================================
+
 
     public void ResetTemporaryPowerUps()
     {
@@ -713,9 +646,8 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // =========================================================
     // SHOW POWER UP SELECTION
-    // =========================================================
+  
 
     public void ShowPowerUpSelection()
     {

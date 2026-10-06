@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9b963a3cf122b114a940cc6d565315f2
+guid: 234b9aa3125108940a05588c9f0b0bc4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6695054586439005456
-    second: SACHIKO (11)_0
+      213: 6772245426812925312
+    second: Untitled19_20261005223350_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 700
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SACHIKO (11)_0
+      name: Untitled19_20261005223350_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 155
+        y: 410
+        width: 1162
+        height: 1103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0fa047753536613a0800000000000000
-      internalID: -6695054586439005456
+      spriteID: 085b2f4b559dbfd50800000000000000
+      internalID: 6772245426812925312
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SACHIKO (11)_0: -6695054586439005456
+      Untitled19_20261005223350_0: 6772245426812925312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

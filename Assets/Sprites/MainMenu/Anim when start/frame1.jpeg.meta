@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 797e2aed098d40340aa0cc3ee3936313
+guid: 0f9861e5c95545b489b87d50d1d0a7a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1295458930767264521
-    second: SACHIKO (3)_0
+      213: 4093529123795720158
+    second: frame1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SACHIKO (3)_0
+      name: frame1_0
       rect:
         serializedVersion: 2
-        x: 747
-        y: 576
-        width: 1196
-        height: 479
+        x: 0
+        y: 0
+        width: 1599
+        height: 899
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 90, y: 111, z: 28, w: 129}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f4828257fa950ee0800000000000000
-      internalID: -1295458930767264521
+      spriteID: ed75f85bc032fc830800000000000000
+      internalID: 4093529123795720158
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5557c16c1b4a61c4d932322ef3d24be2
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SACHIKO (3)_0: -1295458930767264521
+      frame1_0: 4093529123795720158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
