@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 0.5f;
+
     private float dashCooldownTimer = 0f;
     private float dashTimer = 0f;
     private bool isDashing = false;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Direction")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+
     public Vector2 FacingDirection { get; private set; } = Vector2.right;
 
     private Vector2 moveDirection = Vector2.zero;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [Header("Modifiers (Powerups)")]
     [SerializeField] private bool invertControlsX = false;
     [SerializeField] private bool invertControlsY = false;
+
     private float moveSpeedMultiplier = 1f;
     private float dashSpeedMultiplier = 1f;
     private float dashCooldownMultiplier = 1f;
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
         HandleFire();
         UpdateAnimation();
 
-        if (dashCooldownTimer > 0)
+        if (dashCooldownTimer > 0f)
         {
             dashCooldownTimer -= Time.deltaTime;
         }
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             dashTimer -= Time.deltaTime;
 
-            if (dashTimer <= 0)
+            if (dashTimer <= 0f)
             {
                 isDashing = false;
             }
@@ -77,42 +81,43 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Completely stop movement when movement is disabled
         if (!movementEnabled)
         {
-            rb.linearVelocity = Vector2.zero;
+            if (rb != null)
+                rb.linearVelocity = Vector2.zero;
+
             return;
         }
+
+        if (rb == null)
+            return;
 
         if (isDashing)
         {
             rb.linearVelocity =
-                FacingDirection *
-                (dashSpeed * dashSpeedMultiplier);
+                FacingDirection * (dashSpeed * dashSpeedMultiplier);
         }
         else
         {
             rb.linearVelocity =
-                moveDirection *
-                (moveSpeed * moveSpeedMultiplier);
+                moveDirection * (moveSpeed * moveSpeedMultiplier);
         }
     }
 
     private void HandleInput()
     {
-        // Don't process movement or dash input
-        // while movement is disabled
         if (!movementEnabled)
         {
             moveDirection = Vector2.zero;
             isMoving = false;
-
-            // Cancel an active dash
             isDashing = false;
             dashTimer = 0f;
-
             return;
         }
+
+        if (playerInput == null ||
+            playerInput.actions["Move"] == null)
+            return;
 
         Vector2 input =
             playerInput.actions["Move"].ReadValue<Vector2>();
@@ -120,7 +125,6 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = input.x;
         float verticalInput = input.y;
 
-        // Apply inverted controls if power-up is active
         if (invertControlsX)
             horizontalInput *= -1f;
 
@@ -128,27 +132,20 @@ public class PlayerController : MonoBehaviour
             verticalInput *= -1f;
 
         moveDirection =
-            new Vector2(
-                horizontalInput,
-                verticalInput
-            ).normalized;
+            new Vector2(horizontalInput, verticalInput).normalized;
 
-        if (moveDirection.magnitude > 0)
+        if (moveDirection.magnitude > 0f)
         {
             FacingDirection = moveDirection;
             lastDirection = moveDirection;
             isMoving = true;
 
-            // Flip sprite based on horizontal movement.
-            // The base Player_Left sprite faces LEFT,
-            // so flip it only when moving RIGHT.
-            if (horizontalInput < 0)
+            if (spriteRenderer != null)
             {
-                spriteRenderer.flipX = false;
-            }
-            else if (horizontalInput > 0)
-            {
-                spriteRenderer.flipX = true;
+                if (horizontalInput < 0f)
+                    spriteRenderer.flipX = false;
+                else if (horizontalInput > 0f)
+                    spriteRenderer.flipX = true;
             }
         }
         else
@@ -157,9 +154,8 @@ public class PlayerController : MonoBehaviour
             FacingDirection = lastDirection;
         }
 
-        // Handle dash input
         if (playerInput.actions["Dash"].WasPressedThisFrame() &&
-            dashCooldownTimer <= 0 &&
+            dashCooldownTimer <= 0f &&
             !isDashing)
         {
             StartDash();
@@ -168,7 +164,15 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFire()
     {
-        if (playerInput.actions["Fire"].IsPressed() &&
+        // No shooting while the ending has frozen the player.
+        if (!movementEnabled)
+        {
+            isShooting = false;
+            return;
+        }
+
+        if (playerInput != null &&
+            playerInput.actions["Fire"].IsPressed() &&
             currentWeapon != null)
         {
             currentWeapon.Fire();
@@ -185,11 +189,9 @@ public class PlayerController : MonoBehaviour
         if (animator == null)
             return;
 
-        // Keep existing animation parameters
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsShooting", isShooting);
 
-        // Freeze animation when not moving
         if (!isMoving)
         {
             animator.speed = 0f;
@@ -201,17 +203,14 @@ public class PlayerController : MonoBehaviour
         float x = moveDirection.x;
         float y = moveDirection.y;
 
-        // UP
         if (y > 0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
         {
             animator.Play("Player_Up");
         }
-        // DOWN
         else if (y < -0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
         {
             animator.Play("Player_Down");
         }
-        // LEFT / RIGHT
         else
         {
             animator.Play("Player_Left");
@@ -220,16 +219,15 @@ public class PlayerController : MonoBehaviour
 
     private void StartDash()
     {
-        // Don't allow dash while movement is disabled
         if (!movementEnabled)
             return;
 
-        AudioManager.Instance.PlaySFX(SFXType.PlayerDash);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(SFXType.PlayerDash);
 
         isDashing = true;
         dashTimer = dashDuration;
-        dashCooldownTimer =
-            dashCooldown * dashCooldownMultiplier;
+        dashCooldownTimer = dashCooldown * dashCooldownMultiplier;
     }
 
     #region Movement Control
@@ -240,19 +238,14 @@ public class PlayerController : MonoBehaviour
 
         if (!enabled)
         {
-            // Immediately stop current movement
             moveDirection = Vector2.zero;
             isMoving = false;
 
-            // Cancel dash
             isDashing = false;
             dashTimer = 0f;
 
-            // Stop Rigidbody movement immediately
             if (rb != null)
-            {
                 rb.linearVelocity = Vector2.zero;
-            }
         }
     }
 
@@ -268,13 +261,9 @@ public class PlayerController : MonoBehaviour
         if (newWeapon == null)
             return;
 
-        // Disable old weapon if exists
         if (currentWeapon != null)
-        {
             currentWeapon.gameObject.SetActive(false);
-        }
 
-        // Enable new weapon
         currentWeapon = newWeapon;
         currentWeapon.gameObject.SetActive(true);
     }
@@ -284,18 +273,11 @@ public class PlayerController : MonoBehaviour
         if (weaponPrefab == null)
             return;
 
-        // Destroy old weapon
         if (currentWeapon != null)
-        {
             Destroy(currentWeapon.gameObject);
-        }
 
-        // Instantiate new weapon as child
-        GameObject weaponObj =
-            Instantiate(weaponPrefab, transform);
-
-        currentWeapon =
-            weaponObj.GetComponent<WeaponBase>();
+        GameObject weaponObj = Instantiate(weaponPrefab, transform);
+        currentWeapon = weaponObj.GetComponent<WeaponBase>();
     }
 
     #region Powerup Modification Methods
@@ -348,14 +330,10 @@ public class PlayerController : MonoBehaviour
     public void SetInvertedControls(bool inverted)
     {
         invertedControls = inverted;
-
         invertControlsX = inverted;
         invertControlsY = inverted;
 
-        Debug.Log(
-            "Inverted Controls: " +
-            inverted
-        );
+        Debug.Log("Inverted Controls: " + inverted);
     }
 
     public void SetMoveSpeed(float speed)
@@ -371,9 +349,7 @@ public class PlayerController : MonoBehaviour
     public void ForceDash()
     {
         if (!isDashing)
-        {
             StartDash();
-        }
     }
 
     #endregion
@@ -382,14 +358,17 @@ public class PlayerController : MonoBehaviour
 
     public float GetDashCooldownPercent()
     {
-        return 1f -
-            (dashCooldownTimer /
-            (dashCooldown * dashCooldownMultiplier));
+        float totalCooldown = dashCooldown * dashCooldownMultiplier;
+
+        if (totalCooldown <= 0f)
+            return 1f;
+
+        return 1f - (dashCooldownTimer / totalCooldown);
     }
 
     public bool CanDash()
     {
-        return dashCooldownTimer <= 0 && !isDashing;
+        return dashCooldownTimer <= 0f && !isDashing;
     }
 
     public bool IsDashing()
