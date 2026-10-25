@@ -21,7 +21,7 @@ public class DarknessProgressionManager : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float finalRedTint = 0.7f;
     [SerializeField, Range(0f, 1f)] private float startingEdgeGlow = 0.15f;
     [SerializeField, Range(0f, 1f)] private float finalEdgeGlow = 0.8f;
-    [SerializeField, Range(0f, 1f)] private float outsideOpacity = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float outsideOpacity = 0.35f;
 
     [Header("Progression")]
     [SerializeField] private bool progressWithinWave = true;
@@ -33,6 +33,7 @@ public class DarknessProgressionManager : MonoBehaviour
     private float currentRadius;
     private float targetRadius;
     private bool effectEnabled = true;
+    private bool endingTransition;
     private int lastWave = -1;
 
     public float CurrentRadius => currentRadius;
@@ -98,7 +99,7 @@ public class DarknessProgressionManager : MonoBehaviour
 
     private void Update()
     {
-        if (!effectEnabled || waveManager == null)
+        if (!effectEnabled || endingTransition || waveManager == null)
             return;
 
         if (waveManager.CurrentWave != lastWave)
@@ -140,23 +141,10 @@ public class DarknessProgressionManager : MonoBehaviour
             (wave - 1 + waveProgress) / totalWaves
         );
 
-        targetRadius = Mathf.Lerp(
-            wave1Radius,
-            finalWaveRadius,
-            progress
-        );
+        targetRadius = Mathf.Lerp(wave1Radius, finalWaveRadius, progress);
 
-        float redTint = Mathf.Lerp(
-            startingRedTint,
-            finalRedTint,
-            progress
-        );
-
-        float edgeGlow = Mathf.Lerp(
-            startingEdgeGlow,
-            finalEdgeGlow,
-            progress
-        );
+        float redTint = Mathf.Lerp(startingRedTint, finalRedTint, progress);
+        float edgeGlow = Mathf.Lerp(startingEdgeGlow, finalEdgeGlow, progress);
 
         if (instant)
         {
@@ -178,9 +166,10 @@ public class DarknessProgressionManager : MonoBehaviour
         darknessMaterial.SetFloat("_Alpha", 1f);
     }
 
+    
     private void UpdateCenter()
     {
-        if (darknessRect == null)
+        if (darknessRect == null || sachikoTarget == null)
             return;
 
         Camera cam = Camera.main;
@@ -188,9 +177,7 @@ public class DarknessProgressionManager : MonoBehaviour
         if (cam == null)
             return;
 
-        Vector3 screenPosition = cam.WorldToScreenPoint(
-            new Vector3(safeZoneCenter.x, safeZoneCenter.y, 0f)
-        );
+        Vector3 screenPosition = cam.WorldToScreenPoint(sachikoTarget.position);
 
         if (screenPosition.z < 0f)
             return;
@@ -213,16 +200,13 @@ public class DarknessProgressionManager : MonoBehaviour
         float u = Mathf.InverseLerp(rect.xMin, rect.xMax, localPoint.x);
         float v = Mathf.InverseLerp(rect.yMin, rect.yMax, localPoint.y);
 
-        darknessMaterial.SetVector(
-            "_Center",
-            new Vector4(u, v, 0f, 0f)
-        );
+        darknessMaterial.SetVector("_Center", new Vector4(u, v, 0f, 0f));
     }
+
 
     public bool IsInsideSafeZone(Vector2 position)
     {
         float radius = SafeZoneRadiusWorld;
-
         return (position - safeZoneCenter).sqrMagnitude <= radius * radius;
     }
 
@@ -248,6 +232,7 @@ public class DarknessProgressionManager : MonoBehaviour
     public void CollapseCircle(float duration)
     {
         StopAllCoroutines();
+        endingTransition = true;
         StartCoroutine(CollapseRoutine(duration));
     }
 
@@ -265,7 +250,6 @@ public class DarknessProgressionManager : MonoBehaviour
                 : 1f;
 
             currentRadius = Mathf.Lerp(startRadius, minimumRadius, t);
-
             darknessMaterial.SetFloat("_Radius", currentRadius);
 
             yield return null;
@@ -273,6 +257,61 @@ public class DarknessProgressionManager : MonoBehaviour
 
         currentRadius = minimumRadius;
         darknessMaterial.SetFloat("_Radius", minimumRadius);
+    }
+
+    
+    public void CollapseToBlack(float duration)
+    {
+        if (darknessMaterial == null || darknessImage == null)
+        {
+            Debug.LogError("Cannot collapse darkness: material or image is missing.");
+            return;
+        }
+
+        StopAllCoroutines();
+
+        if (sachikoTarget != null)
+            safeZoneCenter = sachikoTarget.position;
+
+        UpdateCenter();
+
+        effectEnabled = true;
+        endingTransition = true;
+        darknessImage.gameObject.SetActive(true);
+
+        StartCoroutine(CollapseToBlackRoutine(duration));
+    }
+
+    private IEnumerator CollapseToBlackRoutine(float duration)
+    {
+        float startRadius = currentRadius;
+        float startOpacity = darknessMaterial.GetFloat("_Opacity");
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = duration > 0f
+                ? Mathf.Clamp01(elapsed / duration)
+                : 1f;
+
+            t = 1f - Mathf.Pow(1f - t, 3f);
+
+            currentRadius = Mathf.Lerp(startRadius, 0f, t);
+
+            darknessMaterial.SetFloat("_Radius", currentRadius);
+            darknessMaterial.SetFloat("_Opacity", Mathf.Lerp(startOpacity, 1f, t));
+            darknessMaterial.SetFloat("_Alpha", 1f);
+
+            yield return null;
+        }
+
+        currentRadius = 0f;
+
+        darknessMaterial.SetFloat("_Radius", 0f);
+        darknessMaterial.SetFloat("_Opacity", 1f);
+        darknessMaterial.SetFloat("_Alpha", 1f);
     }
 
     private void OnDestroy()

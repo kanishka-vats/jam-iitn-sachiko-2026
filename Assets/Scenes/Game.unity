@@ -736,6 +736,7 @@ MonoBehaviour:
   endingOverlay: {fileID: 349901204}
   sachikoTarget: {fileID: 2014872404}
   playerController: {fileID: 1647594483}
+  darknessProgressionManager: {fileID: 2002509260}
   irisImage: {fileID: 1464585380}
   explosionImage: {fileID: 1179244905}
   whiteFlash: {fileID: 1822003090}
@@ -981,6 +982,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameEndManager
   playerHealth: {fileID: 1564156687}
+  playerController: {fileID: 1647594483}
+  darknessManager: {fileID: 2002509260}
+  endingSequenceManager: {fileID: 694623889}
   gameOverScreen: {fileID: 1424157856}
   victoryScreen: {fileID: 1158397505}
   gameplayUI:
@@ -988,6 +992,7 @@ MonoBehaviour:
   - {fileID: 1262711141}
   - {fileID: 1114366272}
   - {fileID: 554164562}
+  blackoutDuration: 2.5
 --- !u!1001 &1059437392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1929,13 +1934,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 1897788042}
-  gameOverPanel: {fileID: 1424157856}
-  gameplayUI:
-  - {fileID: 1114366272}
-  - {fileID: 1262711141}
-  - {fileID: 1340202719}
-  - {fileID: 554164562}
-  playerHealth: {fileID: 1564156687}
 --- !u!114 &1396058143 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4561353995552287912, guid: 266528eb3baefd74ab94357d1f49ec20, type: 3}

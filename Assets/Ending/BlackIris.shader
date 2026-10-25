@@ -107,11 +107,13 @@ Shader "Sachiko/BlackIris"
                 float d = length(p);
                 float edge = max(fwidth(d), 0.002);
 
-                float outside = smoothstep(
-                    _Radius - edge,
-                    _Radius + edge,
-                    d
-                );
+                float outside = _Radius <= 0.001
+                    ? 1.0
+                    : smoothstep(
+                        _Radius - edge,
+                        _Radius + edge,
+                        d
+                    );
 
                 float glow = 1.0 - smoothstep(
                     _Radius,

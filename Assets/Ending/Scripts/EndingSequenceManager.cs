@@ -12,6 +12,7 @@ public class EndingSequenceManager : MonoBehaviour
     [Header("Character Focus")]
     [SerializeField] private Transform sachikoTarget;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private DarknessProgressionManager darknessProgressionManager;
 
     [Header("Ending UI References")]
     [SerializeField] private Image irisImage;
@@ -46,6 +47,15 @@ public class EndingSequenceManager : MonoBehaviour
 
     private void Start()
     {
+        if (darknessProgressionManager == null)
+            darknessProgressionManager = FindFirstObjectByType<DarknessProgressionManager>();
+
+        if (playerController == null)
+            playerController = FindFirstObjectByType<PlayerController>();
+
+        if (sachikoTarget == null && playerController != null)
+            sachikoTarget = playerController.transform;
+
         if (irisImage != null && irisImage.material != null)
         {
             irisMaterial = new Material(irisImage.material);
@@ -95,35 +105,51 @@ public class EndingSequenceManager : MonoBehaviour
         if (Keyboard.current != null &&
             Keyboard.current.eKey.wasPressedThisFrame)
         {
-            StartCoroutine(PlayEnding());
+            StartCoroutine(PlayEnding(false));
         }
     }
 
-    private IEnumerator PlayEnding()
+    public void PlayVictoryEnding()
+    {
+        if (endingStarted)
+            return;
+
+        StartCoroutine(PlayEnding(true));
+    }
+
+    private IEnumerator PlayEnding(bool useGameplayDarkness)
     {
         endingStarted = true;
 
         if (playerController != null)
             playerController.SetMovementEnabled(false);
 
-        yield return new WaitForFixedUpdate();
-
         if (endingOverlay != null)
             endingOverlay.SetActive(true);
 
-        if (irisImage != null && irisMaterial != null)
+        if (useGameplayDarkness && darknessProgressionManager != null)
         {
-            irisImage.transform.SetAsFirstSibling();
+            darknessProgressionManager.CollapseToBlack(irisCloseDuration);
+            yield return new WaitForSecondsRealtime(irisCloseDuration);
+        }
+        else
+        {
+            if (darknessProgressionManager != null)
+                darknessProgressionManager.SetEffectEnabled(false);
 
-            SetIrisCenter(GetSachikoScreenPosition());
-            SetImageAlpha(irisImage, 1f);
-            irisMaterial.SetFloat("_Alpha", 1f);
+            if (irisImage != null && irisMaterial != null)
+            {
+                irisImage.transform.SetAsLastSibling();
 
-            yield return AnimateIris(1.5f, 0.10f, irisCloseDuration);
+                SetIrisCenter(GetSachikoScreenPosition());
+                SetImageAlpha(irisImage, 1f);
+                irisMaterial.SetFloat("_Alpha", 1f);
+
+                yield return AnimateIris(1.5f, 0.10f, irisCloseDuration);
+            }
         }
 
         yield return ShakeCamera();
-
         yield return new WaitForSecondsRealtime(0.08f);
 
         if (explosionImage != null)
@@ -145,15 +171,24 @@ public class EndingSequenceManager : MonoBehaviour
             whiteFlash.transform.SetAsLastSibling();
 
             yield return FadeImage(whiteFlash, 0f, 1f, 0.03f);
-
             yield return new WaitForSecondsRealtime(flashHoldDuration);
 
             SetImageAlpha(irisImage, 0f);
             SetImageAlpha(explosionImage, 0f);
 
+            if (darknessProgressionManager != null)
+                darknessProgressionManager.SetEffectEnabled(false);
+
             yield return FadeImage(
-                whiteFlash, 1f, 0f, flashFadeDuration
+                whiteFlash,
+                1f,
+                0f,
+                flashFadeDuration
             );
+        }
+        else if (darknessProgressionManager != null)
+        {
+            darknessProgressionManager.SetEffectEnabled(false);
         }
 
         if (awakeningImage != null && awakeningImage.sprite != null)
@@ -161,7 +196,10 @@ public class EndingSequenceManager : MonoBehaviour
             awakeningImage.transform.SetAsLastSibling();
 
             yield return FadeImage(
-                awakeningImage, 0f, 1f, awakeningFadeDuration
+                awakeningImage,
+                0f,
+                1f,
+                awakeningFadeDuration
             );
         }
 
