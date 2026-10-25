@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class ArcherEnemy : EnemyBase
@@ -15,33 +16,27 @@ public class ArcherEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
-
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        if (player == null)
+        if (player == null || IsMovementLocked || rb == null)
             return;
 
-        float distance =
-            Vector2.Distance(transform.position, player.position);
-
-        Vector2 direction =
-            (player.position - transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, player.position);
+        Vector2 direction = (player.position - transform.position).normalized;
 
         if (distance > preferredDistance)
         {
             rb.MovePosition(
-                rb.position +
-                direction * moveSpeed * Time.fixedDeltaTime
+                rb.position + direction * moveSpeed * Time.fixedDeltaTime
             );
         }
         else if (distance < minimumDistance)
         {
             rb.MovePosition(
-                rb.position -
-                direction * moveSpeed * Time.fixedDeltaTime
+                rb.position - direction * moveSpeed * Time.fixedDeltaTime
             );
         }
 
@@ -62,8 +57,7 @@ public class ArcherEnemy : EnemyBase
         if (projectilePrefab == null || player == null)
             return;
 
-        Vector2 direction =
-            (player.position - transform.position).normalized;
+        Vector2 direction = (player.position - transform.position).normalized;
 
         GameObject projectile = Instantiate(
             projectilePrefab,
@@ -71,13 +65,9 @@ public class ArcherEnemy : EnemyBase
             Quaternion.identity
         );
 
-        ArcherProjectile projectileScript =
-            projectile.GetComponent<ArcherProjectile>();
+        ArcherProjectile projectileScript = projectile.GetComponent<ArcherProjectile>();
 
         if (projectileScript != null)
-        {
             projectileScript.SetDirection(direction);
-        }
     }
-
 }

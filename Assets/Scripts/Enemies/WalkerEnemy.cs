@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class WalkerEnemy : EnemyBase
@@ -7,21 +8,18 @@ public class WalkerEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
-
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        if (player == null)
+        if (player == null || IsMovementLocked || rb == null)
             return;
 
-        Vector2 direction =
-            (player.position - transform.position).normalized;
+        Vector2 direction = (player.position - transform.position).normalized;
 
         rb.MovePosition(
-            rb.position +
-            direction * moveSpeed * Time.fixedDeltaTime
+            rb.position + direction * moveSpeed * Time.fixedDeltaTime
         );
     }
 
@@ -29,13 +27,10 @@ public class WalkerEnemy : EnemyBase
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerHealth playerHealth =
-                collision.gameObject.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
             if (playerHealth != null)
-            {
                 playerHealth.TakeDamage((int)damage);
-            }
         }
     }
 }

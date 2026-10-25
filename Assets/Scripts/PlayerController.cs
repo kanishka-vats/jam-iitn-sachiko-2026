@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     private bool movementEnabled = true;
 
+
+    [Header("Particle Effects")]
+    [SerializeField] private GameObject dirtEffectPrefab;
+
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float dashDuration = 0.2f;
@@ -92,13 +96,9 @@ public class PlayerController : MonoBehaviour
         }
 
         if (isDashing)
-        {
             rb.linearVelocity = FacingDirection * (dashSpeed * dashSpeedMultiplier);
-        }
         else
-        {
             rb.linearVelocity = moveDirection * (moveSpeed * moveSpeedMultiplier);
-        }
 
         EnforceSafeZoneBoundary();
     }
@@ -246,6 +246,22 @@ public class PlayerController : MonoBehaviour
 
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFX(SFXType.PlayerDash);
+
+        if (dirtEffectPrefab != null)
+        {
+            float angle = Mathf.Atan2(
+                FacingDirection.y,
+                FacingDirection.x
+            ) * Mathf.Rad2Deg;
+
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+
+            ParticleEffects.PlayOnce(
+                dirtEffectPrefab,
+                transform.position,
+                rotation
+            );
+        }
 
         isDashing = true;
         dashTimer = dashDuration;

@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class BomberEnemy : EnemyBase
@@ -11,30 +12,25 @@ public class BomberEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
-
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        if (player == null)
+        if (player == null || IsMovementLocked || rb == null)
             return;
 
-        Vector2 direction =
-            (player.position - transform.position).normalized;
+        Vector2 direction = (player.position - transform.position).normalized;
 
         rb.MovePosition(
-            rb.position +
-            direction * moveSpeed * Time.fixedDeltaTime
+            rb.position + direction * moveSpeed * Time.fixedDeltaTime
         );
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             Explode();
-        }
     }
 
     private void Explode()
@@ -48,13 +44,10 @@ public class BomberEnemy : EnemyBase
         {
             if (hitObject.CompareTag("Player"))
             {
-                PlayerHealth playerHealth =
-                    hitObject.GetComponent<PlayerHealth>();
+                PlayerHealth playerHealth = hitObject.GetComponent<PlayerHealth>();
 
                 if (playerHealth != null)
-                {
                     playerHealth.TakeDamage(explosionDamage);
-                }
             }
         }
 
@@ -63,9 +56,6 @@ public class BomberEnemy : EnemyBase
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(
-            transform.position,
-            explosionRadius
-        );
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

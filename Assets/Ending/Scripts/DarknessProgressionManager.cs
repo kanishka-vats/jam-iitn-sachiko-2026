@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +12,14 @@ public class DarknessProgressionManager : MonoBehaviour
 
     [Header("Circle Radius")]
     [SerializeField, Range(0.1f, 1.5f)] private float wave1Radius = 0.85f;
-    [SerializeField, Range(0.05f, 1f)] private float finalWaveRadius = 0.45f;
+    [SerializeField, Range(0.05f, 1f)] private float finalWaveRadius = 0.25f;
     [SerializeField] private float minimumRadius = 0.05f;
+
+    [Header("Circle Movement")]
+    [SerializeField] private float circleMoveSpeed = 0.6f;
+    [SerializeField] private float minMoveInterval = 7f;
+    [SerializeField] private float maxMoveInterval = 12f;
+    [SerializeField] private float maxDriftFromStart = 3f;
 
     [Header("Red Tint")]
     [SerializeField, Range(0f, 1f)] private float startingRedTint = 0.05f;
@@ -24,14 +29,19 @@ public class DarknessProgressionManager : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float outsideOpacity = 0.35f;
 
     [Header("Progression")]
-    [SerializeField] private bool progressWithinWave = true;
-    [SerializeField] private float transitionSpeed = 3f;
+    [SerializeField] private float transitionSpeed = 1.5f;
 
     private Material darknessMaterial;
     private RectTransform darknessRect;
+
     private Vector2 safeZoneCenter;
+    private Vector2 startingCenter;
+    private Vector2 movementTarget;
+
     private float currentRadius;
     private float targetRadius;
+    private float movementTimer;
+
     private bool effectEnabled = true;
     private bool endingTransition;
     private int lastWave = -1;
@@ -92,9 +102,17 @@ public class DarknessProgressionManager : MonoBehaviour
 
         darknessImage.gameObject.SetActive(true);
 
-        CaptureWaveCenter();
-        UpdateCenter();
+        safeZoneCenter = sachikoTarget.position;
+        startingCenter = safeZoneCenter;
+        movementTarget = safeZoneCenter;
+
+        targetRadius = GetRadiusForWave(waveManager.CurrentWave);
+        currentRadius = targetRadius;
+        lastWave = waveManager.CurrentWave;
+
+        ChooseNewMovementTarget();
         UpdateProgression(true);
+        UpdateCenter();
     }
 
     private void Update()
@@ -103,61 +121,81 @@ public class DarknessProgressionManager : MonoBehaviour
             return;
 
         if (waveManager.CurrentWave != lastWave)
-            CaptureWaveCenter();
+        {
+            lastWave = waveManager.CurrentWave;
+            targetRadius = GetRadiusForWave(lastWave);
+        }
 
+        UpdateCircleMovement();
         UpdateProgression(false);
         UpdateCenter();
     }
 
-    private void CaptureWaveCenter()
+    private float GetRadiusForWave(int wave)
     {
-        if (sachikoTarget == null || waveManager == null)
-            return;
+        int totalWaves = Mathf.Max(1, waveManager.FinalWave);
 
-        safeZoneCenter = sachikoTarget.position;
-        lastWave = waveManager.CurrentWave;
+        float progress = totalWaves <= 1
+            ? 1f
+            : Mathf.Clamp01((wave - 1f) / (totalWaves - 1f));
+
+        return Mathf.Lerp(wave1Radius, finalWaveRadius, progress);
+    }
+
+    private void UpdateCircleMovement()
+    {
+        movementTimer -= Time.deltaTime;
+
+        if (movementTimer <= 0f ||
+            Vector2.Distance(safeZoneCenter, movementTarget) < 0.1f)
+        {
+            ChooseNewMovementTarget();
+        }
+
+        safeZoneCenter = Vector2.MoveTowards(
+            safeZoneCenter,
+            movementTarget,
+            circleMoveSpeed * Time.deltaTime
+        );
+    }
+
+    private void ChooseNewMovementTarget()
+    {
+        Vector2 randomOffset = Random.insideUnitCircle * maxDriftFromStart;
+
+        movementTarget = startingCenter + randomOffset;
+
+        movementTimer = Random.Range(
+            minMoveInterval,
+            Mathf.Max(minMoveInterval, maxMoveInterval)
+        );
     }
 
     private void UpdateProgression(bool instant)
     {
-        int totalWaves = Mathf.Max(1, waveManager.FinalWave);
-        int wave = Mathf.Clamp(waveManager.CurrentWave, 1, totalWaves);
-
-        float waveProgress = 0f;
-
-        if (progressWithinWave && waveManager.WaveActive)
-        {
-            WaveData data = waveManager.CurrentWaveData;
-
-            if (data != null && data.duration > 0f)
-            {
-                waveProgress = 1f - Mathf.Clamp01(
-                    waveManager.WaveTimer / data.duration
-                );
-            }
-        }
-
-        float progress = Mathf.Clamp01(
-            (wave - 1 + waveProgress) / totalWaves
+        float progress = Mathf.InverseLerp(
+            wave1Radius,
+            finalWaveRadius,
+            currentRadius
         );
 
-        targetRadius = Mathf.Lerp(wave1Radius, finalWaveRadius, progress);
+        float waveProgress = waveManager.FinalWave <= 1
+            ? 1f
+            : Mathf.Clamp01(
+                (waveManager.CurrentWave - 1f) /
+                (waveManager.FinalWave - 1f)
+            );
 
-        float redTint = Mathf.Lerp(startingRedTint, finalRedTint, progress);
-        float edgeGlow = Mathf.Lerp(startingEdgeGlow, finalEdgeGlow, progress);
+        float redTint = Mathf.Lerp(startingRedTint, finalRedTint, waveProgress);
+        float edgeGlow = Mathf.Lerp(startingEdgeGlow, finalEdgeGlow, waveProgress);
 
-        if (instant)
-        {
-            currentRadius = targetRadius;
-        }
-        else
-        {
-            currentRadius = Mathf.Lerp(
+        currentRadius = instant
+            ? targetRadius
+            : Mathf.Lerp(
                 currentRadius,
                 targetRadius,
-                Time.unscaledDeltaTime * transitionSpeed
+                Time.deltaTime * transitionSpeed
             );
-        }
 
         darknessMaterial.SetFloat("_Radius", currentRadius);
         darknessMaterial.SetFloat("_RedTint", redTint);
@@ -166,10 +204,9 @@ public class DarknessProgressionManager : MonoBehaviour
         darknessMaterial.SetFloat("_Alpha", 1f);
     }
 
-    
     private void UpdateCenter()
     {
-        if (darknessRect == null || sachikoTarget == null)
+        if (darknessRect == null)
             return;
 
         Camera cam = Camera.main;
@@ -177,7 +214,7 @@ public class DarknessProgressionManager : MonoBehaviour
         if (cam == null)
             return;
 
-        Vector3 screenPosition = cam.WorldToScreenPoint(sachikoTarget.position);
+        Vector3 screenPosition = cam.WorldToScreenPoint(safeZoneCenter);
 
         if (screenPosition.z < 0f)
             return;
@@ -202,7 +239,6 @@ public class DarknessProgressionManager : MonoBehaviour
 
         darknessMaterial.SetVector("_Center", new Vector4(u, v, 0f, 0f));
     }
-
 
     public bool IsInsideSafeZone(Vector2 position)
     {
@@ -259,7 +295,6 @@ public class DarknessProgressionManager : MonoBehaviour
         darknessMaterial.SetFloat("_Radius", minimumRadius);
     }
 
-    
     public void CollapseToBlack(float duration)
     {
         if (darknessMaterial == null || darknessImage == null)
@@ -270,15 +305,11 @@ public class DarknessProgressionManager : MonoBehaviour
 
         StopAllCoroutines();
 
-        if (sachikoTarget != null)
-        {
-            safeZoneCenter = sachikoTarget.position;
-            UpdateCenter();
-        }
-
         effectEnabled = true;
         endingTransition = true;
         darknessImage.gameObject.SetActive(true);
+
+        UpdateCenter();
 
         StartCoroutine(CollapseToBlackRoutine(duration));
     }

@@ -44,8 +44,12 @@ Material:
     - _Alpha: 1
     - _Aspect: 1.7778
     - _ColorMask: 15
+    - _EdgeGlow: 0.3
+    - _EdgeWidth: 0.025
     - _EnableExternalAlpha: 0
+    - _Opacity: 0.777
     - _Radius: 1
+    - _RedTint: 0.06
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -54,6 +58,7 @@ Material:
     - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
+    - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
