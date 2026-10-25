@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -19,11 +20,12 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float difficultyPerWave = 0.15f;
 
     private float waveTimer;
-    private bool waveActive = false;
+    private bool waveActive;
 
     public float WaveTimer => waveTimer;
     public bool WaveActive => waveActive;
     public int CurrentWave => currentWave;
+    public int FinalWave => finalWave;
 
     public WaveData CurrentWaveData
     {
@@ -66,162 +68,87 @@ public class WaveManager : MonoBehaviour
 
         if (wave == null)
         {
-            Debug.LogWarning(
-                "No WaveData found for wave " +
-                currentWave
-            );
-
+            Debug.LogWarning("No WaveData found for wave " + currentWave);
             return;
         }
 
         waveTimer = wave.duration;
         waveActive = true;
 
-        Debug.Log(
-            "===== WAVE " +
-            currentWave +
-            " STARTED ====="
-        );
+        Debug.Log("===== WAVE " + currentWave + " STARTED =====");
     }
 
     private void EndWave()
     {
         waveActive = false;
-
         DestroyRemainingEnemies();
 
         WaveData wave = CurrentWaveData;
 
         if (wave != null)
-        {
-            Debug.Log(
-                "===== WAVE " +
-                currentWave +
-                " COMPLETE ====="
-            );
-        }
-
-        // ------------------------------------------
-        // FINAL WAVE
-        // ------------------------------------------
+            Debug.Log("===== WAVE " + currentWave + " COMPLETE =====");
 
         if (currentWave >= finalWave)
         {
-            Debug.Log(
-                "===== ALL WAVES COMPLETE ====="
-            );
+            Debug.Log("===== ALL WAVES COMPLETE =====");
 
             if (gameEndManager != null)
-            {
                 gameEndManager.ShowVictory();
-            }
             else
-            {
-                Debug.LogWarning(
-                    "GameEndManager reference is missing."
-                );
-            }
+                Debug.LogWarning("GameEndManager reference is missing.");
 
             return;
         }
 
-        // ------------------------------------------
-        // NORMAL WAVE
-        // ------------------------------------------
-
         if (powerUpManager != null)
-        {
             powerUpManager.ShowPowerUpSelection();
-        }
     }
 
     private void DestroyRemainingEnemies()
     {
-        GameObject[] enemies =
-            GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject enemy in enemies)
-        {
             Destroy(enemy);
-        }
 
-        Debug.Log(
-            "Remaining enemies cleared: " +
-            enemies.Length
-        );
+        Debug.Log("Remaining enemies cleared: " + enemies.Length);
     }
 
     public void StartNextWave()
     {
-        Debug.Log(
-            "START NEXT WAVE CALLED. Current wave BEFORE increment: " +
-            currentWave
-        );
-
         currentWave++;
-
-        Debug.Log(
-            "Current wave AFTER increment: " +
-            currentWave
-        );
-
-        // ------------------------------------------
-        // DO NOT START WAVE 5
-        // ------------------------------------------
 
         if (currentWave > finalWave)
         {
-            Debug.Log(
-                "===== FINAL WAVE ALREADY COMPLETE ====="
-            );
+            Debug.Log("===== FINAL WAVE ALREADY COMPLETE =====");
 
             if (gameEndManager != null)
-            {
                 gameEndManager.ShowVictory();
-            }
 
             return;
         }
 
-        // Reset temporary power-ups
         if (powerUpManager != null)
-        {
             powerUpManager.ResetTemporaryPowerUps();
-        }
 
         StartWave();
     }
-
-    // --------------------------------------------------
-    // WAVE TIMER MODIFICATION
-    // --------------------------------------------------
 
     public void AddWaveTime(float amount)
     {
         if (!waveActive)
         {
-            Debug.LogWarning(
-                "Cannot add wave time because the wave is not active."
-            );
-
+            Debug.LogWarning("Cannot add wave time because the wave is not active.");
             return;
         }
 
         waveTimer += amount;
 
-        Debug.Log(
-            "Wave timer increased by " +
-            amount +
-            " seconds. " +
-            "New time: " +
-            waveTimer
-        );
+        Debug.Log("Wave timer increased by " + amount + " seconds. New time: " + waveTimer);
     }
 
     public float GetDifficultyMultiplier()
     {
-        return 1f +
-            (currentWave - 1) *
-            difficultyPerWave;
+        return 1f + (currentWave - 1) * difficultyPerWave;
     }
 }

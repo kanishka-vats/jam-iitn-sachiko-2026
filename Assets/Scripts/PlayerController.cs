@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private DarknessProgressionManager darknessProgressionManager;
 
     private bool movementEnabled = true;
 
@@ -52,9 +53,13 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         if (currentWeapon == null)
-        {
             currentWeapon = GetComponentInChildren<WeaponBase>();
-        }
+
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        if (darknessProgressionManager == null)
+            darknessProgressionManager = FindFirstObjectByType<DarknessProgressionManager>();
     }
 
     private void Update()
@@ -64,43 +69,63 @@ public class PlayerController : MonoBehaviour
         UpdateAnimation();
 
         if (dashCooldownTimer > 0f)
-        {
             dashCooldownTimer -= Time.deltaTime;
-        }
 
         if (isDashing)
         {
             dashTimer -= Time.deltaTime;
 
             if (dashTimer <= 0f)
-            {
                 isDashing = false;
-            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (!movementEnabled)
-        {
-            if (rb != null)
-                rb.linearVelocity = Vector2.zero;
-
-            return;
-        }
-
         if (rb == null)
             return;
 
+        if (!movementEnabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (isDashing)
         {
-            rb.linearVelocity =
-                FacingDirection * (dashSpeed * dashSpeedMultiplier);
+            rb.linearVelocity = FacingDirection * (dashSpeed * dashSpeedMultiplier);
         }
         else
         {
-            rb.linearVelocity =
-                moveDirection * (moveSpeed * moveSpeedMultiplier);
+            rb.linearVelocity = moveDirection * (moveSpeed * moveSpeedMultiplier);
+        }
+
+        EnforceSafeZoneBoundary();
+    }
+
+    private void EnforceSafeZoneBoundary()
+    {
+        if (darknessProgressionManager == null)
+            return;
+
+        Vector2 currentPosition = rb.position;
+        Vector2 nextPosition = currentPosition + rb.linearVelocity * Time.fixedDeltaTime;
+
+        Vector2 clampedPosition = darknessProgressionManager.ClampToSafeZone(nextPosition);
+
+        if ((clampedPosition - nextPosition).sqrMagnitude > 0.0001f)
+        {
+            Vector2 outwardNormal =
+                (clampedPosition - darknessProgressionManager.SafeZoneCenter).normalized;
+
+            Vector2 velocity = rb.linearVelocity;
+            float outwardVelocity = Vector2.Dot(velocity, outwardNormal);
+
+            if (outwardVelocity > 0f)
+                velocity -= outwardNormal * outwardVelocity;
+
+            rb.linearVelocity = velocity;
+            rb.position = clampedPosition;
         }
     }
 
@@ -119,8 +144,7 @@ public class PlayerController : MonoBehaviour
             playerInput.actions["Move"] == null)
             return;
 
-        Vector2 input =
-            playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
 
         float horizontalInput = input.x;
         float verticalInput = input.y;
@@ -131,8 +155,7 @@ public class PlayerController : MonoBehaviour
         if (invertControlsY)
             verticalInput *= -1f;
 
-        moveDirection =
-            new Vector2(horizontalInput, verticalInput).normalized;
+        moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
         if (moveDirection.magnitude > 0f)
         {
@@ -164,7 +187,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFire()
     {
-        // No shooting while the ending has frozen the player.
         if (!movementEnabled)
         {
             isShooting = false;
@@ -240,7 +262,6 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection = Vector2.zero;
             isMoving = false;
-
             isDashing = false;
             dashTimer = 0f;
 

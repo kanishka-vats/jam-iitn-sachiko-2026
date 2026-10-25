@@ -26,6 +26,11 @@ public class EndingSequenceManager : MonoBehaviour
     [SerializeField] private float flashFadeDuration = 0.5f;
     [SerializeField] private float awakeningFadeDuration = 1.5f;
 
+    [Header("Camera Shake")]
+    [SerializeField] private Transform cameraShakeTarget;
+    [SerializeField] private float cameraShakeDuration = 0.18f;
+    [SerializeField] private float cameraShakeMagnitude = 0.08f;
+
     [Header("Explosion Animation")]
     [SerializeField] private float explosionExpandDuration = 0.18f;
     [SerializeField] private float explosionStartScale = 0.08f;
@@ -41,7 +46,6 @@ public class EndingSequenceManager : MonoBehaviour
 
     private void Start()
     {
-        // Create a private material so we don't modify the shared asset.
         if (irisImage != null && irisImage.material != null)
         {
             irisMaterial = new Material(irisImage.material);
@@ -60,11 +64,9 @@ public class EndingSequenceManager : MonoBehaviour
             SetIrisCenter(new Vector2(0.5f, 0.5f));
         }
 
-        // Generate an explosion sprite if one wasn't assigned.
         if (explosionImage != null && explosionImage.sprite == null)
             CreateExplosionSprite();
 
-        // Generate a plain white sprite for the flash if needed.
         if (whiteFlash != null && whiteFlash.sprite == null)
             CreateFlashSprite();
 
@@ -79,7 +81,6 @@ public class EndingSequenceManager : MonoBehaviour
         SetImageAlpha(whiteFlash, 0f);
         SetImageAlpha(awakeningImage, 0f);
 
-        // Start with gameplay visible.
         if (endingOverlay != null)
             endingOverlay.SetActive(false);
 
@@ -102,87 +103,51 @@ public class EndingSequenceManager : MonoBehaviour
     {
         endingStarted = true;
 
-        // Freeze movement, cancel dash and stop shooting.
         if (playerController != null)
-        {
             playerController.SetMovementEnabled(false);
-            Debug.Log("ENDING: Sachiko frozen.");
-        }
-        else
-        {
-            Debug.LogError(
-                "ENDING: PlayerController is not assigned!"
-            );
-        }
 
-        // Allow the Rigidbody to settle before reading the position.
         yield return new WaitForFixedUpdate();
 
         if (endingOverlay != null)
             endingOverlay.SetActive(true);
 
-        // PHASE 1: Close the iris around stationary Sachiko.
-        Debug.Log("ENDING: Closing iris around Sachiko.");
-
         if (irisImage != null && irisMaterial != null)
         {
             irisImage.transform.SetAsFirstSibling();
 
-            Vector2 center = GetSachikoScreenPosition();
-            SetIrisCenter(center);
-
-            Debug.Log($"ENDING: Iris center = {center}");
-
+            SetIrisCenter(GetSachikoScreenPosition());
             SetImageAlpha(irisImage, 1f);
             irisMaterial.SetFloat("_Alpha", 1f);
 
-            yield return AnimateIris(
-                1.5f, 0.025f, irisCloseDuration
-            );
-        }
-        else
-        {
-            Debug.LogError(
-                "ENDING: Iris Image or its material is missing."
-            );
+            yield return AnimateIris(1.5f, 0.10f, irisCloseDuration);
         }
 
-        // PHASE 2: Brief darkness before the blast.
-        Debug.Log("ENDING: Darkness.");
-        yield return new WaitForSecondsRealtime(0.25f);
+        yield return ShakeCamera();
 
-        // PHASE 3: Expanding explosion.
+        yield return new WaitForSecondsRealtime(0.08f);
+
         if (explosionImage != null)
         {
-            Debug.Log("ENDING: Blast!");
-
             explosionImage.transform.SetAsLastSibling();
 
             yield return AnimateExplosion();
 
             float remainingTime = Mathf.Max(
-                0f, explosionDuration - explosionExpandDuration
+                0f,
+                explosionDuration - explosionExpandDuration
             );
 
             yield return new WaitForSecondsRealtime(remainingTime);
         }
 
-        // PHASE 4: White flash.
         if (whiteFlash != null)
         {
-            Debug.Log("ENDING: White flash!");
-
             whiteFlash.transform.SetAsLastSibling();
 
-            yield return FadeImage(
-                whiteFlash, 0f, 1f, 0.03f
-            );
+            yield return FadeImage(whiteFlash, 0f, 1f, 0.03f);
 
-            yield return new WaitForSecondsRealtime(
-                flashHoldDuration
-            );
+            yield return new WaitForSecondsRealtime(flashHoldDuration);
 
-            // Remove the old effects while the screen is white.
             SetImageAlpha(irisImage, 0f);
             SetImageAlpha(explosionImage, 0f);
 
@@ -191,48 +156,58 @@ public class EndingSequenceManager : MonoBehaviour
             );
         }
 
-        // PHASE 5: Reveal the awakening artwork, if assigned.
         if (awakeningImage != null && awakeningImage.sprite != null)
         {
-            Debug.Log("ENDING: Awakening reveal.");
-
             awakeningImage.transform.SetAsLastSibling();
 
             yield return FadeImage(
                 awakeningImage, 0f, 1f, awakeningFadeDuration
             );
         }
-        else
+
+        Debug.Log("Ending sequence completed.");
+    }
+
+    private IEnumerator ShakeCamera()
+    {
+        Transform target = cameraShakeTarget;
+
+        if (target == null && Camera.main != null)
+            target = Camera.main.transform;
+
+        if (target == null || cameraShakeDuration <= 0f)
+            yield break;
+
+        Vector3 originalPosition = target.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < cameraShakeDuration)
         {
-            Debug.LogWarning(
-                "No awakening sprite assigned. Skipping awakening reveal."
+            elapsed += Time.unscaledDeltaTime;
+
+            float strength = 1f - Mathf.Clamp01(
+                elapsed / cameraShakeDuration
             );
+
+            Vector2 offset = Random.insideUnitCircle
+                * cameraShakeMagnitude * strength;
+
+            target.localPosition = originalPosition
+                + new Vector3(offset.x, offset.y, 0f);
+
+            yield return null;
         }
 
-        Debug.Log("ENDING: Sequence completed.");
+        target.localPosition = originalPosition;
     }
 
     private Vector2 GetSachikoScreenPosition()
     {
-        if (sachikoTarget == null)
-        {
-            Debug.LogError(
-                "Sachiko Target is missing. Using screen centre."
-            );
-
+        if (sachikoTarget == null || Camera.main == null)
             return new Vector2(0.5f, 0.5f);
-        }
-
-        Camera worldCamera = Camera.main;
-
-        if (worldCamera == null)
-        {
-            Debug.LogError("Main Camera not found.");
-            return new Vector2(0.5f, 0.5f);
-        }
 
         Vector3 screenPosition =
-            worldCamera.WorldToScreenPoint(sachikoTarget.position);
+            Camera.main.WorldToScreenPoint(sachikoTarget.position);
 
         if (screenPosition.z < 0f)
             return new Vector2(0.5f, 0.5f);
@@ -264,14 +239,8 @@ public class EndingSequenceManager : MonoBehaviour
                 rect.yMin, rect.yMax, localPoint.y
             );
 
-            Debug.Log($"Sachiko iris UV: ({u:F2}, {v:F2})");
-
             return new Vector2(u, v);
         }
-
-        Debug.LogWarning(
-            "Could not convert Sachiko's position to UI coordinates."
-        );
 
         return new Vector2(0.5f, 0.5f);
     }
@@ -306,7 +275,7 @@ public class EndingSequenceManager : MonoBehaviour
                 ? Mathf.Clamp01(elapsed / duration)
                 : 1f;
 
-            t = t * t * (3f - 2f * t);
+            t = 1f - Mathf.Pow(1f - t, 3f);
 
             irisMaterial.SetFloat(
                 "_Radius",
@@ -326,7 +295,6 @@ public class EndingSequenceManager : MonoBehaviour
 
         RectTransform rect = explosionImage.rectTransform;
 
-        // Stretch the explosion image across its parent Canvas.
         rect.anchorMin = Vector2.zero;
         rect.anchorMax = Vector2.one;
         rect.offsetMin = Vector2.zero;
@@ -347,7 +315,6 @@ public class EndingSequenceManager : MonoBehaviour
                 ? Mathf.Clamp01(elapsed / explosionExpandDuration)
                 : 1f;
 
-            // Fast, dramatic expansion.
             t = 1f - Mathf.Pow(1f - t, 3f);
 
             float scale = Mathf.Lerp(
