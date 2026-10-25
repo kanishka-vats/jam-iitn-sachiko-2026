@@ -14,36 +14,33 @@ public class EndingSequenceManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private DarknessProgressionManager darknessProgressionManager;
 
-    [Header("Ending UI References")]
+    [Header("Ending UI")]
     [SerializeField] private Image irisImage;
-    [SerializeField] private Image explosionImage;
+    [SerializeField] private Image glitchImage;
     [SerializeField] private Image whiteFlash;
     [SerializeField] private Image awakeningImage;
 
     [Header("Timing")]
     [SerializeField] private float irisCloseDuration = 2.5f;
-    [SerializeField] private float explosionDuration = 0.5f;
+    [SerializeField] private float glitchDuration = 0.45f;
+    [SerializeField] private float flashInDuration = 0.04f;
     [SerializeField] private float flashHoldDuration = 0.12f;
-    [SerializeField] private float flashFadeDuration = 0.5f;
+    [SerializeField] private float flashFadeDuration = 0.6f;
     [SerializeField] private float awakeningFadeDuration = 1.5f;
+
+    [Header("Glitch Settings")]
+    [SerializeField, Range(0f, 2f)] private float glitchIntensity = 1.3f;
+    [SerializeField] private float glitchPeakDuration = 0.12f;
+    [SerializeField] private float glitchSpeed = 1.5f;
 
     [Header("Camera Shake")]
     [SerializeField] private Transform cameraShakeTarget;
-    [SerializeField] private float cameraShakeDuration = 0.18f;
-    [SerializeField] private float cameraShakeMagnitude = 0.08f;
-
-    [Header("Explosion Animation")]
-    [SerializeField] private float explosionExpandDuration = 0.18f;
-    [SerializeField] private float explosionStartScale = 0.08f;
-    [SerializeField] private float explosionEndScale = 2f;
+    [SerializeField] private float cameraShakeDuration = 0.3f;
+    [SerializeField] private float cameraShakeMagnitude = 0.1f;
 
     private Material irisMaterial;
+    private Material glitchMaterial;
     private bool endingStarted;
-
-    private Sprite generatedFlashSprite;
-    private Sprite generatedExplosionSprite;
-    private Texture2D generatedFlashTexture;
-    private Texture2D generatedExplosionTexture;
 
     private void Start()
     {
@@ -56,38 +53,9 @@ public class EndingSequenceManager : MonoBehaviour
         if (sachikoTarget == null && playerController != null)
             sachikoTarget = playerController.transform;
 
-        if (irisImage != null && irisImage.material != null)
-        {
-            irisMaterial = new Material(irisImage.material);
-            irisImage.material = irisMaterial;
+        SetupIris();
+        SetupGlitch();
 
-            RectTransform rect = irisImage.rectTransform;
-
-            float aspect = rect.rect.height > 0f
-                ? rect.rect.width / rect.rect.height
-                : 16f / 9f;
-
-            irisMaterial.SetFloat("_Aspect", aspect);
-            irisMaterial.SetFloat("_Radius", 1.5f);
-            irisMaterial.SetFloat("_Alpha", 0f);
-
-            SetIrisCenter(new Vector2(0.5f, 0.5f));
-        }
-
-        if (explosionImage != null && explosionImage.sprite == null)
-            CreateExplosionSprite();
-
-        if (whiteFlash != null && whiteFlash.sprite == null)
-            CreateFlashSprite();
-
-        if (whiteFlash != null)
-            whiteFlash.color = Color.white;
-
-        if (explosionImage != null)
-            explosionImage.color = new Color(1f, 0.25f, 0.03f, 0f);
-
-        SetImageAlpha(irisImage, 0f);
-        SetImageAlpha(explosionImage, 0f);
         SetImageAlpha(whiteFlash, 0f);
         SetImageAlpha(awakeningImage, 0f);
 
@@ -95,6 +63,55 @@ public class EndingSequenceManager : MonoBehaviour
             endingOverlay.SetActive(false);
 
         Debug.Log("EndingSequenceManager ready. Press E to test.");
+    }
+
+    private void SetupIris()
+    {
+        if (irisImage == null || irisImage.material == null)
+            return;
+
+        irisMaterial = new Material(irisImage.material);
+        irisImage.material = irisMaterial;
+
+        RectTransform rect = irisImage.rectTransform;
+
+        float aspect = rect.rect.height > 0f
+            ? rect.rect.width / rect.rect.height
+            : 16f / 9f;
+
+        irisMaterial.SetFloat("_Aspect", aspect);
+        irisMaterial.SetFloat("_Radius", 1.5f);
+        irisMaterial.SetFloat("_Alpha", 0f);
+
+        SetIrisCenter(new Vector2(0.5f, 0.5f));
+        SetImageAlpha(irisImage, 0f);
+    }
+
+    private void SetupGlitch()
+    {
+        if (glitchImage == null)
+            return;
+
+        if (glitchImage.material == null ||
+            !glitchImage.material.HasProperty("_Progress") ||
+            !glitchImage.material.HasProperty("_Intensity") ||
+            !glitchImage.material.HasProperty("_Fade"))
+        {
+            Debug.LogError("Assign a material using the Sachiko/Glitch shader to Glitch Image.");
+            glitchImage.gameObject.SetActive(false);
+            return;
+        }
+
+        glitchMaterial = new Material(glitchImage.material);
+        glitchImage.material = glitchMaterial;
+
+        glitchMaterial.SetFloat("_Progress", 0f);
+        glitchMaterial.SetFloat("_Intensity", glitchIntensity);
+        glitchMaterial.SetFloat("_Fade", 0f);
+        glitchMaterial.SetFloat("_Speed", glitchSpeed);
+
+        glitchImage.color = Color.white;
+        glitchImage.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -139,60 +156,45 @@ public class EndingSequenceManager : MonoBehaviour
 
             if (irisImage != null && irisMaterial != null)
             {
+                irisImage.gameObject.SetActive(true);
                 irisImage.transform.SetAsLastSibling();
 
-                SetIrisCenter(GetSachikoScreenPosition());
+                SetIrisCenter(GetSachikoScreenPosition(irisImage));
                 SetImageAlpha(irisImage, 1f);
                 irisMaterial.SetFloat("_Alpha", 1f);
 
-                yield return AnimateIris(1.5f, 0.10f, irisCloseDuration);
+                yield return AnimateIris(1.5f, 0.05f, irisCloseDuration);
             }
         }
 
-        yield return ShakeCamera();
-        yield return new WaitForSecondsRealtime(0.08f);
-
-        if (explosionImage != null)
-        {
-            explosionImage.transform.SetAsLastSibling();
-
-            yield return AnimateExplosion();
-
-            float remainingTime = Mathf.Max(
-                0f,
-                explosionDuration - explosionExpandDuration
-            );
-
-            yield return new WaitForSecondsRealtime(remainingTime);
-        }
+        yield return PlayGlitch();
 
         if (whiteFlash != null)
         {
+            whiteFlash.gameObject.SetActive(true);
             whiteFlash.transform.SetAsLastSibling();
 
-            yield return FadeImage(whiteFlash, 0f, 1f, 0.03f);
+            yield return FadeImage(whiteFlash, 0f, 1f, flashInDuration);
             yield return new WaitForSecondsRealtime(flashHoldDuration);
 
             SetImageAlpha(irisImage, 0f);
-            SetImageAlpha(explosionImage, 0f);
 
             if (darknessProgressionManager != null)
                 darknessProgressionManager.SetEffectEnabled(false);
 
-            yield return FadeImage(
-                whiteFlash,
-                1f,
-                0f,
-                flashFadeDuration
-            );
+            yield return FadeImage(whiteFlash, 1f, 0f, flashFadeDuration);
         }
-        else if (darknessProgressionManager != null)
+        else
         {
-            darknessProgressionManager.SetEffectEnabled(false);
+            SetImageAlpha(irisImage, 0f);
+
+            if (darknessProgressionManager != null)
+                darknessProgressionManager.SetEffectEnabled(false);
         }
 
         if (awakeningImage != null && awakeningImage.sprite != null)
         {
+            awakeningImage.gameObject.SetActive(true);
             awakeningImage.transform.SetAsLastSibling();
 
             yield return FadeImage(
@@ -204,6 +206,57 @@ public class EndingSequenceManager : MonoBehaviour
         }
 
         Debug.Log("Ending sequence completed.");
+    }
+
+    private IEnumerator PlayGlitch()
+    {
+        if (glitchImage == null || glitchMaterial == null)
+        {
+            yield return ShakeCamera();
+            yield break;
+        }
+
+        glitchImage.gameObject.SetActive(true);
+        glitchImage.color = Color.white;
+        glitchImage.transform.SetAsLastSibling();
+
+        glitchMaterial.SetFloat("_Progress", 0f);
+        glitchMaterial.SetFloat("_Intensity", glitchIntensity);
+        glitchMaterial.SetFloat("_Fade", 1f);
+        glitchMaterial.SetFloat("_Speed", glitchSpeed);
+
+        StartCoroutine(ShakeCamera());
+
+        float elapsed = 0f;
+
+        while (elapsed < glitchDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = Mathf.Clamp01(elapsed / glitchDuration);
+            float progress = Mathf.SmoothStep(0f, 1f, t);
+
+            float intensity = t < 0.35f
+                ? Mathf.Lerp(0.2f, glitchIntensity, t / 0.35f)
+                : Mathf.Lerp(
+                    glitchIntensity,
+                    glitchIntensity * 0.65f,
+                    Mathf.Clamp01((t - 0.35f) / 0.65f)
+                );
+
+            if (t < glitchPeakDuration / Mathf.Max(glitchDuration, 0.001f))
+                intensity = glitchIntensity * 1.4f;
+
+            glitchMaterial.SetFloat("_Progress", progress);
+            glitchMaterial.SetFloat("_Intensity", intensity);
+            glitchMaterial.SetFloat("_Fade", 1f);
+
+            yield return null;
+        }
+
+        glitchMaterial.SetFloat("_Progress", 1f);
+        glitchMaterial.SetFloat("_Fade", 0f);
+        glitchImage.gameObject.SetActive(false);
     }
 
     private IEnumerator ShakeCamera()
@@ -239,7 +292,7 @@ public class EndingSequenceManager : MonoBehaviour
         target.localPosition = originalPosition;
     }
 
-    private Vector2 GetSachikoScreenPosition()
+    private Vector2 GetSachikoScreenPosition(Image image = null)
     {
         if (sachikoTarget == null || Camera.main == null)
             return new Vector2(0.5f, 0.5f);
@@ -250,7 +303,13 @@ public class EndingSequenceManager : MonoBehaviour
         if (screenPosition.z < 0f)
             return new Vector2(0.5f, 0.5f);
 
-        Canvas canvas = irisImage.canvas;
+        if (image == null)
+            image = irisImage;
+
+        if (image == null)
+            return new Vector2(0.5f, 0.5f);
+
+        Canvas canvas = image.canvas;
         Camera uiCamera = null;
 
         if (canvas != null &&
@@ -259,22 +318,26 @@ public class EndingSequenceManager : MonoBehaviour
             uiCamera = canvas.worldCamera;
         }
 
-        RectTransform irisRect = irisImage.rectTransform;
+        RectTransform rect = image.rectTransform;
 
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            irisRect,
+            rect,
             screenPosition,
             uiCamera,
             out Vector2 localPoint))
         {
-            Rect rect = irisRect.rect;
+            Rect bounds = rect.rect;
 
             float u = Mathf.InverseLerp(
-                rect.xMin, rect.xMax, localPoint.x
+                bounds.xMin,
+                bounds.xMax,
+                localPoint.x
             );
 
             float v = Mathf.InverseLerp(
-                rect.yMin, rect.yMax, localPoint.y
+                bounds.yMin,
+                bounds.yMax,
+                localPoint.y
             );
 
             return new Vector2(u, v);
@@ -326,49 +389,6 @@ public class EndingSequenceManager : MonoBehaviour
         irisMaterial.SetFloat("_Radius", endRadius);
     }
 
-    private IEnumerator AnimateExplosion()
-    {
-        if (explosionImage == null)
-            yield break;
-
-        RectTransform rect = explosionImage.rectTransform;
-
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
-        rect.anchoredPosition = Vector2.zero;
-        rect.localScale = Vector3.one * explosionStartScale;
-
-        explosionImage.preserveAspect = false;
-        SetImageAlpha(explosionImage, 1f);
-
-        float elapsed = 0f;
-
-        while (elapsed < explosionExpandDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-
-            float t = explosionExpandDuration > 0f
-                ? Mathf.Clamp01(elapsed / explosionExpandDuration)
-                : 1f;
-
-            t = 1f - Mathf.Pow(1f - t, 3f);
-
-            float scale = Mathf.Lerp(
-                explosionStartScale,
-                explosionEndScale,
-                t
-            );
-
-            rect.localScale = Vector3.one * scale;
-
-            yield return null;
-        }
-
-        rect.localScale = Vector3.one * explosionEndScale;
-    }
-
     private IEnumerator FadeImage(
         Image image,
         float startAlpha,
@@ -415,107 +435,12 @@ public class EndingSequenceManager : MonoBehaviour
         image.color = color;
     }
 
-    private void CreateExplosionSprite()
-    {
-        const int size = 256;
-
-        generatedExplosionTexture = new Texture2D(
-            size, size, TextureFormat.RGBA32, false
-        );
-
-        generatedExplosionTexture.name = "GeneratedEndingExplosion";
-        generatedExplosionTexture.filterMode = FilterMode.Bilinear;
-        generatedExplosionTexture.wrapMode = TextureWrapMode.Clamp;
-
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = 0; x < size; x++)
-            {
-                float px = (x + 0.5f) / size * 2f - 1f;
-                float py = (y + 0.5f) / size * 2f - 1f;
-
-                float radius = Mathf.Sqrt(px * px + py * py);
-                float angle = Mathf.Atan2(py, px);
-
-                float rayPattern =
-                    0.5f + 0.5f * Mathf.Cos(angle * 18f);
-
-                float rays = Mathf.Pow(rayPattern, 7f);
-
-                float core =
-                    1f - Mathf.SmoothStep(0f, 0.48f, radius);
-
-                float rayLength = 0.58f + rays * 0.42f;
-
-                float rayAlpha = 1f - Mathf.SmoothStep(
-                    rayLength - 0.08f,
-                    rayLength + 0.08f,
-                    radius
-                );
-
-                float outerFade =
-                    1f - Mathf.SmoothStep(0.85f, 1f, radius);
-
-                float alpha = Mathf.Clamp01(
-                    Mathf.Max(core, rayAlpha * rays) * outerFade
-                );
-
-                if (radius > 1f)
-                    alpha = 0f;
-
-                generatedExplosionTexture.SetPixel(
-                    x, y, new Color(1f, 1f, 1f, alpha)
-                );
-            }
-        }
-
-        generatedExplosionTexture.Apply();
-
-        generatedExplosionSprite = Sprite.Create(
-            generatedExplosionTexture,
-            new Rect(0, 0, size, size),
-            new Vector2(0.5f, 0.5f)
-        );
-
-        generatedExplosionSprite.name = "GeneratedEndingExplosion";
-        explosionImage.sprite = generatedExplosionSprite;
-    }
-
-    private void CreateFlashSprite()
-    {
-        generatedFlashTexture = new Texture2D(
-            1, 1, TextureFormat.RGBA32, false
-        );
-
-        generatedFlashTexture.name = "GeneratedWhiteFlash";
-        generatedFlashTexture.SetPixel(0, 0, Color.white);
-        generatedFlashTexture.Apply();
-
-        generatedFlashSprite = Sprite.Create(
-            generatedFlashTexture,
-            new Rect(0, 0, 1, 1),
-            new Vector2(0.5f, 0.5f)
-        );
-
-        generatedFlashSprite.name = "GeneratedWhiteFlash";
-        whiteFlash.sprite = generatedFlashSprite;
-    }
-
     private void OnDestroy()
     {
         if (irisMaterial != null)
             Destroy(irisMaterial);
 
-        if (generatedExplosionSprite != null)
-            Destroy(generatedExplosionSprite);
-
-        if (generatedFlashSprite != null)
-            Destroy(generatedFlashSprite);
-
-        if (generatedExplosionTexture != null)
-            Destroy(generatedExplosionTexture);
-
-        if (generatedFlashTexture != null)
-            Destroy(generatedFlashTexture);
+        if (glitchMaterial != null)
+            Destroy(glitchMaterial);
     }
 }

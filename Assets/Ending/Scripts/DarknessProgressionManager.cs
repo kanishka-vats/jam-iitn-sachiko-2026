@@ -271,9 +271,10 @@ public class DarknessProgressionManager : MonoBehaviour
         StopAllCoroutines();
 
         if (sachikoTarget != null)
+        {
             safeZoneCenter = sachikoTarget.position;
-
-        UpdateCenter();
+            UpdateCenter();
+        }
 
         effectEnabled = true;
         endingTransition = true;
