@@ -9,6 +9,9 @@ public class EndingSequenceManager : MonoBehaviour
     [Header("Ending Overlay")]
     [SerializeField] private GameObject endingOverlay;
 
+    [Header("Victory")]
+    [SerializeField] private GameObject victoryPanel;
+
     [Header("Character Focus")]
     [SerializeField] private Transform sachikoTarget;
     [SerializeField] private PlayerController playerController;
@@ -62,7 +65,10 @@ public class EndingSequenceManager : MonoBehaviour
         if (endingOverlay != null)
             endingOverlay.SetActive(false);
 
-        Debug.Log("EndingSequenceManager ready. Press E to test.");
+        if (victoryPanel != null)
+            victoryPanel.SetActive(false);
+
+        Debug.Log("EndingSequenceManager ready.");
     }
 
     private void SetupIris()
@@ -141,6 +147,9 @@ public class EndingSequenceManager : MonoBehaviour
         if (playerController != null)
             playerController.SetMovementEnabled(false);
 
+        if (victoryPanel != null)
+            victoryPanel.SetActive(false);
+
         if (endingOverlay != null)
             endingOverlay.SetActive(true);
 
@@ -183,6 +192,7 @@ public class EndingSequenceManager : MonoBehaviour
                 darknessProgressionManager.SetEffectEnabled(false);
 
             yield return FadeImage(whiteFlash, 1f, 0f, flashFadeDuration);
+            whiteFlash.gameObject.SetActive(false);
         }
         else
         {
@@ -205,7 +215,15 @@ public class EndingSequenceManager : MonoBehaviour
             );
         }
 
-        Debug.Log("Ending sequence completed.");
+        if (endingOverlay != null)
+            endingOverlay.SetActive(false);
+
+        if (victoryPanel != null)
+            victoryPanel.SetActive(true);
+        else
+            Debug.LogError("EndingSequenceManager: Victory Panel is not assigned.");
+
+        Debug.Log("Victory ending completed.");
     }
 
     private IEnumerator PlayGlitch()
@@ -314,9 +332,7 @@ public class EndingSequenceManager : MonoBehaviour
 
         if (canvas != null &&
             canvas.renderMode != RenderMode.ScreenSpaceOverlay)
-        {
             uiCamera = canvas.worldCamera;
-        }
 
         RectTransform rect = image.rectTransform;
 

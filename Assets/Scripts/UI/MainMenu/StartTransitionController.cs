@@ -1,6 +1,6 @@
+
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartTransitionController : MonoBehaviour
 {
@@ -19,8 +19,8 @@ public class StartTransitionController : MonoBehaviour
     [SerializeField] private AudioSource glitchSource;
     [SerializeField] private AudioClip glitchSFX;
 
-    [Header("Scene")]
-    [SerializeField] private string gameSceneName = "Game";
+    [Header("Story")]
+    [SerializeField] private StorySequenceManager storySequenceManager;
 
     [Header("UI Shake")]
     [SerializeField] private UIShake uiShake;
@@ -36,27 +36,20 @@ public class StartTransitionController : MonoBehaviour
             return;
 
         isTransitioning = true;
-
         StartCoroutine(StartTransition());
     }
 
     private IEnumerator StartTransition()
     {
-        // Stop main menu music immediately
         if (AudioManager.Instance != null)
-        {
             AudioManager.Instance.StopMusic();
-        }
 
-        // Hide menu
         if (menuPanel != null)
             menuPanel.SetActive(false);
 
-        // Show transition animation
         if (transitionObject != null)
             transitionObject.SetActive(true);
 
-        // Play animation from beginning
         if (transitionAnimator != null)
         {
             transitionAnimator.Play(
@@ -66,23 +59,17 @@ public class StartTransitionController : MonoBehaviour
             );
         }
 
-        // Play glitch SFX
         if (glitchSource != null && glitchSFX != null)
-        {
             glitchSource.PlayOneShot(glitchSFX);
-        }
 
-        // Play character dialogue
         if (dialogueSource != null && characterDialogue != null)
         {
             dialogueSource.clip = characterDialogue;
             dialogueSource.Play();
         }
 
-        // Trigger UI shake
         StartCoroutine(TriggerUIShake());
 
-        // Wait until dialogue finishes
         if (dialogueSource != null && characterDialogue != null)
         {
             yield return new WaitWhile(
@@ -90,8 +77,20 @@ public class StartTransitionController : MonoBehaviour
             );
         }
 
-        // Dialogue finished -> immediately load game
-        SceneManager.LoadScene(gameSceneName);
+        if (transitionObject != null)
+            transitionObject.SetActive(false);
+
+        if (storySequenceManager != null)
+        {
+            storySequenceManager.BeginStory();
+        }
+        else
+        {
+            Debug.LogError(
+                "Story Sequence Manager is not assigned!",
+                this
+            );
+        }
     }
 
     private IEnumerator TriggerUIShake()
