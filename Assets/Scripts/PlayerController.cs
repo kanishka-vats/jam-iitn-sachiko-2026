@@ -9,8 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private DarknessProgressionManager darknessProgressionManager;
 
-    private bool movementEnabled = true;
+    [Header("Dust Trail")]
+    [SerializeField] private ParticleSystem dustTrail;
+    [SerializeField] private float dustMovementThreshold = 0.1f;
+    [SerializeField] private float dustEmissionRate = 18f;
 
+    private ParticleSystem.EmissionModule dustEmission;
+    private bool movementEnabled = true;
 
     [Header("Particle Effects")]
     [SerializeField] private GameObject dirtEffectPrefab;
@@ -64,10 +69,19 @@ public class PlayerController : MonoBehaviour
 
         if (darknessProgressionManager == null)
             darknessProgressionManager = FindFirstObjectByType<DarknessProgressionManager>();
+
+        if (dustTrail != null)
+        {
+            dustEmission = dustTrail.emission;
+            dustEmission.rateOverTime = 0f;
+            dustEmission.enabled = true;
+            dustTrail.Play();
+        }
     }
 
     private void Update()
     {
+        UpdateDustTrail();
         HandleInput();
         HandleFire();
         UpdateAnimation();
@@ -127,6 +141,20 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = velocity;
             rb.position = clampedPosition;
         }
+    }
+
+    private void UpdateDustTrail()
+    {
+        if (dustTrail == null || rb == null)
+            return;
+
+        bool shouldEmit =
+            movementEnabled &&
+            !isDashing &&
+            rb.linearVelocity.sqrMagnitude >
+            dustMovementThreshold * dustMovementThreshold;
+
+        dustEmission.rateOverTime = shouldEmit ? dustEmissionRate : 0f;
     }
 
     private void HandleInput()
@@ -226,17 +254,11 @@ public class PlayerController : MonoBehaviour
         float y = moveDirection.y;
 
         if (y > 0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
-        {
             animator.Play("Player_Up");
-        }
         else if (y < -0.5f && Mathf.Abs(y) >= Mathf.Abs(x))
-        {
             animator.Play("Player_Down");
-        }
         else
-        {
             animator.Play("Player_Left");
-        }
     }
 
     private void StartDash()

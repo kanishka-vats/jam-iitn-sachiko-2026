@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class ParticleEffects
 {
+    
     public static GameObject PlayOnce(
         GameObject prefab,
         Vector3 position,
@@ -12,28 +13,39 @@ public static class ParticleEffects
             return null;
 
         GameObject effect = Object.Instantiate(prefab, position, rotation);
+        effect.SetActive(true);
 
         ParticleSystem[] systems =
             effect.GetComponentsInChildren<ParticleSystem>(true);
+
+        if (systems.Length == 0)
+        {
+            Debug.LogWarning("Particle effect has no ParticleSystem components: " + prefab.name);
+            Object.Destroy(effect);
+            return null;
+        }
 
         float lifetime = 0f;
 
         foreach (ParticleSystem system in systems)
         {
+            system.gameObject.SetActive(true);
+            system.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            system.Clear(true);
             system.Play(true);
 
             var main = system.main;
-
             lifetime = Mathf.Max(
                 lifetime,
                 main.duration + main.startLifetime.constantMax
             );
         }
 
-        Object.Destroy(effect, lifetime + 0.25f);
+        Object.Destroy(effect, lifetime + 0.5f);
 
         return effect;
     }
+
 
     public static GameObject Attach(
         GameObject prefab,

@@ -8,10 +8,15 @@ public class EnemyBase : MonoBehaviour
     public float moveSpeed = 2f;
     public float damage = 10f;
 
+    [Header("Death Effect")]
+    [SerializeField] private GameObject deathSmokePrefab;
+    [SerializeField] private Vector3 deathEffectOffset = Vector3.zero;
+
     protected float currentHealth;
     protected Transform player;
 
     private float movementLockedUntil;
+    private bool isDead;
 
     protected bool IsMovementLocked => Time.time < movementLockedUntil;
 
@@ -35,6 +40,9 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void TakeDamage(float damageAmount)
     {
+        if (isDead)
+            return;
+
         currentHealth -= damageAmount;
 
         if (currentHealth <= 0f)
@@ -43,6 +51,20 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        if (deathSmokePrefab != null)
+        {
+            ParticleEffects.PlayOnce(
+                deathSmokePrefab,
+                transform.position + deathEffectOffset,
+                Quaternion.identity
+            );
+        }
+
         if (CurrencyManager.Instance != null)
             CurrencyManager.Instance.AddDiamonds(1);
 

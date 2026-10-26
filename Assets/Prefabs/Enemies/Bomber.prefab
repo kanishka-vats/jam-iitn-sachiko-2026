@@ -205,8 +205,16 @@ MonoBehaviour:
   maxHealth: 1
   moveSpeed: 5
   damage: 20
+  deathSmokePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
+  deathEffectOffset: {x: 0, y: 0, z: 0}
   explosionRadius: 2
   explosionDamage: 30
+  explosionEffectPrefab: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  explosionEffectOffset: {x: 0, y: 0, z: 0}
+  fireTrailPrefab: {fileID: 182542, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+  trailInterval: 0
+  trailDistanceBehind: 0.3
+  trailOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &5772319681062042463
 MonoBehaviour:
   m_ObjectHideFlags: 0

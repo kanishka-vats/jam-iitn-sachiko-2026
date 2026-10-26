@@ -142,11 +142,16 @@ MonoBehaviour:
   maxHealth: 2
   moveSpeed: 1.5
   damage: 10
+  deathSmokePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
+  deathEffectOffset: {x: 0, y: 0, z: 0}
   preferredDistance: 6
   minimumDistance: 4
   attackRange: 8
   fireRate: 2
-  projectilePrefab: {fileID: 8675175613093462767, guid: 5ccd9d2987332ce4bac319aa17233db9, type: 3}
+  projectilePrefab: {fileID: 5595036731814654509, guid: cb766dfcf141982459e61b8734cb761e, type: 3}
+  auraPrefab: {fileID: 100000, guid: 5b6c2f68addb63847b151f0d41a9d3b1, type: 3}
+  auraLocalOffset: {x: 0, y: 0, z: 0}
+  auraSortingOrder: -1
 --- !u!58 &7584354605994431686
 CircleCollider2D:
   m_ObjectHideFlags: 0

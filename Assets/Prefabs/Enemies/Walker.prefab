@@ -51,6 +51,8 @@ MonoBehaviour:
   maxHealth: 3
   moveSpeed: 2
   damage: 5
+  deathSmokePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
+  deathEffectOffset: {x: 0, y: 0, z: 0}
 --- !u!58 &7584354605994431686
 CircleCollider2D:
   m_ObjectHideFlags: 0
